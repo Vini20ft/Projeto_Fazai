@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
+import model.Cliente;
 import model.Funcionario;
 import util.UtilJPA;
 
