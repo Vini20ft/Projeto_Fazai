@@ -12,13 +12,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import model.Cliente;
-import dao.ClienteDAO;
+import model.Consumidor;
+import dao.ConsumidorDAO;
 
 @Path("/service")
 public class ServiceControleCliente {
 	
-	private final ClienteDAO cliDAO = new ClienteDAO();
+	private final ConsumidorDAO cliDAO = new ConsumidorDAO();
 	
 	/**
 	 * @Consumes - determina o formato dos dados que vamos postar
@@ -32,7 +32,7 @@ public class ServiceControleCliente {
 	@Path("/cadastrar")
 	public String Cadastrar(ClienteHttp cliHttp ){
  
-		Cliente cli = new Cliente();
+		Consumidor cli = new Consumidor();
  
 		try {
  
@@ -60,9 +60,9 @@ public class ServiceControleCliente {
 	@Produces("application/json; charset=UTF-8")
 	@Consumes("application/json; charset=UTF-8")	
 	@Path("/alterar")
-	public String Alterar(Cliente cliHttp){
+	public String Alterar(Consumidor cliHttp){
  
-		Cliente cli = new Cliente();
+		Consumidor cli = new Consumidor();
  
 		try {
 			

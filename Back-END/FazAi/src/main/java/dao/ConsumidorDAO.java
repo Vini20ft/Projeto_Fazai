@@ -6,28 +6,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
-
-import model.Funcionario;
+import model.Consumidor;
 import util.UtilJPA;
 
-public class FuncionarioDAO {
+public class ConsumidorDAO {
 	
-	public FuncionarioDAO(){}
+	public ConsumidorDAO(){}
 	
 	private UserTransaction utx = null;
     
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
 
-    public void inserir(Funcionario f) throws  Exception {  	
+    public void inserir(Consumidor c) throws  Exception {  	
     	
         try 
         {
             EntityTransaction et = manager.getTransaction();
             et.begin();
-            manager.persist(f);
+            manager.persist(c);
             et.commit();
-            System.out.print("Funcionario "+f.getNome()+" Cadastrado com Sucesso!!!");
+            System.out.print("Consumidor "+c.getNome()+" Cadastrado com Sucesso!!!");
             
         } catch (Exception ex) {        	
             try 
@@ -36,7 +35,7 @@ public class FuncionarioDAO {
                 
             } catch (Exception re) {    
             	
-                throw new Exception("Erro ao Tentar Cadastrar "+f.getNome()+re);           
+                throw new Exception("Erro ao Tentar Cadastrar Consumidor "+c.getNome()+re);           
             }
             
             throw ex;
@@ -50,12 +49,12 @@ public class FuncionarioDAO {
         }
     }
     
-    public Funcionario procurarId(String cpf) throws  Exception {    
+    public Consumidor procurarId(String cpf) throws  Exception {    
     	
         try 
         {    
-        	Funcionario f = manager.find(Funcionario.class, cpf);
-            return f;
+        	Consumidor cli = manager.find(Consumidor.class, cpf);
+            return cli;
             
         } catch (Exception ex) {        	
             	try 
@@ -64,7 +63,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Cpf de Funcionario não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Cpf de Consumidor não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -78,13 +77,13 @@ public class FuncionarioDAO {
         }
     }
     
-    public Funcionario procurarNome(String nome) throws  Exception {       
+    public Consumidor procurarNome(String nome) throws  Exception {       
     	
          try 
         {   
-        	Funcionario f = null;
-        	f = manager.find(Funcionario.class, nome);
-            return f;
+        	Consumidor cli = null;
+        	cli = manager.find(Consumidor.class, nome);
+            return cli;
             
                 
         } catch (Exception ex) {        	
@@ -94,7 +93,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Nome de Funcionario não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Nome de Consumidor não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -108,15 +107,15 @@ public class FuncionarioDAO {
         }
     }
     
-    public void alterar(Funcionario f) throws  Exception {      
+    public void alterar(Consumidor cli) throws  Exception {      
     	
         try 
         {               
             EntityTransaction et = manager.getTransaction();
             et.begin();	
-            manager.merge(f);
+            manager.merge(cli);
             et.commit();
-            System.out.print("Cadastro do Funcionario "+f.getNome()+" Alterado com Sucesso!!!");
+            System.out.print("Cadastro de Consumidor "+cli.getNome()+" Alterado com Sucesso!!!");
             
         } catch (Exception ex) {
         	
@@ -126,7 +125,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Alterar "+f.getNome()+re);
+            		throw new Exception("Erro ao Tentar Alterar "+cli.getNome()+re);
                 
             	}
             
@@ -143,16 +142,16 @@ public class FuncionarioDAO {
 
     public void excluir(int id) throws Exception {
     	
-    	Funcionario f = new Funcionario();
+    	Consumidor cli = new Consumidor();
     	    
         try 
         {
               EntityTransaction et = manager.getTransaction();
               et.begin();	
-              f = manager.getReference(Funcionario.class, id);
-              manager.remove(f);
+              cli = manager.getReference(Consumidor.class, id);
+              manager.remove(cli);
               et.commit();
-              System.out.print("Cadastro do Funcionario "+f.getNome()+" Excluido com Sucesso!!!");
+              System.out.print("Cadastro do Consumidor "+cli.getNome()+" Excluido com Sucesso!!!");
               
         } catch (Exception ex) {
         	
@@ -163,7 +162,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Excluir "+f.getNome()+re);
+            		throw new Exception("Erro ao Tentar Excluir "+cli.getNome()+re);
                 
             	}
             
@@ -179,13 +178,13 @@ public class FuncionarioDAO {
     }
     
    
-	public List<Funcionario> listar(){
+	public List<Consumidor> listar(){
     	
 		try{
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from funcionario");
-			List<Funcionario> f = query.getResultList();
-			return f;	
+			Query query = manager.createQuery("from consumidor");
+			List<Consumidor> c = query.getResultList();
+			return c;	
 		}
 		finally{
 			manager.close();
