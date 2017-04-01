@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
-import model.Cliente;
+import model.Estabelecimento;
 import util.UtilJPA;
 
 public class ClienteDAO {
@@ -17,7 +17,7 @@ public class ClienteDAO {
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
 
-    public void inserir(Cliente c) throws  Exception {  	
+    public void inserir(Estabelecimento c) throws  Exception {  	
     	
         try 
         {
@@ -48,11 +48,11 @@ public class ClienteDAO {
         }
     }
     
-    public Cliente procurarId(String cpf) throws  Exception {    
+    public Estabelecimento procurarId(String cpf) throws  Exception {    
     	
         try 
         {    
-        	Cliente cli = manager.find(Cliente.class, cpf);
+        	Estabelecimento cli = manager.find(Estabelecimento.class, cpf);
             return cli;
             
         } catch (Exception ex) {        	
@@ -76,12 +76,12 @@ public class ClienteDAO {
         }
     }
     
-    public Cliente procurarNome(String nome) throws  Exception {       
+    public Estabelecimento procurarNome(String nome) throws  Exception {       
     	
          try 
         {   
-        	Cliente cli = null;
-        	cli = manager.find(Cliente.class, nome);
+        	Estabelecimento cli = null;
+        	cli = manager.find(Estabelecimento.class, nome);
             return cli;
             
                 
@@ -106,7 +106,7 @@ public class ClienteDAO {
         }
     }
     
-    public void alterar(Cliente cli) throws  Exception {      
+    public void alterar(Estabelecimento cli) throws  Exception {      
     	
         try 
         {               
@@ -141,13 +141,13 @@ public class ClienteDAO {
 
     public void excluir(int id) throws Exception {
     	
-    	Cliente cli = new Cliente();
+    	Estabelecimento cli = new Estabelecimento();
     	    
         try 
         {
               EntityTransaction et = manager.getTransaction();
               et.begin();	
-              cli = manager.getReference(Cliente.class, id);
+              cli = manager.getReference(Estabelecimento.class, id);
               manager.remove(cli);
               et.commit();
               System.out.print("Cadastro do Cliente "+cli.getNome()+" Excluido com Sucesso!!!");
@@ -177,12 +177,12 @@ public class ClienteDAO {
     }
     
    
-	public List<Cliente> listar(){
+	public List<Estabelecimento> listar(){
     	
 		try{
 			manager.getEntityManagerFactory();
 			Query query = manager.createQuery("from cliente");
-			List<Cliente> cli = query.getResultList();
+			List<Estabelecimento> cli = query.getResultList();
 			return cli;	
 		}
 		finally{
