@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">FazAi</string>
     <string name="facebook_app_id">755309927978194</string>
+    <string name="cancel_login">Login cancelado</string>
+    <string name="error_login">Ocorreu um erro ao efetuar login</string>
 </resources>
