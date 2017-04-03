@@ -33,7 +33,12 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
-        if (AccessToken.getCurrentAccessToken() == null) {
+        VerifyCurrentUser();
+    }
+
+    private void VerifyCurrentUser() {
+        if (AccessToken.getCurrentAccessToken() == null && (googleApiClient == null && !googleApiClient.isConnected())) {
+            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
             goLoginScreen();
         }
     }
