@@ -16,8 +16,9 @@ public class EstabelecimentoDAO {
     
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
-
-    public void inserir(Estabelecimento e) throws  Exception {  	
+	
+	//Metodo de inserir cadastro de estabelecimento no banco de dados.
+    public void inserirEstabelecimento(Estabelecimento e) throws  Exception {  	
     	
         try 
         {
@@ -34,7 +35,7 @@ public class EstabelecimentoDAO {
                 
             } catch (Exception re) {    
             	
-                throw new Exception("Erro ao Tentar Cadastrar "+e.getNome()+re);           
+                throw new Exception("Erro ao Tentar Cadastrar o Estabelecimento "+e.getNome()+re);           
             }
             
             throw ex;
@@ -48,7 +49,8 @@ public class EstabelecimentoDAO {
         }
     }
     
-    public Estabelecimento procurarCnpj(String cnpj) throws  Exception {    
+    //Metodo de procurar cadastro de estabeleciemnto por cnpj.
+    public Estabelecimento procurarEstabelecimentoCnpj(String cnpj) throws  Exception {    
     	
         try 
         {    
@@ -76,7 +78,8 @@ public class EstabelecimentoDAO {
         }
     }
     
-    public Estabelecimento procurarNome(String nome) throws  Exception {       
+    //Metodo de procurar cadastro de estabelecimento por nome.
+    public Estabelecimento procurarEstabelecimentoNome(String nome) throws  Exception {       
     	
          try 
         {   
@@ -92,7 +95,7 @@ public class EstabelecimentoDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Nome de Cliente não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Nome de Estabelecimento não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -106,15 +109,16 @@ public class EstabelecimentoDAO {
         }
     }
     
-    public void alterar(Estabelecimento cli) throws  Exception {      
+    //Metodo de alterar cadastro de estabelecimento.
+    public void alterarEstabelecimento(Estabelecimento e) throws  Exception {      
     	
         try 
         {               
             EntityTransaction et = manager.getTransaction();
             et.begin();	
-            manager.merge(cli);
+            manager.merge(e);
             et.commit();
-            System.out.print("Cadastro do Cliente "+cli.getNome()+" Alterado com Sucesso!!!");
+            System.out.print("Cadastro do Estabelecimento "+e.getNome()+" Alterado com Sucesso!!!");
             
         } catch (Exception ex) {
         	
@@ -124,7 +128,7 @@ public class EstabelecimentoDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Alterar "+cli.getNome()+re);
+            		throw new Exception("Erro ao Tentar Alterar o Estabelecimento "+e.getNome()+re);
                 
             	}
             
@@ -138,8 +142,9 @@ public class EstabelecimentoDAO {
             }
         }
     }
-
-    public void excluir(int id) throws Exception {
+    
+    //Metodo de excluir cadastro de estabelecimento.
+    public void excluirEstabelecimento(int id) throws Exception {
     	
     	Estabelecimento cli = new Estabelecimento();
     	    
@@ -150,7 +155,7 @@ public class EstabelecimentoDAO {
               cli = manager.getReference(Estabelecimento.class, id);
               manager.remove(cli);
               et.commit();
-              System.out.print("Cadastro do Cliente "+cli.getNome()+" Excluido com Sucesso!!!");
+              System.out.print("Cadastro do Estabelecimento "+cli.getNome()+" Excluido com Sucesso!!!");
               
         } catch (Exception ex) {
         	
@@ -161,7 +166,7 @@ public class EstabelecimentoDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Excluir "+cli.getNome()+re);
+            		throw new Exception("Erro ao Tentar Excluir o Estabelecimento "+cli.getNome()+re);
                 
             	}
             
@@ -176,12 +181,12 @@ public class EstabelecimentoDAO {
         }
     }
     
-   
-	public List<Estabelecimento> listar(){
+   //Metodo de listar todos os cadastro de estabelecimentos.
+	public List<Estabelecimento> listarEstabelecimento(){
     	
 		try{
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from cliente");
+			Query query = manager.createQuery("from estabelecimento");
 			List<Estabelecimento> cli = query.getResultList();
 			return cli;	
 		}
