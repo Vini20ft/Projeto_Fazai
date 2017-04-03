@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Faz Aí</string>
+    <string name="facebook_app_id">755309927978194</string>
+    <string name="cancel_login">Iniciar sesión cancelado</string>
+    <string name="error_login">Hubo un registro de errores</string>
+    <string name="error_logout">Se produjo un error al cerrar la sesión</string>
+</resources>
