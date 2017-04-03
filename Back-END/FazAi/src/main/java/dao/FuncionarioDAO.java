@@ -18,8 +18,10 @@ public class FuncionarioDAO {
     
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
-
-    public void inserir(Funcionario f) throws  Exception {  	
+	
+	//Método de inserir funcionário.
+	
+    public void inserirFuncionario(Funcionario f) throws  Exception {  	
     	
         try 
         {
@@ -36,7 +38,7 @@ public class FuncionarioDAO {
                 
             } catch (Exception re) {    
             	
-                throw new Exception("Erro ao Tentar Cadastrar "+f.getNome()+re);           
+                throw new Exception("Erro ao Tentar Cadastrar Funcionario "+f.getNome()+re);           
             }
             
             throw ex;
@@ -50,7 +52,9 @@ public class FuncionarioDAO {
         }
     }
     
-    public Funcionario procurarId(String cpf) throws  Exception {    
+    //Método de procurar funcionario por cpf.
+    
+    public Funcionario procurarFuncionarioCpf(String cpf) throws  Exception {    
     	
         try 
         {    
@@ -64,7 +68,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Cpf de Funcionario não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Cpf do Funcionario não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -78,7 +82,9 @@ public class FuncionarioDAO {
         }
     }
     
-    public Funcionario procurarNome(String nome) throws  Exception {       
+    //Método de procurar funcionario pelo nome.
+    
+    public Funcionario procurarFuncionarioNome(String nome) throws  Exception {       
     	
          try 
         {   
@@ -94,7 +100,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Nome de Funcionario não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Nome do Funcionario não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -108,7 +114,9 @@ public class FuncionarioDAO {
         }
     }
     
-    public void alterar(Funcionario f) throws  Exception {      
+    //Método para alterar cadastro de funcionario.
+    
+    public void alterarFuncionario(Funcionario f) throws  Exception {      
     	
         try 
         {               
@@ -126,7 +134,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Alterar "+f.getNome()+re);
+            		throw new Exception("Erro ao Tentar Alterar Cadastro do Funcionario "+f.getNome()+re);
                 
             	}
             
@@ -140,8 +148,10 @@ public class FuncionarioDAO {
             }
         }
     }
-
-    public void excluir(int id) throws Exception {
+    
+    //Método de excluir cadastro de funcionário.
+    
+    public void excluirFuncionario(int id) throws Exception {
     	
     	Funcionario f = new Funcionario();
     	    
@@ -163,7 +173,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Excluir "+f.getNome()+re);
+            		throw new Exception("Erro ao Tentar Excluir Cadastro do Funcionario "+f.getNome()+re);
                 
             	}
             
@@ -178,6 +188,7 @@ public class FuncionarioDAO {
         }
     }
     
+    //Método de listar todos os funcionários cadastrados.
    
 	public List<Funcionario> listar(){
     	

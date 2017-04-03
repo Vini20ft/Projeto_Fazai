@@ -8,24 +8,24 @@ import javax.transaction.UserTransaction;
 import model.Estabelecimento;
 import util.UtilJPA;
 
-public class ClienteDAO {
+public class EstabelecimentoDAO {
 	
-	public ClienteDAO(){}
+	public EstabelecimentoDAO(){}
 	
 	private UserTransaction utx = null;
     
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
 
-    public void inserir(Estabelecimento c) throws  Exception {  	
+    public void inserir(Estabelecimento e) throws  Exception {  	
     	
         try 
         {
             EntityTransaction et = manager.getTransaction();
             et.begin();
-            manager.persist(c);
+            manager.persist(e);
             et.commit();
-            System.out.print("Cliente "+c.getNome()+" Cadastrado com Sucesso!!!");
+            System.out.print("Estabelecimento "+e.getNome()+" Cadastrado com Sucesso!!!");
             
         } catch (Exception ex) {        	
             try 
@@ -34,7 +34,7 @@ public class ClienteDAO {
                 
             } catch (Exception re) {    
             	
-                throw new Exception("Erro ao Tentar Cadastrar "+c.getNome()+re);           
+                throw new Exception("Erro ao Tentar Cadastrar "+e.getNome()+re);           
             }
             
             throw ex;
@@ -48,12 +48,12 @@ public class ClienteDAO {
         }
     }
     
-    public Estabelecimento procurarId(String cpf) throws  Exception {    
+    public Estabelecimento procurarCnpj(String cnpj) throws  Exception {    
     	
         try 
         {    
-        	Estabelecimento cli = manager.find(Estabelecimento.class, cpf);
-            return cli;
+        	Estabelecimento e = manager.find(Estabelecimento.class, cnpj);
+            return e;
             
         } catch (Exception ex) {        	
             	try 
@@ -62,7 +62,7 @@ public class ClienteDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Cpf de Cliente não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Cnpj de Estabelecimento não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
