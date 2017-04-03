@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
@@ -19,9 +20,27 @@ public class FuncionarioDAO {
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
 	
-	//Método de inserir funcionário.
-	
-    public void inserirFuncionario(Funcionario f) throws  Exception {  	
+	public Funcionario getFuncionario(String login, String senha) {
+		   
+        try {
+              Funcionario f = (Funcionario) manager
+                         .createQuery(
+                    		 "SELECT login, senha from funcionario where login = :login and senha = :senha")
+                         .setParameter("login", login)
+                         .setParameter("senha", senha).getSingleResult();
+              if(f != null){
+            	  System.out.print("pegou caralho!!!");
+              }
+              return f;
+              
+        } catch (NoResultException e) {
+        	
+        	  System.out.print("Funcionario ou Senha Inválida!!!");
+              return null;
+        }
+  }
+
+    public void inserir(Funcionario f) throws  Exception {  	
     	
         try 
         {
@@ -38,7 +57,7 @@ public class FuncionarioDAO {
                 
             } catch (Exception re) {    
             	
-                throw new Exception("Erro ao Tentar Cadastrar Funcionario "+f.getNome()+re);           
+                throw new Exception("Erro ao Tentar Cadastrar "+f.getNome()+re);           
             }
             
             throw ex;
@@ -52,9 +71,7 @@ public class FuncionarioDAO {
         }
     }
     
-    //Método de procurar funcionario por cpf.
-    
-    public Funcionario procurarFuncionarioCpf(String cpf) throws  Exception {    
+    public Funcionario procurarId(String cpf) throws  Exception {    
     	
         try 
         {    
@@ -68,7 +85,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Cpf do Funcionario não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Cpf de Funcionario não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -82,9 +99,7 @@ public class FuncionarioDAO {
         }
     }
     
-    //Método de procurar funcionario pelo nome.
-    
-    public Funcionario procurarFuncionarioNome(String nome) throws  Exception {       
+    public Funcionario procurarNome(String nome) throws  Exception {       
     	
          try 
         {   
@@ -100,7 +115,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Nome do Funcionario não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Nome de Funcionario não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -114,9 +129,7 @@ public class FuncionarioDAO {
         }
     }
     
-    //Método para alterar cadastro de funcionario.
-    
-    public void alterarFuncionario(Funcionario f) throws  Exception {      
+    public void alterar(Funcionario f) throws  Exception {      
     	
         try 
         {               
@@ -134,7 +147,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Alterar Cadastro do Funcionario "+f.getNome()+re);
+            		throw new Exception("Erro ao Tentar Alterar "+f.getNome()+re);
                 
             	}
             
@@ -148,10 +161,8 @@ public class FuncionarioDAO {
             }
         }
     }
-    
-    //Método de excluir cadastro de funcionário.
-    
-    public void excluirFuncionario(int id) throws Exception {
+
+    public void excluir(int id) throws Exception {
     	
     	Funcionario f = new Funcionario();
     	    
@@ -173,7 +184,7 @@ public class FuncionarioDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Excluir Cadastro do Funcionario "+f.getNome()+re);
+            		throw new Exception("Erro ao Tentar Excluir "+f.getNome()+re);
                 
             	}
             
@@ -188,7 +199,6 @@ public class FuncionarioDAO {
         }
     }
     
-    //Método de listar todos os funcionários cadastrados.
    
 	public List<Funcionario> listar(){
     	

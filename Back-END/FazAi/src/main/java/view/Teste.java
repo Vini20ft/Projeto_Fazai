@@ -19,12 +19,13 @@ public class Teste{
         //cli.inserir(c);
     	
     	Funcionario f = new Funcionario();
-    	f.setId(2);
-    	//f.setLogin("misaeljunior");
+    	f.setLogin("misaeljunior");
     	//f.setNome("misaeljjunior");
-    	//f.setSenha("misaejunior");
+    	f.setSenha("misaeljunior");
+    	//f.setEmail("misaeljunior");
     	
     	FuncionarioDAO fun = new FuncionarioDAO();
-    	//fun.(f.getId());
+    	fun.getFuncionario(f.getLogin(), f.getSenha());
+    	//fun.inserir(f);	
     }
 }

@@ -17,10 +17,8 @@ public class ConsumidorDAO {
     
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
-	
-	//Método de cadastrar consumidor.
-	
-    public void inserirConsumidor(Consumidor c) throws  Exception {  	
+
+    public void inserir(Consumidor c) throws  Exception {  	
     	
         try 
         {
@@ -51,14 +49,12 @@ public class ConsumidorDAO {
         }
     }
     
-    //Método de procurar consumidor pelo cpf.
-    
-    public Consumidor procurarConsumidorCpf(String cpf) throws  Exception {    
+    public Consumidor procurarId(String cpf) throws  Exception {    
     	
         try 
         {    
-        	Consumidor c = manager.find(Consumidor.class, cpf);
-            return c;
+        	Consumidor cli = manager.find(Consumidor.class, cpf);
+            return cli;
             
         } catch (Exception ex) {        	
             	try 
@@ -67,7 +63,7 @@ public class ConsumidorDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Cpf de Consumidor não Consta nos Nossos Registros "+re);               
+            		throw new Exception("Cpf de Consumidor não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -80,16 +76,14 @@ public class ConsumidorDAO {
             }
         }
     }
-    
-    //Método de procurar consumidor pelo nome.
     
     public Consumidor procurarNome(String nome) throws  Exception {       
     	
          try 
         {   
-        	Consumidor c = null;
-        	c = manager.find(Consumidor.class, nome);
-            return c;
+        	Consumidor cli = null;
+        	cli = manager.find(Consumidor.class, nome);
+            return cli;
             
                 
         } catch (Exception ex) {        	
@@ -99,7 +93,7 @@ public class ConsumidorDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Nome de Consumidor não Consta nos Nossos Registros "+re);               
+            		throw new Exception("Nome de Consumidor não Consta nos Nossos Registros"+re);               
             	}
             
             	throw ex;
@@ -112,8 +106,6 @@ public class ConsumidorDAO {
             }
         }
     }
-    
-    //Método para alterar cadastro de consumidor.
     
     public void alterar(Consumidor cli) throws  Exception {      
     	
@@ -133,7 +125,7 @@ public class ConsumidorDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Alterar Cadastro de Consumidor "+cli.getNome()+re);
+            		throw new Exception("Erro ao Tentar Alterar "+cli.getNome()+re);
                 
             	}
             
@@ -147,21 +139,19 @@ public class ConsumidorDAO {
             }
         }
     }
-    
-    //Método de exclusão de consumidor.
-    
+
     public void excluir(int id) throws Exception {
     	
-    	Consumidor c = new Consumidor();
+    	Consumidor cli = new Consumidor();
     	    
         try 
         {
               EntityTransaction et = manager.getTransaction();
               et.begin();	
-              c = manager.getReference(Consumidor.class, id);
-              manager.remove(c);
+              cli = manager.getReference(Consumidor.class, id);
+              manager.remove(cli);
               et.commit();
-              System.out.print("Cadastro do Consumidor "+c.getNome()+" Excluido com Sucesso!!!");
+              System.out.print("Cadastro do Consumidor "+cli.getNome()+" Excluido com Sucesso!!!");
               
         } catch (Exception ex) {
         	
@@ -172,7 +162,7 @@ public class ConsumidorDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Excluir Cadastro do Consumidor "+c.getNome()+re);
+            		throw new Exception("Erro ao Tentar Excluir "+cli.getNome()+re);
                 
             	}
             
@@ -187,7 +177,6 @@ public class ConsumidorDAO {
         }
     }
     
-    //Método de listar consumidores cadastrados.
    
 	public List<Consumidor> listar(){
     	

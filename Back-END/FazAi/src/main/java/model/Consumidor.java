@@ -1,17 +1,13 @@
 package model;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name="consumidor")
 public class Consumidor{
 	
-	//Atributos da Classe Consumidor.
-	
-	@Id
 	@Column(name="cpf", length=50, nullable=false)
-	private int cpf;
+	private String cpf;
 	@Column(name="nome", length=50, nullable=false)
 	private String nome;
 	@Column(name="email", length=50, nullable=false)
@@ -19,17 +15,13 @@ public class Consumidor{
 	@Column(name="telefone", length=20, nullable=false)
 	private String telefone;
 	
-	//Construtor de Consumidor.
-	
 	public Consumidor(){}
-	
-	//Gets e Sets da Classe Consumidor.
-	
-	public int getCpf() {
+
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -56,4 +48,5 @@ public class Consumidor{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
 }
