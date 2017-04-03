@@ -2,18 +2,36 @@ package fazai.com.br.fazai;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener {
+
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .build();
 
         if (AccessToken.getCurrentAccessToken() == null) {
             goLoginScreen();
@@ -26,8 +44,35 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void logoutFacebook(View view) {
+    public void signOut(View view) {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            signOutFacebook();
+        } else {
+            signOutGoogle();
+        }
+    }
+
+    private void signOutFacebook() {
         LoginManager.getInstance().logOut();
         goLoginScreen();
+    }
+
+    private void signOutGoogle() {
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        if (status.isSuccess()) {
+                            goLoginScreen();
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.error_logout, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
