@@ -7,7 +7,7 @@
     tools:context="fazai.com.br.fazai.MainActivity">
 
     <Button
-        android:onClick="logout"
+        android:onClick="logoutFacebook"
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

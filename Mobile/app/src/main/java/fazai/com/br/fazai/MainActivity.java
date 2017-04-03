@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void logout(View view) {
+    public void logoutFacebook(View view) {
         LoginManager.getInstance().logOut();
         goLoginScreen();
     }
