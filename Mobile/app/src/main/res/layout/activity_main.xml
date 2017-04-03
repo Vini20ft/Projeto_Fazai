@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fazai.com.br.fazai.MainActivity">
+    tools:context="fazai.com.br.fazai.activities.MainActivity">
 
     <Button
         android:onClick="signOut"
