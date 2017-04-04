@@ -1,0 +1,1 @@
+var loginErro = "Usuário inválido";
