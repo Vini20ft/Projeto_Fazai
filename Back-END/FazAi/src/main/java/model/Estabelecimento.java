@@ -1,9 +1,16 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="estabelecimento")
@@ -20,6 +27,22 @@ public class Estabelecimento{
 	private String reazaoSocial;
 	@Column(name="especialidade", length=50, nullable=false)
 	private String especialidade;
+	
+	@OneToMany(mappedBy = "estabelecimento",
+			fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Pedido> pedidos;
+	
+	@OneToMany(mappedBy = "estabelecimento",
+			fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Cardapio> cardapios;
+	
+	@OneToMany(mappedBy = "estabelecimento",
+			fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)	
+	private List<Funcionario> funcionario;
+	
 	
 	//Contrtutor de Estabelecimento;
 	
