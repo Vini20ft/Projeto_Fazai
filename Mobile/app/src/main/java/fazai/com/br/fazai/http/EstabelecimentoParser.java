@@ -47,7 +47,7 @@ public class EstabelecimentoParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("url do servico");
+        String urlApi = String.format("https://dl.dropboxusercontent.com/content_link/EkrFt0Yw0bio17qIrPSKWayVSFL9cUxqHh1xdmEOrzE5ExbJ7XcXqiVim5KbVipE/file");
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor

@@ -13,8 +13,11 @@ public class Estabelecimento {
     public String razaoSocial;
     @SerializedName("especialidade")
     public String especialidade;
+    @SerializedName("endereco")
+    public Endereco endereco;
 
     public Estabelecimento() {
+        endereco = new Endereco();
     }
 
     public Estabelecimento(int cnpj, String nome, String razaoSocial, String especialidade) {

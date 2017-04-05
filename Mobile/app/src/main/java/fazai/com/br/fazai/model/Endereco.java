@@ -17,7 +17,7 @@ public class Endereco {
     public int numero;
     @SerializedName("telefone")
     public String telefone;
-
+    @SerializedName("localizacao")
     public Localizacao localizacao;
 
     public Endereco() {
