@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "359267866058",
+    "firebase_url": "https://fazai-568d2.firebaseio.com",
+    "project_id": "fazai-568d2",
+    "storage_bucket": "fazai-568d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359267866058:android:8ce77604a52312e0",
+        "android_client_info": {
+          "package_name": "fazai.com.br.fazai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359267866058-ilhqsl6sho4liv0e3fmdreolh3l0o4ns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fazai.com.br.fazai",
+            "certificate_hash": "d2ac45df32d8350aff4e4884265dc516be8a2623"
+          }
+        },
+        {
+          "client_id": "359267866058-t4cuv15co1shvkep71tsdo8sr1iq4rn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB92l3phtRvsbvjaYBLJJXVOz8T8X3vmR0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359267866058-t4cuv15co1shvkep71tsdo8sr1iq4rn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
