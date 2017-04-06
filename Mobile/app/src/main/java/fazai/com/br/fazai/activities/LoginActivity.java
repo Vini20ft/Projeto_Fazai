@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -35,6 +36,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        VerifyCurrentUser();
+
         callbackManager = CallbackManager.Factory.create();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -70,6 +74,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivityForResult(intent, SIGN_IN_CODE);
             }
         });
+    }
+
+    private void VerifyCurrentUser() {
+        if (AccessToken.getCurrentAccessToken() != null || (googleApiClient != null && googleApiClient.isConnected())) {
+            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
+            goMainScreen();
+        }
     }
 
     private void goMainScreen() {
