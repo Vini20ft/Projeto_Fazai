@@ -8,18 +8,18 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        tools:layout_editor_absoluteY="164dp"
-        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="137dp"
+        tools:layout_editor_absoluteX="244dp"
         android:layout_above="@+id/signInButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="137dp"
         tools:layout_editor_absoluteY="244dp"
