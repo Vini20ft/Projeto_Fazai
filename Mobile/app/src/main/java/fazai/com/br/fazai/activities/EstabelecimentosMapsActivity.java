@@ -15,7 +15,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fazai.com.br.fazai.R;
@@ -68,7 +67,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
         mMap = googleMap;
         LatLng sydney;
         MarkerOptions marker;
-        estabelecimentoList = new ArrayList<>();
 
         for (Estabelecimento estabelecimento : estabelecimentoList) {
             double latitude = estabelecimento.endereco.localizacao.latitude;
