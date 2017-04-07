@@ -2,16 +2,10 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="funcionario")
@@ -29,12 +23,6 @@ public class Funcionario {
 	private String login;
 	@Column(name="senha", length=50, nullable=false)
 	private String senha;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cnpj", 
-				insertable = true,
-				updatable = true)
-	@Fetch(FetchMode.JOIN)
-	private Estabelecimento estabelecimento;
 	
 	public Funcionario(){}
 
