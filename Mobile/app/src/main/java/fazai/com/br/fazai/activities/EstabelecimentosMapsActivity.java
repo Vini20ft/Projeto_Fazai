@@ -25,8 +25,7 @@ import fazai.com.br.fazai.model.Estabelecimento;
 import fazai.com.br.fazai.model.PopupAdapter;
 
 public class EstabelecimentosMapsActivity extends FragmentActivity implements OnMapReadyCallback,
-        LoaderManager.LoaderCallbacks<List<Estabelecimento>>,
-        GoogleMap.OnInfoWindowClickListener {
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>> {
 
     private GoogleMap mMap;
     private Marker marker;
@@ -99,9 +98,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
                 return true;
             }
         });
-
-        //mMap.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
-        mMap.setOnInfoWindowClickListener(this);
     }
 
     private void setUpMap() {
@@ -140,11 +136,5 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
         markerOptions.position(latLng).title(title).snippet(snippet).draggable(true);
 
         marker = mMap.addMarker(markerOptions);
-    }
-
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-
     }
 }
