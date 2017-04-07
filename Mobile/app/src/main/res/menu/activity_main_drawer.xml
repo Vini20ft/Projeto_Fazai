@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/ic_account_box_black_24dp"
             android:title="Perfil" />
         <!--<item
             android:id="@+id/nav_gallery"
@@ -12,8 +12,12 @@
             android:title="Gallery" />-->
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/ic_navigation_black_24dp"
             android:title="Mapa de FoodTrucks" />
+        <item
+            android:id="@+id/nav_foodtruck"
+            android:icon="@mipmap/ic_local_shipping_black_24dp"
+            android:title="@string/food_truck" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

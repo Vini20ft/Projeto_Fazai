@@ -11,4 +11,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!--menu lateral-->
+    <string name="food_truck">Food Truck</string>
+
 </resources>
