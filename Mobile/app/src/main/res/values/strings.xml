@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Faz Aí</string>
     <string name="facebook_app_id">755309927978194</string>
-    <string name="cancel_login">Login cancelado</string>
-    <string name="error_login">Ocorreu um erro ao efetuar login</string>
-    <string name="error_logout">Ocorreu um erro ao efetuar logout</string>
+    <string name="cancel_login">Login canceled</string>
+    <string name="error_login">There was an error logging in</string>
+    <string name="error_logout">There was an error logging out</string>
     <string name="title_activity_estabelecimentos_maps">Map</string>
     <string name="title_activity_main">MainActivity</string>
 
@@ -13,12 +13,10 @@
     <string name="action_settings">Settings</string>
 
     <!--menu lateral-->
-    <string name="perfil">Perfil</string>
-    <string name="mapa_dos_food_trucks">Mapa dos Food Trucks</string>
+    <string name="perfil">Profile</string>
+    <string name="mapa_dos_food_trucks">Map of Food Trucks</string>
     <string name="food_truck">Food Truck</string>
-    <string name="pedidos">Pedidos</string>
-    <string name="compartilhar">Compartilhar</string>
-    <string name="sair">Sair</string>
-
-
+    <string name="pedidos">Requests</string>
+    <string name="compartilhar">To share</string>
+    <string name="sair">Get out</string>
 </resources>

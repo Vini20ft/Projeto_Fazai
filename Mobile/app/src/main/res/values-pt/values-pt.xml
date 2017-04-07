@@ -1,0 +1,16 @@
+<resources>
+    <string name="cancel_login">Login cancelado</string>
+    <string name="error_login">Ocorreu um erro ao iniciar a sessão</string>
+    <string name="error_logout">Ocorreu um erro ao terminar a sessão</string>
+    <string name="title_activity_estabelecimentos_maps">Mapa</string>
+
+    <string name="action_settings">Configurações</string>
+
+    <!--menu lateral-->
+    <string name="perfil">Perfil</string>
+    <string name="mapa_dos_food_trucks">Mapa dos Food Trucks</string>
+    <string name="food_truck">Food Truck</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="compartilhar">Compartilhar</string>
+    <string name="sair">Sair</string>
+</resources>
