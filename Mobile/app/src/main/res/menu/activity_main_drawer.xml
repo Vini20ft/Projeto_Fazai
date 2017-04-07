@@ -5,15 +5,11 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@mipmap/ic_account_box_black_24dp"
-            android:title="Perfil" />
-        <!--<item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />-->
+            android:title="@string/perfil" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@mipmap/ic_navigation_black_24dp"
-            android:title="Mapa de FoodTrucks" />
+            android:title="@string/mapa_dos_food_trucks" />
         <item
             android:id="@+id/nav_foodtruck"
             android:icon="@mipmap/ic_local_shipping_black_24dp"
@@ -21,7 +17,7 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Pedidos" />
+            android:title="@string/pedidos" />
     </group>
 
     <item android:title="Communicate">
@@ -29,11 +25,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Compartilhar" />
+                android:title="@string/compartilhar" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Sair" />
+                android:title="@string/sair" />
         </menu>
     </item>
 
