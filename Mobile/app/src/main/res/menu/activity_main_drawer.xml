@@ -3,17 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_perfil"
             android:icon="@mipmap/ic_profile"
             android:title="@string/perfil" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@mipmap/ic_navigacao"
+            android:icon="@mipmap/ic_mapa"
             android:title="@string/mapa_dos_food_trucks" />
-        <item
-            android:id="@+id/nav_food_truck"
-            android:icon="@mipmap/ic_food_truck"
-            android:title="@string/food_truck" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@mipmap/ic_pedido"
@@ -22,10 +18,6 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@mipmap/ic_compartinhar"
-                android:title="@string/compartilhar" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@mipmap/ic_sair"
