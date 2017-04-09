@@ -14,9 +14,12 @@
 
     <!--menu lateral-->
     <string name="perfil">Profile</string>
-    <string name="mapa_dos_food_trucks">Map of Food Trucks</string>
+    <string name="mapa_dos_food_trucks">Map</string>
     <string name="food_truck">Food Truck</string>
     <string name="pedidos">Requests</string>
     <string name="compartilhar">To share</string>
-    <string name="sair">Get out</string>
+    <string name="cardapio">Menu</string>
+    <string name="status_pedido">Order Status</string>
+    <string name="conta">Account</string>
+    <string name="sair">Logoff</string>
 </resources>

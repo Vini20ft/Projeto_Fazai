@@ -8,9 +8,12 @@
 
     <!--menu lateral-->
     <string name="perfil">Perfil</string>
-    <string name="mapa_dos_food_trucks">Mapa dos Food Trucks</string>
+    <string name="mapa_dos_food_trucks">Mapa</string>
     <string name="food_truck">Food Truck</string>
     <string name="pedidos">Peticiones</string>
     <string name="compartilhar">Compartir</string>
+    <string name="cardapio">Menú</string>
+    <string name="status_pedido">Estado del pedido</string>
+    <string name="conta">Cuenta</string>
     <string name="sair">Salir</string>
 </resources>
