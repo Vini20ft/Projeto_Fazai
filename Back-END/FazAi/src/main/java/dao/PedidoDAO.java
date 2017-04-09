@@ -154,14 +154,19 @@ public class PedidoDAO {
     }
     
    //metodo de listar pedidos.
-	public List<Consumidor> listarPedidos(){
+	public List<Consumidor> listarPedidos()throws Exception{
     	
 		try{
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from pedidos");
+			Query query = manager.createQuery("from Pedido");
+			@SuppressWarnings("unchecked")
 			List<Consumidor> c = query.getResultList();
 			return c;	
-		}
+		} catch (Exception re) {
+        	
+    		throw new Exception("Erro ao Tentar Listar "+re);
+        
+    	}
 		finally{
 			manager.close();
 		}

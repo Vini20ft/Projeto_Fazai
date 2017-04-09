@@ -8,6 +8,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
+import org.apache.commons.mail.SimpleEmail;
+
 import model.Funcionario;
 import util.UtilJPA;
 
@@ -20,27 +22,77 @@ public class FuncionarioDAO {
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
 	
-	public Funcionario getFuncionario(String login, String senha) {
-		   
+	//Metodo de login de funcionario.
+	public Funcionario loginFuncionario(String login, String senha) {
+		
         try {
               Funcionario f = (Funcionario) manager
                          .createQuery(
-                    		 "SELECT login, senha from funcionario where login = :login and senha = :senha")
+                    		 "SELECT f FROM Funcionario f WHERE login = :login and senha = :senha")
                          .setParameter("login", login)
                          .setParameter("senha", senha).getSingleResult();
-              if(f != null){
-            	  System.out.print("pegou caralho!!!");
-              }
               return f;
               
         } catch (NoResultException e) {
         	
-        	  System.out.print("Funcionario ou Senha Inválida!!!");
+        	  System.out.print("Nome de Funcionario ou Senha Inválidos!!! " + e);
               return null;
         }
-  }
+	}
+	
+	//Método de redefinição de senha.
+	public Funcionario redefinirSenhaFuncionario(String email) throws  Exception {       
+    	
+    	try {
+    		
+            Funcionario f = (Funcionario) manager
+                       .createQuery(
+                  		 "SELECT f FROM Funcionario f WHERE email = :email ")
+                       .setParameter("email", email).getSingleResult();
+            
+            if(f.getEmail() == email){
+            	
+            	SimpleEmail mEmail = new SimpleEmail();
+            	//Utilize o hostname do seu provedor de email
+            	System.out.println("alterando hostname...");
+            	mEmail.setHostName("smtp.gmail.com");
+            	//Quando a porta utilizada não é a padrão (gmail = 465)
+            	mEmail.setSmtpPort(465);
+            	//Adicione os destinatários
+            	mEmail.addTo(f.getEmail(), f.getNome());
+            	//Configure o seu email do qual enviará
+            	mEmail.setFrom("grupofazai@gmail.com", "Grupo Faz Aí");
+            	//Adicione um assunto
+            	mEmail.setSubject("Redefinição de Senha do Faz Aí");
+            	//Adicione a mensagem do email
+            	mEmail.setMsg("Redefina Sua Senha Através do Link... ");
+            	//Para autenticar no servidor é necessário chamar os dois métodos abaixo
+            	System.out.println("autenticando...");
+            	mEmail.setSSL(true);
+            	mEmail.setAuthentication("grupofazai@gmail.com", "123fazai456");
+            	System.out.println("enviando...");
+            	mEmail.send();
+            	System.out.println("Email enviado!");
+            	
+            }else{
+            	
+            }
+            		
+            		
+                	
+            	
+            return null;
+            
+      } catch (NoResultException e) {
+      	
+      	  System.out.print("Erro ao Tentar Locarlizar Email de Funcionário " + e);
+          return null;
+      }
+    	
+    }
 
-    public void inserir(Funcionario f) throws  Exception {  	
+	//Metodo de inserir cadastro de funcionario.
+    public void inserirFuncionario(Funcionario f) throws  Exception {  	
     	
         try 
         {
@@ -71,11 +123,12 @@ public class FuncionarioDAO {
         }
     }
     
-    public Funcionario procurarId(String cpf) throws  Exception {    
+    //Metodo de procurar cadastro de funcionario por codigo.
+    public Funcionario procurarFuncionarioId(int id) throws  Exception {    
     	
         try 
         {    
-        	Funcionario f = manager.find(Funcionario.class, cpf);
+        	Funcionario f = manager.find(Funcionario.class, id);
             return f;
             
         } catch (Exception ex) {        	
@@ -99,37 +152,26 @@ public class FuncionarioDAO {
         }
     }
     
-    public Funcionario procurarNome(String nome) throws  Exception {       
+    //Metodo de procurar cadastro de funcionario por nome.
+    public Funcionario procurarFuncionarioNome(String nome) throws  Exception {       
     	
-         try 
-        {   
-        	Funcionario f = null;
-        	f = manager.find(Funcionario.class, nome);
+    	try {
+    		
+            Funcionario f = (Funcionario) manager
+                       .createQuery(
+                  		 "SELECT f FROM Funcionario f WHERE nome = :nome ")
+                       .setParameter("nome", nome).getSingleResult();           
             return f;
             
-                
-        } catch (Exception ex) {        	
-            	try 
-            	{           	
-            		utx.rollback();
-                
-            	} catch (Exception re) {
-            	
-            		throw new Exception("Nome de Funcionario não Consta nos Nossos Registros"+re);               
-            	}
-            
-            	throw ex;
-            
-        } finally {
-        	
-        	if (manager != null) {
-        		manager.close();
-            	
-            }
-        }
+      } catch (NoResultException e) {
+      	
+      	  System.out.print("Funcionário Não Localizado !!! " + e);
+          return null;
+      }
     }
     
-    public void alterar(Funcionario f) throws  Exception {      
+    //Metodo de alterar cadastro de funcionario.
+    public void alterarFuncionario(Funcionario f) throws  Exception {      
     	
         try 
         {               
@@ -161,8 +203,9 @@ public class FuncionarioDAO {
             }
         }
     }
-
-    public void excluir(int id) throws Exception {
+    
+    //Metodo de excluir cadastro de funcionarino.
+    public void excluirFuncionario(int id) throws Exception {
     	
     	Funcionario f = new Funcionario();
     	    
@@ -199,15 +242,22 @@ public class FuncionarioDAO {
         }
     }
     
-   
-	public List<Funcionario> listar(){
-    	
+    //Metodo de listar todos os cadastro de funcionario.
+	public List<Funcionario> listarFuncionario()throws Exception{
+		
 		try{
+			
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from funcionario");
+			Query query = manager.createQuery("from Funcionario");
+			@SuppressWarnings("unchecked")
 			List<Funcionario> f = query.getResultList();
-			return f;	
-		}
+			return f;
+			
+		} catch (Exception re) {
+        	
+    		throw new Exception("Erro ao Tentar Listar "+re);
+        
+    	}
 		finally{
 			manager.close();
 		}

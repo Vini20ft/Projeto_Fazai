@@ -14,7 +14,7 @@ import dao.ConsumidorDAO;
 @Path("/service")
 public class ConsumidorServiceController {
 	
-	private final ConsumidorDAO cliDAO = new ConsumidorDAO();
+	private final ConsumidorDAO cd = new ConsumidorDAO();
 	
 	/**
 	 * @Consumes - determina o formato dos dados que vamos postar
@@ -26,18 +26,17 @@ public class ConsumidorServiceController {
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
 	@Path("/cadastrar")
-	public String Cadastrar(ConsumidorHttp conHttp ){
+	public String Cadastrar(ConsumidorHttp ch ){
  
 		Consumidor con = new Consumidor();
  
 		try {
  
-			conHttp.setCpf(con.getCpf());			
-			conHttp.setNome(con.getNome());
-			conHttp.setEmail(con.getEmail());
-			conHttp.setTelefone(con.getTelefone());
-			
-			cliDAO.inserir(con);
+			con.setNome(ch.getNome());
+			con.setCpf(ch.getCpf());
+			con.setEmail(ch.getEmail());
+			con.setTelefone(ch.getTelefone());
+			cd.inserirConsumidor(con);
  
 			return "Registro cadastrado com sucesso!";
  
@@ -56,18 +55,17 @@ public class ConsumidorServiceController {
 	@Produces("application/json; charset=UTF-8")
 	@Consumes("application/json; charset=UTF-8")	
 	@Path("/alterar")
-	public String Alterar(Consumidor conHttp){
+	public String Alterar(Consumidor ch){
  
-		Consumidor con = new Consumidor();
+		Consumidor c = new Consumidor();
  
 		try {
-			
-			conHttp.setCpf(con.getCpf());			
-			conHttp.setNome(con.getNome());
-			conHttp.setEmail(con.getEmail());
-			conHttp.setTelefone(con.getTelefone());
-			
-			cliDAO.alterar(con);
+						
+			c.setNome(ch.getNome());
+			c.setCpf(ch.getCpf());
+			c.setEmail(ch.getEmail());
+			c.setTelefone(ch.getTelefone());
+			cd.alterarConsumidor(c);
  
 			return "Registro alterado com sucesso!";
  

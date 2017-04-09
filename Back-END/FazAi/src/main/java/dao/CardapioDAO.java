@@ -80,36 +80,6 @@ public class CardapioDAO {
             }
         }
     }
-    //Metodo de procurar cardapio por tipo
-    public Cardapio procurarCardapioTipo(String tipo) throws  Exception {       
-    	
-         try 
-        {   
-        	Cardapio c = null;
-        	c = manager.find(Cardapio.class, tipo);
-            return c;
-            
-                
-        } catch (Exception ex) {        	
-            	try 
-            	{           	
-            		utx.rollback();
-                
-            	} catch (Exception re) {
-            	
-            		throw new Exception("Tipo de Cardápio não Consta nos Nossos Registros"+re);               
-            	}
-            
-            	throw ex;
-            
-        } finally {
-        	
-        	if (manager != null) {
-        		manager.close();
-            	
-            }
-        }
-    }
     
     //Método de alterar cardapio
     public void alterarCardapio(Cardapio c) throws  Exception {      
@@ -184,14 +154,20 @@ public class CardapioDAO {
     }
     
    //Metodo de listar cardapios
-	public List<Funcionario> listarCardapio(){
-    	
+	public List<Funcionario> listarCardapio()throws Exception{
+    		
 		try{
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from cardapio");
+			Query query = manager.createQuery("from Cardapio");
+			@SuppressWarnings("unchecked")
 			List<Funcionario> f = query.getResultList();
 			return f;	
-		}
+			
+		} catch (Exception re) {
+        	
+    		throw new Exception("Erro ao Tentar Listar "+re);
+        
+    	}
 		finally{
 			manager.close();
 		}

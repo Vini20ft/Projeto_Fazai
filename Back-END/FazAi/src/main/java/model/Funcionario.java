@@ -2,42 +2,33 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 @Entity
-@Table(name="funcionario")
+@Table(name="Funcionario")
 public class Funcionario {
 	
+	//Atributos da Classe Estabelecimento.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	@Column(name="nome", length=50, nullable=false)
+	@Column(name="nome", length=50, nullable=false, unique=true)
 	private String nome;
-	@Column(name="email", length=50, nullable=false)
+	@Column(name="email", length=50, nullable=false, unique=true)
 	private String email;
-	@Column(name="login", length=50, nullable=false)
+	@Column(name="login", length=50, nullable=false, unique=true)
 	private String login;
 	@Column(name="senha", length=50, nullable=false)
 	private String senha;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cnpj", 
-				insertable = true,
-				updatable = true)
-	@Fetch(FetchMode.JOIN)
-	private Estabelecimento estabelecimento;
 	
+	//Construtor de Funcionario.
 	public Funcionario(){}
-
+	
+	//Gets e Sets de Funcionario.
 	public int getId() {
 		return id;
 	}

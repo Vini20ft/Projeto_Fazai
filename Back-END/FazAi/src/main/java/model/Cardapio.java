@@ -1,26 +1,13 @@
 package model;
-
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 @Entity
-@Table(name="cardapio")
+@Table(name="Cardapio")
 public class Cardapio {
 	
 	//Atributos da classe cardapio.
@@ -29,29 +16,12 @@ public class Cardapio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="codigo")
 	private int id;
-	@Column(name="tipo", length=50, nullable=false)
+	@Column(name="tipo", length=50, nullable=false, unique=true)
 	private String tipo;
 	@Column(name="criador", length=50, nullable=false)
 	private String criador;
-	@Column(name="descricao", length=50, nullable=false)
+	@Column(name="descricao", length=50, nullable=false, unique=true)
 	private String descricao;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cnpj", 
-				insertable = true,
-				updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
-	private Estabelecimento estabelecimento;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "pedidoCardapio", 
-            joinColumns = @JoinColumn(name="codigo"),
-            inverseJoinColumns = @JoinColumn(name= "codigo"))
-    @Column (name = "cardapio")
-	private List<Pedido> pedido;
-	
-	
 	
 	//Construtor da classe cardapio.
 	public Cardapio() {}
@@ -88,7 +58,6 @@ public class Cardapio {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
 
 }
+

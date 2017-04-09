@@ -1,12 +1,18 @@
 package dao;
 
+import java.io.FileWriter;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+
 import model.Estabelecimento;
 import util.UtilJPA;
+
+import com.google.gson.Gson;
 
 public class EstabelecimentoDAO {
 	
@@ -50,7 +56,7 @@ public class EstabelecimentoDAO {
     }
     
     //Metodo de procurar cadastro de estabeleciemnto por cnpj.
-    public Estabelecimento procurarEstabelecimentoCnpj(String cnpj) throws  Exception {    
+    public Estabelecimento procurarEstabelecimentoCnpj(int cnpj) throws  Exception {    
     	
         try 
         {    
@@ -81,32 +87,19 @@ public class EstabelecimentoDAO {
     //Metodo de procurar cadastro de estabelecimento por nome.
     public Estabelecimento procurarEstabelecimentoNome(String nome) throws  Exception {       
     	
-         try 
-        {   
-        	Estabelecimento cli = null;
-        	cli = manager.find(Estabelecimento.class, nome);
-            return cli;
+    	try {
+    		
+            Estabelecimento e = (Estabelecimento) manager
+                       .createQuery(
+                  		 "SELECT e FROM Estabelecimento e WHERE nome = :nome ")
+                       .setParameter("nome", nome).getSingleResult();            
+            return e;
             
-                
-        } catch (Exception ex) {        	
-            	try 
-            	{           	
-            		utx.rollback();
-                
-            	} catch (Exception re) {
-            	
-            		throw new Exception("Nome de Estabelecimento não Consta nos Nossos Registros"+re);               
-            	}
-            
-            	throw ex;
-            
-        } finally {
-        	
-        	if (manager != null) {
-        		manager.close();
-            	
-            }
-        }
+      } catch (NoResultException e) {
+      	
+      	  System.out.print("Estabelecimento Não Localizado!!! " + e);
+          return null;
+      }
     }
     
     //Metodo de alterar cadastro de estabelecimento.
@@ -182,16 +175,56 @@ public class EstabelecimentoDAO {
     }
     
    //Metodo de listar todos os cadastro de estabelecimentos.
-	public List<Estabelecimento> listarEstabelecimento(){
+	public List<Estabelecimento> listarEstabelecimento()throws Exception{
     	
 		try{
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from estabelecimento");
+			Query query = manager.createQuery("from Estabelecimento");
+			@SuppressWarnings("unchecked")
 			List<Estabelecimento> cli = query.getResultList();
 			return cli;	
-		}
+		} catch (Exception re) {
+        	
+    		throw new Exception("Erro ao Tentar Listar "+re);
+        
+    	}
 		finally{
 			manager.close();
 		}
 	}
+	
+	//Metodo de listar todos os cadastro de estabelecimentos, salvando em json.
+		public List<Estabelecimento> listarEstabelecimentoJson()throws Exception{
+	    	
+			try{
+				manager.getEntityManagerFactory();
+				Query query = manager.createQuery("from Estabelecimento");
+				@SuppressWarnings("unchecked")
+				List<Estabelecimento> e = query.getResultList();
+				Gson g = new Gson();
+				String json = g.toJson(e);
+				try {
+					 
+					 FileWriter fileWriter = new FileWriter("/Users/George/Desktop/listaEstabelecimento.json");
+					 fileWriter.write(json);
+					 fileWriter.close();
+					 
+					 } catch (Exception re) {
+						 
+						 throw new Exception("Erro ao Tentar Listar "+re);
+					 }
+					 	System.out.println(json);
+				
+				return e;
+				
+				
+			} catch (Exception re) {
+	        	
+	    		throw new Exception("Erro ao Tentar Listar "+re);
+	        
+	    	}
+			finally{
+				manager.close();
+			}
+		}
 }

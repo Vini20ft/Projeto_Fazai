@@ -1,39 +1,34 @@
 package model;
 
 import javax.persistence.Column;
-import javax.persistence.FetchType;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
-import java.util.List;
-
-@Table(name="consumidor")
+@Entity
+@Table(name="Consumidor")
 public class Consumidor{
-	@Id
-	@Column(name="cpf", length=50, nullable=false)
-	private String cpf;
-	@Column(name="nome", length=50, nullable=false)
-	private String nome;
-	@Column(name="email", length=50, nullable=false)
-	private String email;
-	@Column(name="telefone", length=20, nullable=false)
-	private String telefone;
-	@OneToMany(mappedBy = "consumidor",
-			fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
-	private List<Pedido> pedido;
 	
-	public Consumidor(){}
+	//Atributos da Classe Consumidor.
+	@Id
+	@Column(name="cpf", length=50, nullable=false, unique=true)
+	private int cpf;
+	@Column(name="nome", length=50, nullable=false, unique=true)
+	private String nome;
+	@Column(name="email", length=50, nullable=false, unique=true)
+	private String email;
+	@Column(name="telefone", length=50, nullable=false, unique=true)
+	private String telefone;
+	
+	//Construtor da Classe Consumidor.
+	public Consumidor() {}
 
-	public String getCpf() {
+	//Gets e Sets da Classe Consumidor.
+	public int getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 
@@ -60,5 +55,4 @@ public class Consumidor{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 }

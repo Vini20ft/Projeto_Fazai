@@ -5,12 +5,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ConsumidorHttp {
 	
-	private String cpf;
+	private int cpf;
 	private String nome;
 	private String email;
 	private String telefone;
 	
-	public ConsumidorHttp(String cpf, String nome, String email, String telefone) {
+	public ConsumidorHttp(int cpf, String nome, String email, String telefone) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;
@@ -18,10 +18,10 @@ public class ConsumidorHttp {
 		this.telefone = telefone;
 	}
 	
-	public String getCpf() {
+	public int getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 	public String getNome() {

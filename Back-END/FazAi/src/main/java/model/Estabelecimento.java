@@ -1,19 +1,12 @@
 package model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 @Entity
-@Table(name="estabelecimento")
+@Table(name="Estabelecimento")
 public class Estabelecimento{
 	
 	//Atributos de Estabelecimento.
@@ -21,27 +14,18 @@ public class Estabelecimento{
 	@Id
 	@Column(name="cnpj")
 	private int cnpj;
-	@Column(name="nome", length=50, nullable=false)
+	@Column(name="nome", length=50, nullable=false, unique=true)
 	private String nome;
 	@Column(name="razaoSocial", length=50, nullable=false)
-	private String reazaoSocial;
+	private String razaoSocial;
 	@Column(name="especialidade", length=50, nullable=false)
 	private String especialidade;
-	
-	@OneToMany(mappedBy = "estabelecimento",
-			fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
-	private List<Pedido> pedidos;
-	
-	@OneToMany(mappedBy = "estabelecimento",
-			fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
-	private List<Cardapio> cardapios;
-	
-	@OneToMany(mappedBy = "estabelecimento",
-			fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)	
-	private List<Funcionario> funcionario;
+	@Column(name="endereco", length=50, nullable=false)
+	private String endereco;
+	@Column(name="latitude", length=50, nullable=false)
+	private String latitude;
+	@Column(name="longetude", length=50, nullable=false)
+	private String longetude;
 	
 	
 	//Contrtutor de Estabelecimento;
@@ -66,12 +50,12 @@ public class Estabelecimento{
 		this.nome = nome;
 	}
 
-	public String getReazaoSocial() {
-		return reazaoSocial;
+	public String getRazaoSocial() {
+		return razaoSocial;
 	}
 
-	public void setReazaoSocial(String reazaoSocial) {
-		this.reazaoSocial = reazaoSocial;
+	public void setRazaoSocial(String reazaoSocial) {
+		this.razaoSocial = reazaoSocial;
 	}
 
 	public String getEspecialidade() {
@@ -80,6 +64,30 @@ public class Estabelecimento{
 
 	public void setEspecialidade(String especialidade) {
 		this.especialidade = especialidade;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongetude() {
+		return longetude;
+	}
+
+	public void setLongetude(String longetude) {
+		this.longetude = longetude;
 	}
 		
 }
