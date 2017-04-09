@@ -1,0 +1,66 @@
+﻿<div ng-controller="cardapioController" ng-init="Pesquisar()">
+    <form method="get" class="form-horizontal">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2 style="margin-top:13px"><i class="fa fa-cutlery" style="font-size:20px"></i> Cardápio</h2>
+            </div>
+            <div class="col-sm-8">
+                <div class="title-action">
+                    <a href="" class="btn btn-primary" ui-sref="index.cardapioCadastro">Novo</a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="ibox float-e-margins">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="spiner-example" ng-if="Pesquisa == true">
+                                <div class="sk-spinner sk-spinner-three-bounce">
+                                    <div class="sk-bounce1"></div>
+                                    <div class="sk-bounce2"></div>
+                                    <div class="sk-bounce3"></div>
+                                </div>
+                            </div>
+                            <div ng-if="Pesquisa == false">
+                                <table class="footable table table-stripped toggle-arrow-tiny table-bordered table-hover" data-page-size="10">
+                                    <thead>
+                                        <tr>
+                                            <th>FoodTruck</th>
+                                            <th>Descrição</th>
+                                            <th>Observação</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in listaCardapio" style="cursor:pointer">
+                                            <td>{{item.foodTruck.nome}}</td>
+                                            <td>{{item.descricao}}</td>
+                                            <td>{{item.observacao}}</td>
+                                            <td align="right" width="160px">
+                                                <a href="" class="btn btn-info" ng-click="EditarItem(item)">Editar</a>
+                                                <a href="" class="btn btn-danger" ng-click="ExcluirItem(item)">Excluir</a>
+                                                <script>
+                                                    $('.footable').trigger('footable_initialized');
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5">
+                                                <ul class="pagination pull-right"></ul>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </form>
+</div>
