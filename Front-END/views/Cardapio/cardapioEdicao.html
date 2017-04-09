@@ -1,4 +1,4 @@
-﻿<div ng-controller="funcionarioController" ng-init="CadastroEdicaoInit(true)">
+﻿<div ng-controller="cardapioController" ng-init="CadastroEdicaoInit(true)">
     <form method="get" class="form-horizontal" ng-submit="Salvar(false)">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
@@ -24,12 +24,61 @@
                         </div>
                         <div ng-if="Pesquisa == false">
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">FoodTruck*:</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-options="item as item.nome for item in foodTrucks | orderBy:'nome' track by item.id" ng-model="CardapioDados.foodTruck.selected" ng-disabled="Pesquisa" required="">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
                                 <label class="col-sm-2 control-label">Descrição*:</label>
-                                <div class="col-md-10"><input type="text" class="form-control" ng-model="CardapioDados.descricao" maxlength="100" required=""></div>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="CardapioDados.descricao" maxlength="100" required=""></div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Observação:</label>
                                 <div class="col-md-10"><textarea class="form-control" ng-model="CardapioDados.observacao" maxlength="200"></textarea></div>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Nome*:</label>
+                                            <div class="col-md-8"><input type="text" class="form-control" ng-model="listaItemCardapio.nome" maxlength="50" /></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Preço*:</label>
+                                            <div class="col-md-8"><input type="number" class="form-control" ng-model="listaItemCardapio.preco" maxlength="30" /></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Observação:</label>
+                                            <div class="col-md-8"><textarea class="form-control" ng-model="listaItemCardapio.observacao" maxlength="200"></textarea></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12"><a href="" class="btn btn-info pull-right" ng-click="AdicionarItemCardapio()">Adicionar</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6" style="max-height: 200px;overflow-y:auto">
+                                        <table class="footable table table-stripped toggle-arrow-tiny table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th width="40%">Prato</th>
+                                                    <th width="20%">Preço</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in CardapioDados.ItemCardapio" style="cursor:pointer">
+                                                    <td>{{item.nome}}</td>
+                                                    <td>R$ {{item.preco}}</td>
+                                                    <td align="right" width="80px">
+                                                        <label class="btn btn-info btn-xs" ng-if="item.observacao != '' && item.observacao != undefined" uib-tooltip="{{item.observacao}}" tooltip-placement="left">Obs</label>
+                                                        <a href="" class="btn btn-danger btn-xs" ng-click="ExcluirItemCardapio(item)">Excluir</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

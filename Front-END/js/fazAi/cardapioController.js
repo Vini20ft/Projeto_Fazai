@@ -1,18 +1,83 @@
-﻿function cardapioController($scope, ServiceFazAi, toaster, $interval, $state) {
+﻿function cardapioController($scope, ServiceFazAi, toaster, $interval, $state, $stateParams) {
 
     $scope.CardapioDados = {};
-    $scope.Pesquisa = false;
+    $scope.CardapioDados.ItemCardapio = [];
+    $scope.listaCardapio = {};
+    $scope.foodTrucks = {};
+    $scope.listaItemCardapio = [];
+    $scope.Pesquisa = true;
+
+    $scope.Pesquisar = function () {
+        $scope.verificarOuAtualizarCookies();
+        $scope.ToasterMsg('Criar pesquisa', 'error');
+        $scope.Pesquisa = false;
+        $scope.listaCardapio = listaCardapio;
+    }
 
     $scope.CadastroEdicaoInit = function (edicao) {
         $scope.verificarOuAtualizarCookies();
-        if (edicao === true) $scope.ToasterMsg('Carregar os dados para editar', 'error');
+        $scope.foodTrucks = listaFoodTrucks;
+        if (edicao === true) {
+            $scope.CardapioDados = $stateParams.cardapioItem;
+            if ($scope.CardapioDados.foodTruck != undefined && $scope.CardapioDados.foodTruck != "") {
+                var foodTruckSelecionado = $scope.foodTrucks.filter(function (elemento) {
+                    return elemento.id === $scope.CardapioDados.foodTruck.id;
+                });
+                $scope.CardapioDados.foodTruck.selected = foodTruckSelecionado[0];
+            }
+            $scope.ToasterMsg('Carregar os dados para editar', 'error');
+        }
         else $scope.ToasterMsg('Carregar os dados para cadastrar', 'error');
+        $scope.Pesquisa = false;
     }
 
     $scope.Salvar = function (edicao) {
         $scope.verificarOuAtualizarCookies();
-        if (edicao === true) alert('Criar lógica para editar', 'error');
-        else alert('Criar lógica para cadastrar', 'error');
+        if ($scope.CardapioDados.ItemCardapio == undefined || $scope.CardapioDados.ItemCardapio.length == undefined || $scope.CardapioDados.ItemCardapio.length <= 0) {
+            $scope.ToasterMsg(camposObrigatorioItemCardapio, 'warning');
+            return;
+        }
+        if (edicao === true) $scope.ToasterMsg('Criar lógica para editar', 'error');
+        else $scope.ToasterMsg('Criar lógica para cadastrar', 'error');
+    }
+
+    $scope.EditarItem = function (itemLista) {
+        $scope.verificarOuAtualizarCookies();
+        $state.go('index.cardapioEdicao/:cardapioItem', { cardapioItem: itemLista });
+    }
+
+    $scope.ExcluirItem = function (itemLista) {
+        $scope.verificarOuAtualizarCookies();
+
+        ServiceFazAi.removeService('/Cardapio/Delete', itemLista.id).then(function (response) {
+            $scope.ToasterMsg(excluidoSucesso);
+            $scope.Pesquisar();
+        }, function errorCallback(response) {
+            $scope.MsgErro(response, excluidoErro);
+        });
+
+        var index = $scope.listaCardapio.indexOf(itemLista);
+        if (index != -1) $scope.listaCardapio.splice(index, 1);
+        $scope.ToasterMsg(excluidoSucesso, 'success');
+    }
+
+    $scope.AdicionarItemCardapio = function () {
+        $scope.verificarOuAtualizarCookies();
+        if ($scope.listaItemCardapio.nome == undefined || $scope.listaItemCardapio.nome == "" ||
+            $scope.listaItemCardapio.preco == undefined || $scope.listaItemCardapio.preco == "") {
+            $scope.ToasterMsg(camposObrigatorios, 'warning');
+            return;
+        }
+        $scope.CardapioDados.ItemCardapio.push($scope.listaItemCardapio);
+        $scope.listaItemCardapio = {};
+        $scope.ToasterMsg(adicionadoSucesso, 'success');
+    }
+
+    $scope.ExcluirItemCardapio = function (itemLista) {
+        $scope.verificarOuAtualizarCookies();
+        var index = $scope.CardapioDados.ItemCardapio.indexOf(itemLista);
+        if (index != -1) $scope.CardapioDados.ItemCardapio.splice(index, 1);
+        $scope.ToasterMsg(excluidoSucesso, 'success');
     }
 
     ////////////////////////////////////////////////////
