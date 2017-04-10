@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
+    private Button fb;
 
     public static final int SIGN_IN_CODE = 777;
 
@@ -67,13 +69,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+       /* signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent, SIGN_IN_CODE);
             }
-        });
+        });*/
     }
 
     private void VerifyCurrentUser() {
@@ -91,6 +93,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void init() {
         loginButton = (LoginButton) findViewById(R.id.login_button);
+        fb = (Button) findViewById(R.id.fb);
         signInButton = (SignInButton) findViewById(R.id.signInButton);
     }
 
@@ -119,5 +122,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    //metodo click FacebookLogin
+    public void onClickFacebook(View v) {
+        if (v == fb) {
+            loginButton.performClick();
+        }
+    }
+
+    //metodo click googlePlusLogin
+    public void onClickGooglePlus(View v){
+        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(intent, SIGN_IN_CODE);
+    }
+
+
+
 }
 
