@@ -15,15 +15,18 @@ public class Estabelecimento {
     public String especialidade;
     @SerializedName("endereco")
     public Endereco endereco;
+    @SerializedName("foto")
+    public String foto;
 
     public Estabelecimento() {
         endereco = new Endereco();
     }
 
-    public Estabelecimento(int cnpj, String nome, String razaoSocial, String especialidade) {
+    public Estabelecimento(int cnpj, String nome, String razaoSocial, String especialidade, String foto) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.especialidade = especialidade;
+        this.foto = foto;
     }
 }
