@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.nav_faz_ai) {
 
         }else if (id == R.id.nav_sair) {
+            signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id. drawer_layout);
