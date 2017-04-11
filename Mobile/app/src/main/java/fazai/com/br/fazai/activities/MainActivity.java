@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,12 +26,25 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import java.util.List;
+
 import fazai.com.br.fazai.R;
+import fazai.com.br.fazai.http.EstabelecimentosTask;
+import fazai.com.br.fazai.model.Estabelecimento;
+import fazai.com.br.fazai.ui.adapter.EstabelecimentoAdapter;
 
 public class MainActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener {
+        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener,
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>{
 
     private GoogleApiClient googleApiClient;
+
+    private RecyclerView recyclerView;
+    private GridLayoutManager gridLayoutManager;
+    private EstabelecimentoAdapter adapter;
+    private List<Estabelecimento> mEstabelecimentoList;
+
+    private LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +61,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        gridLayoutManager = new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        mLoaderManager = getSupportLoaderManager();
+        mLoaderManager.initLoader(0, null, this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -90,16 +114,24 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_perfil) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_mapa) {
             Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_food_truck) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_pedido) {
 
-        } else if (id == R.id.nav_send) {
+        }else if (id == R.id.nav_cardapio) {
+
+        }else if (id == R.id.nav_status_pedido) {
+
+        }else if (id == R.id.nav_conta) {
+
+      /*  }else if (id == R.id.nav_faz_ai) {*/
+
+        }else if (id == R.id.nav_sair) {
             signOut();
         }
 
@@ -151,6 +183,36 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
+        return new EstabelecimentosTask(getApplicationContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Estabelecimento>> loader, final List<Estabelecimento> data) {
+        if (data != null) {
+            mEstabelecimentoList = data;
+            adapter = new EstabelecimentoAdapter(this, mEstabelecimentoList);
+            recyclerView.setAdapter(adapter);
+
+            /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                    if(gridLayoutManager.findLastCompletelyVisibleItemPosition() == data.size()-1){
+                        EstabelecimentosTask estabelecimentosTask = new EstabelecimentosTask(getApplicationContext());
+                        estabelecimentosTask.loadInBackground();
+                    }
+                }
+            });*/
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Estabelecimento>> loader) {
 
     }
 }

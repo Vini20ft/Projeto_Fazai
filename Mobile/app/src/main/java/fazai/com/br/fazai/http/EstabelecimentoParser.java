@@ -16,7 +16,7 @@ import okhttp3.Response;
 
 public class EstabelecimentoParser {
 
-    public static List<Estabelecimento> searchByTitle(String q) throws IOException {
+    protected static List<Estabelecimento> searchByTitle(String q) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 
@@ -42,12 +42,12 @@ public class EstabelecimentoParser {
         return null;
     }
 
-    public static List<Estabelecimento> searchAll() throws IOException {
+    protected static List<Estabelecimento> searchAll() throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("https://dl.dropboxusercontent.com/content_link/EkrFt0Yw0bio17qIrPSKWayVSFL9cUxqHh1xdmEOrzE5ExbJ7XcXqiVim5KbVipE/file");
+        String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentoList.json");
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor
@@ -68,7 +68,36 @@ public class EstabelecimentoParser {
         return null;
     }
 
-    public static Estabelecimento searchByLocation(Localizacao localizacao) throws IOException {
+    protected static List<Estabelecimento> searchAllByLocation(Localizacao localizacao) throws IOException {
+        //estabelece a conexão com o servidor
+        OkHttpClient client = new OkHttpClient();
+
+        //fazendo requisicao ao servidor
+        long latitude = localizacao.latitude;
+        long longitude = localizacao.longitude;
+
+        String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentosList.json");
+        Request request = new Request.Builder().url(urlApi).build();
+
+        //resposta do servidor
+        Response response = client.newCall(request).execute();
+
+        //verificando se não houve erro de conexão
+        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+            String json = response.body().string();
+
+            //converter o result json em obj java
+            Gson gson = new Gson();
+            EstabelecimentoSearchResult result = gson.fromJson(json, EstabelecimentoSearchResult.class);
+
+            if (result != null)
+                return result.estabelecimentos;
+        }
+
+        return null;
+    }
+
+    protected static Estabelecimento searchByLocation(Localizacao localizacao) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 
