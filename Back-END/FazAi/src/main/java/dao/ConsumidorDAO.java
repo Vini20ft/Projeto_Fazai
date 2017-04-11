@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+
 import model.Consumidor;
 import util.UtilJPA;
 
@@ -17,12 +19,13 @@ public class ConsumidorDAO {
     
     UtilJPA utiljpa = new UtilJPA();
 	EntityManager manager = UtilJPA.getEntityManager();
-
-    public void inserir(Consumidor c) throws  Exception {  	
+	
+	//Metodo de cadastrar consumidor.
+    public void inserirConsumidor(Consumidor c) throws  Exception {  	
     	
         try 
         {
-            EntityTransaction et = manager.getTransaction();
+        	EntityTransaction et = manager.getTransaction();
             et.begin();
             manager.persist(c);
             et.commit();
@@ -49,7 +52,8 @@ public class ConsumidorDAO {
         }
     }
     
-    public Consumidor procurarId(String cpf) throws  Exception {    
+    //Metodo de procurar consumidor por codigo.
+    public Consumidor procurarConsumidorId(int cpf) throws  Exception {    
     	
         try 
         {    
@@ -77,23 +81,45 @@ public class ConsumidorDAO {
         }
     }
     
-    public Consumidor procurarNome(String nome) throws  Exception {       
+    //Metodo de procurar consumidor por nome.
+    public Consumidor procurarConsumidorNome(String nome) throws  Exception {       
     	
-         try 
-        {   
-        	Consumidor cli = null;
-        	cli = manager.find(Consumidor.class, nome);
-            return cli;
+    	try {
+    		
+            Consumidor c = (Consumidor) manager
+                       .createQuery(
+                  		 "SELECT c FROM Consumidor c WHERE nome = :nome ")
+                       .setParameter("nome", nome).getSingleResult();            
+            return c;
             
-                
-        } catch (Exception ex) {        	
+      } catch (NoResultException e) {
+      	
+      	  System.out.print("Consumidor Não Localizado!!! " + e);
+          return null;
+      }
+    }
+    
+    //Metodo de alterar cadastro de consumidor.
+    public void alterarConsumidor(Consumidor c) throws  Exception {      
+    	
+        try 
+        {               
+            EntityTransaction et = manager.getTransaction();
+            et.begin();	
+            manager.merge(c);
+            et.commit();
+            System.out.print("Cadastro de Consumidor "+c.getNome()+" Alterado com Sucesso!!!");
+            
+        } catch (Exception ex) {
+        	
             	try 
             	{           	
             		utx.rollback();
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Nome de Consumidor não Consta nos Nossos Registros"+re);               
+            		throw new Exception("Erro ao Tentar Alterar "+c.getNome()+re);
+                
             	}
             
             	throw ex;
@@ -107,51 +133,19 @@ public class ConsumidorDAO {
         }
     }
     
-    public void alterar(Consumidor cli) throws  Exception {      
+    //Metodo de excluir cadastro de consumidor.
+    public void excluirConsumidor(int id) throws Exception {
     	
-        try 
-        {               
-            EntityTransaction et = manager.getTransaction();
-            et.begin();	
-            manager.merge(cli);
-            et.commit();
-            System.out.print("Cadastro de Consumidor "+cli.getNome()+" Alterado com Sucesso!!!");
-            
-        } catch (Exception ex) {
-        	
-            	try 
-            	{           	
-            		utx.rollback();
-                
-            	} catch (Exception re) {
-            	
-            		throw new Exception("Erro ao Tentar Alterar "+cli.getNome()+re);
-                
-            	}
-            
-            	throw ex;
-            
-        } finally {
-        	
-        	if (manager != null) {
-        		manager.close();
-            	
-            }
-        }
-    }
-
-    public void excluir(int id) throws Exception {
-    	
-    	Consumidor cli = new Consumidor();
+    	Consumidor c = new Consumidor();
     	    
         try 
         {
               EntityTransaction et = manager.getTransaction();
               et.begin();	
-              cli = manager.getReference(Consumidor.class, id);
-              manager.remove(cli);
+              c = manager.getReference(Consumidor.class, id);
+              manager.remove(c);
               et.commit();
-              System.out.print("Cadastro do Consumidor "+cli.getNome()+" Excluido com Sucesso!!!");
+              System.out.print("Cadastro do Consumidor "+c.getNome()+" Excluido com Sucesso!!!");
               
         } catch (Exception ex) {
         	
@@ -162,7 +156,7 @@ public class ConsumidorDAO {
                 
             	} catch (Exception re) {
             	
-            		throw new Exception("Erro ao Tentar Excluir "+cli.getNome()+re);
+            		throw new Exception("Erro ao Tentar Excluir "+c.getNome()+re);
                 
             	}
             
@@ -177,15 +171,20 @@ public class ConsumidorDAO {
         }
     }
     
-   
-	public List<Consumidor> listar(){
+    //Metodo de listar todos os cadastros de consumidor
+	public List<Consumidor> listarConsumidor()throws Exception{
     	
 		try{
 			manager.getEntityManagerFactory();
-			Query query = manager.createQuery("from consumidor");
+			Query query = manager.createQuery("from Consumidor");
+			@SuppressWarnings("unchecked")
 			List<Consumidor> c = query.getResultList();
 			return c;	
-		}
+		} catch (Exception re) {
+        	
+    		throw new Exception("Erro ao Tentar Listar "+re);
+        
+    	}
 		finally{
 			manager.close();
 		}

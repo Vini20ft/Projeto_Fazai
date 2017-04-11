@@ -1,30 +1,29 @@
 package model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name="consumidor")
+@Entity
+@Table(name="Consumidor")
 public class Consumidor{
 	
 	//Atributos da Classe Consumidor.
-	
 	@Id
-	@Column(name="cpf", length=50, nullable=false)
+	@Column(name="cpf", length=50, nullable=false, unique=true)
 	private int cpf;
-	@Column(name="nome", length=50, nullable=false)
+	@Column(name="nome", length=50, nullable=false, unique=true)
 	private String nome;
-	@Column(name="email", length=50, nullable=false)
+	@Column(name="email", length=50, nullable=false, unique=true)
 	private String email;
-	@Column(name="telefone", length=20, nullable=false)
+	@Column(name="telefone", length=50, nullable=false, unique=true)
 	private String telefone;
 	
-	//Construtor de Consumidor.
-	
-	public Consumidor(){}
-	
+	//Construtor da Classe Consumidor.
+	public Consumidor() {}
+
 	//Gets e Sets da Classe Consumidor.
-	
 	public int getCpf() {
 		return cpf;
 	}
