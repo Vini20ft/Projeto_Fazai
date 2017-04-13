@@ -10,7 +10,7 @@
                   </div>
             </div>
         </div>
-
+        <br />
         <div class="ibox float-e-margins">
             <div class="row">
                 <div class="col-lg-12">
@@ -39,6 +39,7 @@
                                             <th>Login</th>
                                             <th>Senha</th>
                                             <th>Perfil</th>
+                                            <th></th>
                                             
                                         </tr>
                                     </thead>
@@ -50,14 +51,14 @@
                                             <td>{{Funcionario.Numero}}</td>
                                             <td>{{Funcionario.Bairro}}</td>
                                             <td>{{Funcionario.Cidade}}</td>
-                                            <td>{{Funcionario.Estado.nome}}</td>
+                                            <td>{{Funcionario.Estado}}</td>
                                             <td>{{Funcionario.Email}}</td>
                                             <td>{{Funcionario.Login}}</td>
                                             <td>{{Funcionario.Senha}}</td>
-                                            <td>{{Funcionario.Perfil.nome}}</td>
+                                            <td>{{Funcionario.Perfil}}</td>
                                             <td align="right" width="160px">
-                                                <a href="" class="btn btn-info" ng-click="EditarItem(item)">Editar</a>
-                                                <a href="" class="btn btn-danger" ng-click="ExcluirItem(item)">Excluir</a>
+                                                <a href="" class="btn btn-info" ng-click="EditarItem(Funcionario)">Editar</a>
+                                                <a href="" class="btn btn-danger" ng-click="ExcluirItem(Funcionario)">Excluir</a>
                                                 <script>
                                                     $('.footable').trigger('footable_initialized');
                                                 </script>
@@ -66,7 +67,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="12">
                                                 <ul class="pagination pull-right"></ul>
                                             </td>
                                         </tr>
@@ -78,5 +79,6 @@
                 </div>
             </div>
         </div>
+        <br />
     </form>
 </div>

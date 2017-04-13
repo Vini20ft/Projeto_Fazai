@@ -1,0 +1,38 @@
+<div class="loginColumns animated fadeInDown">
+<meta charset="utf-8">
+	<div class="row">
+
+		<div class="col-md-6">
+			<h1 align="center">
+				<img src="Img/LogoFazAi.jpg" style="width: 95px" />
+			</h1>
+			<h3 align="center" class="font-bold" >Recupere sua senha</h3>
+			<p>Digite seu e-mail e clique no botão para redefinir sua senha.
+			</p>
+		</div>
+		<div class="col-md-6">
+			<div class="ibox-content">
+				<form class="m-t" role="form" ng-submit="redefinir()"
+					ng-controller="esqueceuSenhaController">
+					<div class="form-group">
+						<input type="email" class="form-control" placeholder="E-mail"
+							required="" ng-model="dadosUsuario.emailUsuario">
+					</div>
+					<button class="btn btn-primary block full-width m-b"
+						ui-sref="index.login">Redefinir</button>
+
+					<p class="text-muted text-center">
+						<small>confira seu E-mail antes de prosseguir</small>
+				</form>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-6">Faz aí</div>
+		<div class="col-md-6 text-right">
+			<small>© 2017</small>
+		</div>
+	</div>
+</div>
+<toaster-container></toaster-container>
