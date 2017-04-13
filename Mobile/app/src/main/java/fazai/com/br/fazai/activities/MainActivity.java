@@ -119,15 +119,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_mapa) {
             Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_food_truck) {
-
-        } else if (id == R.id.nav_pedido) {
-
-        }else if (id == R.id.nav_cardapio) {
-
-        }else if (id == R.id.nav_status_pedido) {
-
-        }else if (id == R.id.nav_conta) {
 
       /*  }else if (id == R.id.nav_faz_ai) {*/
 

@@ -10,32 +10,22 @@
             android:id="@+id/nav_mapa"
             android:icon="@mipmap/ic_mapa"
             android:title="@string/mapa_dos_food_trucks" />
-        <item
-            android:id="@+id/nav_food_truck"
-            android:icon="@mipmap/ic_food_truck"
-            android:title="@string/food_truck" />
 
-        <item
-            android:id="@+id/nav_pedido"
-            android:icon="@mipmap/ic_pedido"
-            android:title="@string/pedidos" />
-        <item
-            android:id="@+id/nav_cardapio"
-            android:icon="@mipmap/ic_cardapio"
-            android:title="@string/cardapio" />
-        <item
-            android:id="@+id/nav_status_pedido"
-            android:icon="@mipmap/ic_status_pedido"
-            android:title="@string/status_pedido" />
-        <item
-            android:id="@+id/nav_conta"
-            android:icon="@mipmap/ic_conta"
-            android:title="@string/conta" />
-
-
-        <item
-            android:id="@+id/nav_sair"
-            android:icon="@mipmap/ic_sair"
-            android:title="@string/sair" />
     </group>
+    <item android:title="">
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_sobre"
+                    android:icon="@mipmap/ic_faz_ai"
+                    android:title="@string/sair" />
+                <item
+                    android:id="@+id/nav_compartilhar"
+
+                    android:title="@string/sair" />
+                <item
+                    android:id="@+id/nav_sair"
+                    android:icon="@mipmap/ic_sair"
+                    android:title="@string/sair" />
+            </group>
+    </item>
 </menu>

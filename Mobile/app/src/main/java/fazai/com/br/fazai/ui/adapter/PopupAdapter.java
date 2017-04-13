@@ -1,4 +1,4 @@
-package fazai.com.br.fazai.model;
+package fazai.com.br.fazai.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
