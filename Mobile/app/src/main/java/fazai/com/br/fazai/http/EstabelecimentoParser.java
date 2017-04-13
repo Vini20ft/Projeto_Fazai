@@ -16,6 +16,32 @@ import okhttp3.Response;
 
 public class EstabelecimentoParser {
 
+    protected static Estabelecimento searchDetailById(/*int id*/) throws IOException {
+        //estabelece a conexão com o servidor
+        OkHttpClient client = new OkHttpClient();
+
+        //fazendo requisicao ao servidor
+        String urlApi = String.format("https://dl.dropboxusercontent.com/s/ymj0kr2u7ayauzk/estabelecimentoCardapio");
+        Request request = new Request.Builder().url(urlApi).build();
+
+        //resposta do servidor
+        Response response = client.newCall(request).execute();
+
+        //verificando se não houve erro de conexão
+        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+            String json = response.body().string();
+
+            //converter o result json em obj java
+            Gson gson = new Gson();
+            EstabelecimentoSearchResult result = gson.fromJson(json, EstabelecimentoSearchResult.class);
+
+            if (result != null)
+                return result.estabelecimento;
+        }
+
+        return null;
+    }
+
     protected static List<Estabelecimento> searchByTitle(String q) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
@@ -47,7 +73,7 @@ public class EstabelecimentoParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentosList.json");
+        String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentosList");
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor
