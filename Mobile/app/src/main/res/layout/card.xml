@@ -9,11 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
         android:elevation="3dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardElevation="4dp"
-        card_view:cardCornerRadius="1dp"
-        >
+        card_view:cardCornerRadius="@dimen/card_estab_radius">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,26 +20,24 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/estab_cover_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:scaleType="centerCrop" />
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="5dp"
+                android:paddingLeft="@dimen/estab_title_padding"
+                android:paddingRight="@dimen/estab_title_padding"
+                android:paddingTop="@dimen/estab_title_padding"
                 android:textColor="@color/cardview_dark_background"
                 android:text="test"
-                android:textSize="12sp"
+                android:textSize="@dimen/estab_title"
                 android:textStyle="normal"
                 android:typeface="sans" />
-
-
 
         </RelativeLayout>
 

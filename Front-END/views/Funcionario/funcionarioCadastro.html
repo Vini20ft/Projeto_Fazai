@@ -1,5 +1,5 @@
-﻿<div ng-controller="funcionarioController" ng-init="CadastroEdicaoInit(false)">
-    <form method="get" class="form-horizontal" ng-submit="SalvarFuncionario(false)">
+<div ng-controller="funcionarioController" ng-init="CadastroEdicaoInit(false)">
+    <form method="get" class="form-horizontal" ng-submit="Salvar(false)">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2 style="margin-top:13px"><i class="fa fa-group" style="font-size:20px"></i> Novo Funcionário</h2>
@@ -24,18 +24,47 @@
                         </div>
                         <div ng-if="Pesquisa == false">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Nome*:</label>
-                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FuncionarioDados.Nome" maxlength="100"></div>
+                                <label class="col-sm-2 control-label">Nome:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="Funcionario.Nome" maxlength="100" ng-required="true"></div>
                                 <label class="col-sm-2 control-label">Telefone:</label>
-                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="FuncionarioDados.Telefone"></div>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="Funcionario.Telefone" ng-required="true"></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Logradouro:</label>
-                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FuncionarioDados.Logradouro" maxlength="400"></div>
+                                <label class="col-sm-2 control-label">Rua:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="Funcionario.Rua" maxlength="400" ng-required="true"></div>
                                 <label class="col-sm-2 control-label">Número:</label>
-                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="FuncionarioDados.Numero"></div>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="Funcionario.Numero" ng-required="true"></div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Bairro:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="Funcionario.Bairro" maxlength="20" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Cidade:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="20" ng-model="Funcionario.Cidade" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Estado:</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="Funcionario.Estados" ng-options="Estado.nome for Estado in Estados" ng-required="true">
+                                        <option value="">Selecione um Estado</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">E-mail:</label>
+                                <div class="col-md-4"><input type="email" class="form-control" maxlength="40" ng-model="Funcionario.Email" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Login:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="Funcionario.Login" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Senha:</label>
+                                <div class="col-md-4"><input type="password" class="form-control" maxlength="40" ng-model="Funcionario.Senha" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                 <label class="col-sm-2 control-label">Perfil:</label>
+                                <div class="col-sm-4" >
+                                    <select class="form-control" ng-model="Funcionario.Perfis" ng-options="Perfil.nome for Perfil in Perfis" ng-required="true">
+                                        <option value="">Selecione um Perfil</option>
+                                    </select>
+                                </div>
+                                </div>
                     </div>
                 </div>
             </div>

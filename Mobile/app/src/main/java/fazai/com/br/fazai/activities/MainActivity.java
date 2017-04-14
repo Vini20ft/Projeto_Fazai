@@ -114,16 +114,15 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_perfil) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_mapa) {
             Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+      /*  }else if (id == R.id.nav_faz_ai) {*/
 
-        } else if (id == R.id.nav_send) {
+        }else if (id == R.id.nav_sair) {
             signOut();
         }
 

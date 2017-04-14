@@ -192,7 +192,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.cardapioCadastro', {
             url: "/cardapioCadastro",
             templateUrl: "views/Cardapio/cardapioCadastro.html",
-            data: { pageTitle: 'Cadastro de Cardápio' },
+            data: { pageTitle: 'Cadastro de Cardï¿½pio' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
@@ -218,7 +218,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.cardapioEdicao/:cardapioItem', {
             url: "/cardapioEdicao/:cardapioItem",
             templateUrl: "views/Cardapio/cardapioEdicao.html",
-            data: { pageTitle: 'Cadastro de Cardápio' },
+            data: { pageTitle: 'Cadastro de Cardï¿½pio' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
@@ -244,7 +244,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.relatorio', {
             url: "/relatorio",
             templateUrl: "views/relatorio.html",
-            data: { pageTitle: 'Relatórios' },
+            data: { pageTitle: 'Relatï¿½rios' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+         .state('EsqueceuSenha', {
+            url: "/EsqueceuSenha",
+            templateUrl: "views/EsqueceuSenha.html",
+            data: { pageTitle: 'Esqueceu Senha' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
