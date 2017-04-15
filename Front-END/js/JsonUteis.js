@@ -13,3 +13,24 @@ var listaFoodTrucks = [
     { id: 4, nome: "FoodTruck 4" },
     { id: 5, nome: "FoodTruck 5" }
 ];
+
+var
+
+    listaFuncionarioDados = [
+        {
+            ID: "01",
+            Nome: "Vinicius Oliveira",
+            Telefone: "8197491889",
+            Rua: "Rua C. M. O. Ribeiro",
+            Numero: "512",
+            Bairro: "Candeias",
+            Cidade: "Jaboatão dos Guararapes",
+            Estado: "PE",
+            Email: "leomiroliveira5@gmail.com",
+            Login: "leomir",
+            Senha: "123456",
+            Perfil: "Gerente"
+        }];
+                
+            
+             
