@@ -21,21 +21,21 @@ public class Estabelecimento {
     public Endereco endereco;
     @SerializedName("foto")
     public String foto;
-    @SerializedName("pratos")
-    public List<Prato> pratoList;
+    @SerializedName("cardapios")
+    public List<Cardapio> cardapioList;
 
     public Estabelecimento() {
         endereco = new Endereco();
-        pratoList = new ArrayList<>();
+        cardapioList = new ArrayList<>();
     }
 
-    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, List<Prato> pratos) {
+    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, List<Cardapio> cardapios) {
         this.id = id;
         this.cnpj = cnpj;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.especialidade = especialidade;
         this.foto = foto;
-        this.pratoList = pratos;
+        this.cardapioList = cardapios;
     }
 }
