@@ -23,14 +23,16 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".activities.LoginActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -38,11 +40,13 @@
         <activity
             android:name=".activities.EstabelecimentosMapsActivity"
             android:label="@string/title_activity_estabelecimentos_maps"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.DetalheEstabelecimentoActivity" />
+        <activity android:name=".activities.ItensCardapioActivity"></activity>
     </application>
 
 </manifest>

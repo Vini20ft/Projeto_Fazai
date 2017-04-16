@@ -21,6 +21,8 @@ public class Estabelecimento {
     public Endereco endereco;
     @SerializedName("foto")
     public String foto;
+    @SerializedName("rating")
+    public int rating;
     @SerializedName("cardapios")
     public List<Cardapio> cardapioList;
 

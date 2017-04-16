@@ -2,9 +2,6 @@ package fazai.com.br.fazai.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Caio Ernandes on 15/04/2017.
- */
 
 public class ItemCardapio {
     @SerializedName("codigo")

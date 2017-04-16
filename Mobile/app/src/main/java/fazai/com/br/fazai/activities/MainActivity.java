@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -30,21 +31,20 @@ import java.util.List;
 
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.EstabelecimentosTask;
+import fazai.com.br.fazai.interfaces.EstabelecimentoClickListener;
 import fazai.com.br.fazai.model.Estabelecimento;
 import fazai.com.br.fazai.ui.adapter.EstabelecimentoAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener,
-        LoaderManager.LoaderCallbacks<List<Estabelecimento>>{
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, EstabelecimentoClickListener {
 
     private GoogleApiClient googleApiClient;
-
     private RecyclerView recyclerView;
-    private GridLayoutManager gridLayoutManager;
-    private EstabelecimentoAdapter adapter;
-    private List<Estabelecimento> mEstabelecimentoList;
-
-    private LoaderManager mLoaderManager;
+    protected GridLayoutManager gridLayoutManager;
+    protected EstabelecimentoAdapter adapter;
+    protected List<Estabelecimento> mEstabelecimentoList;
+    protected LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +63,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        gridLayoutManager = new GridLayoutManager(this,2);
+        gridLayoutManager = new GridLayoutManager(this, 2);
+
         recyclerView.setLayoutManager(gridLayoutManager);
+
 
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
@@ -114,15 +116,10 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_perfil) {
-
-        } else if (id == R.id.nav_mapa) {
+        if (id == R.id.nav_mapa) {
             Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
-
-      /*  }else if (id == R.id.nav_faz_ai) {*/
-
-        }else if (id == R.id.nav_sair) {
+        } else if (id == R.id.nav_sair) {
             signOut();
         }
 
@@ -159,7 +156,6 @@ public class MainActivity extends AppCompatActivity
 
     private void signOutGoogle() {
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
@@ -188,22 +184,18 @@ public class MainActivity extends AppCompatActivity
             mEstabelecimentoList = data;
             adapter = new EstabelecimentoAdapter(this, mEstabelecimentoList);
             recyclerView.setAdapter(adapter);
-
-            /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-                    if(gridLayoutManager.findLastCompletelyVisibleItemPosition() == data.size()-1){
-                        EstabelecimentosTask estabelecimentosTask = new EstabelecimentosTask(getApplicationContext());
-                        estabelecimentosTask.loadInBackground();
-                    }
-                }
-            });*/
+            adapter.notifyDataSetChanged();
+            adapter.setClickListener(this);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<List<Estabelecimento>> loader) {
 
+    }
+
+    @Override
+    public void estabelecimentoClickListener(View v, int position) {
+        startActivity(new Intent(getApplicationContext(), DetalheEstabelecimentoActivity.class));
     }
 }
