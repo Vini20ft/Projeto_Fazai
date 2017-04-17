@@ -18,7 +18,7 @@
             android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/imageEstabelecimento"
+            android:id="@+id/imageEstabelecimentoDetalhe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -30,7 +30,7 @@
             android:id="@+id/nomeEstabelecimento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageEstabelecimento"
+            android:layout_below="@+id/imageEstabelecimentoDetalhe"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="71dp"
             android:text="TextView" />

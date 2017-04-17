@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by caio.e.nascimento on 4/3/2017.
- */
 
 public class EstabelecimentoSearchResult {
 

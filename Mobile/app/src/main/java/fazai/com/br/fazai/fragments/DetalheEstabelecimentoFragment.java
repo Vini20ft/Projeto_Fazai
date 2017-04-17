@@ -32,13 +32,15 @@ public class DetalheEstabelecimentoFragment extends Fragment implements LoaderMa
     TextView nomeEstabelecimento;
 
     @Nullable
-    @BindView(R.id.imageEstabelecimento)
+    @BindView(R.id.imageEstabelecimentoDetalhe)
     ImageView imageEstabelecimento;
 
     @BindView(R.id.ratingBar)
     RatingBar ratingBar;
 
     private Unbinder unbinder;
+
+    Estabelecimento estabelecimento;
 
     public DetalheEstabelecimentoFragment() {
 
@@ -66,13 +68,16 @@ public class DetalheEstabelecimentoFragment extends Fragment implements LoaderMa
 
     @Override
     public Loader<Estabelecimento> onCreateLoader(int id, Bundle args) {
-        return new EstabelecimentoByIdTask(getActivity(), 0);
+        return new EstabelecimentoByIdTask(getActivity(), 1);
     }
 
     @Override
     public void onLoadFinished(Loader<Estabelecimento> loader, Estabelecimento data) {
         if (data != null) {
-            setViewDetalheEstabelecimento(data);
+            estabelecimento = data;
+            setViewDetalheEstabelecimento(estabelecimento);
+        } else {
+            Toast.makeText(getActivity(), "Erro ao carregar informações.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -81,10 +86,10 @@ public class DetalheEstabelecimentoFragment extends Fragment implements LoaderMa
 
     }
 
-    public void setViewDetalheEstabelecimento(Estabelecimento data) {
-        nomeEstabelecimento.setText(data.nome);
-        Glide.with(getActivity()).load(data.foto).into(imageEstabelecimento);
-        ratingBar.setNumStars(data.rating);
+    public void setViewDetalheEstabelecimento(Estabelecimento estabelecimento) {
+        nomeEstabelecimento.setText(estabelecimento.nome);
+        Glide.with(getActivity()).load(estabelecimento.foto).into(imageEstabelecimento);
+        ratingBar.setNumStars(estabelecimento.rating);
     }
 
     public void verificaConexao() {

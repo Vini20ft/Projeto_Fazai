@@ -23,7 +23,7 @@ public class Estabelecimento {
     public String foto;
     @SerializedName("rating")
     public int rating;
-    @SerializedName("cardapios")
+    @SerializedName("cardapio")
     public List<Cardapio> cardapioList;
 
     public Estabelecimento() {

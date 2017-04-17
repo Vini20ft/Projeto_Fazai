@@ -25,6 +25,8 @@ public class DetalheEstabelecimentoActivity extends AppCompatActivity implements
     CardapioFragment cardapioFragment;
     SelectorPageAdapter selectorPageAdapter;
 
+    //tutorial viewpager with tablayout: https://www.youtube.com/watch?v=f7V5m1bpcZU
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
