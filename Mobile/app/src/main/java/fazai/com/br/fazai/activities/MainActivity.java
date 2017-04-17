@@ -10,12 +10,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -29,21 +29,26 @@ import com.google.android.gms.common.api.Status;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.EstabelecimentosTask;
-import fazai.com.br.fazai.interfaces.EstabelecimentoClickListener;
+import fazai.com.br.fazai.interfaces.OnEstabelecimentoClick;
 import fazai.com.br.fazai.model.Estabelecimento;
 import fazai.com.br.fazai.ui.adapter.EstabelecimentoAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener,
-        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, EstabelecimentoClickListener {
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick {
 
     private GoogleApiClient googleApiClient;
-    private RecyclerView recyclerView;
-    protected GridLayoutManager gridLayoutManager;
+
+    @BindView(R.id.listEstabelecimentos)
+    ListView mListEstabelecimentos;
+
     protected EstabelecimentoAdapter adapter;
     protected List<Estabelecimento> mEstabelecimentoList;
+
     protected LoaderManager mLoaderManager;
 
     @Override
@@ -62,12 +67,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        gridLayoutManager = new GridLayoutManager(this, 2);
-
-        recyclerView.setLayoutManager(gridLayoutManager);
-
-
+        ButterKnife.bind(this);
+        mListEstabelecimentos.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
 
@@ -183,9 +184,7 @@ public class MainActivity extends AppCompatActivity
         if (data != null) {
             mEstabelecimentoList = data;
             adapter = new EstabelecimentoAdapter(this, mEstabelecimentoList);
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            adapter.setClickListener(this);
+            mListEstabelecimentos.setAdapter(adapter);
         }
     }
 
@@ -195,7 +194,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void estabelecimentoClickListener(View v, int position) {
-        startActivity(new Intent(getApplicationContext(), DetalheEstabelecimentoActivity.class));
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Estabelecimento estabelecimento = (Estabelecimento) mListEstabelecimentos.getItemAtPosition(position);
+        (this).onEstabelecimentoClick(estabelecimento);
+    }
+
+    @Override
+    public void onEstabelecimentoClick(Estabelecimento estabelecimento) {
+        Intent it = new Intent(this, DetalheEstabelecimentoActivity.class);
+        it.putExtra("id", estabelecimento.id);
+        startActivity(it);
     }
 }
