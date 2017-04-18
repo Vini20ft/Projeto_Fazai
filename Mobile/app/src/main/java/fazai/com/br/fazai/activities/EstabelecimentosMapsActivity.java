@@ -347,6 +347,4 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17.0f));
 
     }
-
-
 }
