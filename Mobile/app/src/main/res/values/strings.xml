@@ -6,7 +6,8 @@
     <string name="error_login">There was an error logging in</string>
     <string name="error_logout">There was an error logging out</string>
     <string name="title_activity_estabelecimentos_maps">Map</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Principal</string>
+    <string name="title_activity_login">Login</string>
     <string name="txtLogin">Keep with:</string>
     <string name="msgCampoPesquisaFoodVazio">Enter the name of FoodTruck!</string>
 
@@ -32,4 +33,7 @@
     <string name="horario_funcionamento">Operating hours: </string>
     <string name="ligar">Turn on</string>
     <string name="navegacao_mapa">Start Navigation</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

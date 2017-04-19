@@ -1,6 +1,8 @@
 package fazai.com.br.fazai.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +25,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Arrays;
 
+import fazai.com.br.fazai.Constante;
 import fazai.com.br.fazai.R;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -36,50 +39,91 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public static final int SIGN_IN_CODE = 777;
 
+    // ShredPreferences
+    public SharedPreferences sharedPreferences;
+    private String senha;
+
+    // fim ShredPreferences
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        VerifyCurrentUser();
+        // ShredPreferences para acessar só uma vez o login
 
-        callbackManager = CallbackManager.Factory.create();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+        sharedPreferences = getSharedPreferences(Constante.getPrefName(), MODE_PRIVATE);
+        senha = sharedPreferences.getString("senha", "");
 
-        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .build();
+            if(senha == "0" || senha == ""){
+                VerifyCurrentUser();
+                // SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("senha", "1");
+                editor.commit();
+                // fim SharedPreferences
 
-        init();
+
+                callbackManager = CallbackManager.Factory.create();
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestEmail()
+                        .build();
+
+                googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
+                        .addApi(Auth.GOOGLE_SIGN_IN_API)
+                        .build();
+
+                init();
 
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                goMainScreen();
+                loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        goMainScreen();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
+                        // SharedPreferences
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("senha", "0");
+                        editor.commit();
+                        // fim SharedPreferences
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
+                        // SharedPreferences
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("senha", "0");
+                        editor.commit();
+                        // fim SharedPreferences
+
+                    }
+
+                });
+
+               /* signInButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                        startActivityForResult(intent, SIGN_IN_CODE);
+                    }
+                });*/
+            } else{
+                SharedPreferences sharedPreferences = getSharedPreferences(Constante.getPrefName(), MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("senha", "1");
+                editor.commit();
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
+        }
 
-            @Override
-            public void onCancel() {
-                Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-       /* signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(intent, SIGN_IN_CODE);
-            }
-        });*/
-    }
 
     private void VerifyCurrentUser() {
         if (AccessToken.getCurrentAccessToken() != null || (googleApiClient != null && googleApiClient.isConnected())) {
@@ -137,6 +181,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onClickGooglePlus(View v){
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent, SIGN_IN_CODE);
+
     }
 
 

@@ -1,7 +1,10 @@
 package fazai.com.br.fazai.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -51,10 +55,13 @@ public class MainActivity extends AppCompatActivity
 
         private LoaderManager mLoaderManager;
 
+        public SharedPreferences sharedPreferences;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
@@ -83,6 +90,7 @@ public class MainActivity extends AppCompatActivity
                     .build();
 
             VerifyCurrentUser();
+
         }
 
         @Override
@@ -134,6 +142,11 @@ public class MainActivity extends AppCompatActivity
 
             } else if (id == R.id.nav_sair) {
                 signOut();
+                /*
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("senha", "0");
+                editor.commit();
+                */
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -216,4 +229,45 @@ public class MainActivity extends AppCompatActivity
         public void onLoaderReset(Loader<List<Estabelecimento>> loader) {
 
         }
+/*
+        // Permissão do sistema
+
+    private void readMyCurrentCoordinates() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        Location location = null;
+        double latitude = 0;
+        double longitude = 0;
+
+        if (!isGPSEnabled && !isNetworkEnabled) {
+            Log.i(TAG, "No geo resource able to be used.");
+        }
+        else {
+            if (isNetworkEnabled) {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 0, this);
+                Log.d(TAG, "Network");
+                location = locationManager.getLastKnownLocation( LocationManager.NETWORK_PROVIDER );
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                }
+            }
+
+            if (isGPSEnabled) {
+                if (location == null) {
+                    locationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 2000, 0, this );
+                    Log.d(TAG, "GPS Enabled");
+                    location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                    }
+                }
+            }
+        }
+        Log.i( TAG, "Lat: "+latitude+" | Long: "+longitude );
+    }
+   */
+
 }
