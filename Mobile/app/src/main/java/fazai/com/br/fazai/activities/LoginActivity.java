@@ -119,8 +119,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -138,8 +136,4 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent, SIGN_IN_CODE);
     }
-
-
-
 }
-
