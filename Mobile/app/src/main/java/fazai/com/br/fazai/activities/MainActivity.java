@@ -43,35 +43,39 @@ public class MainActivity extends AppCompatActivity
         LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick,
         SwipeRefreshLayout.OnRefreshListener {
 
-    private GoogleApiClient googleApiClient;
-
     @BindView(R.id.listEstabelecimentos)
-    protected ListView mListEstabelecimentos;
-
-    protected EstabelecimentoAdapter adapter;
-    protected List<Estabelecimento> mEstabelecimentoList;
-    protected LoaderManager mLoaderManager;
+    ListView mListEstabelecimentos;
 
     @BindView(R.id.swipeMain)
     SwipeRefreshLayout mSwipe;
+
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    private EstabelecimentoAdapter adapter;
+    private List<Estabelecimento> mEstabelecimentoList;
+    private LoaderManager mLoaderManager;
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ButterKnife.bind(this);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         mListEstabelecimentos.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();

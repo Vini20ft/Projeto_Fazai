@@ -40,44 +40,40 @@ import fazai.com.br.fazai.model.Cardapio;
 import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
 
 public class CardapioActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener,
-        NavigationView.OnNavigationItemSelectedListener, OnCardapioClick,
-        LoaderManager.LoaderCallbacks<List<Cardapio>>,
-        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, OnCardapioClick,
+        LoaderManager.LoaderCallbacks<List<Cardapio>>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.listCardapio)
-    protected ListView listViewCardapio;
-
-    protected CardapioAdapter adapter;
-    protected LoaderManager mLoaderManager;
-    protected List<Cardapio> mCardapioList;
-    protected GoogleApiClient googleApiClient;
+    ListView mListCardapio;
 
     @BindView(R.id.swipeCardapio)
     SwipeRefreshLayout mSwipe;
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawer;
+
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
+
+    private CardapioAdapter mAdapter;
+    private LoaderManager mLoaderManager;
+    private List<Cardapio> mCardapioList;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardapio);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        if (!verificaConexao()) {
-            Toast.makeText(getApplicationContext(), "Falha na conexão com a internet.",
-                    Toast.LENGTH_LONG).show();
-        }
-
         ButterKnife.bind(this);
 
-        listViewCardapio.setOnItemClickListener(this);
+        initToolBar();
+
+        verificaConexao();
+
+        mListCardapio.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
 
@@ -88,11 +84,20 @@ public class CardapioActivity extends AppCompatActivity
                 .requestEmail()
                 .build();
 
-        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
         VerifyCurrentUser();
+    }
+
+    public void initToolBar() {
+        setSupportActionBar(mToolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(toggle);
+        toggle.syncState();
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -109,16 +114,16 @@ public class CardapioActivity extends AppCompatActivity
     public Loader<List<Cardapio>> onCreateLoader(int id, Bundle args) {
         showProgress();
         //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
-        return new CardapiosTask(getApplicationContext(), 1);
+        return new CardapiosTask(getApplicationContext(), /*idEstabelecimento*/ 1);
     }
 
     @Override
     public void onLoadFinished(Loader<List<Cardapio>> loader, List<Cardapio> data) {
         if (data != null) {
             mCardapioList = data;
-            adapter = new CardapioAdapter(this, mCardapioList);
-            adapter.notifyDataSetChanged();
-            listViewCardapio.setAdapter(adapter);
+            mAdapter = new CardapioAdapter(this, mCardapioList);
+            mAdapter.notifyDataSetChanged();
+            mListCardapio.setAdapter(mAdapter);
             mSwipe.setRefreshing(false);
         }
     }
@@ -130,21 +135,19 @@ public class CardapioActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Cardapio cardapio = (Cardapio) listViewCardapio.getItemAtPosition(i);
+        Cardapio cardapio = (Cardapio) mListCardapio.getItemAtPosition(i);
         this.onCardapioClick(cardapio);
     }
 
-    public  boolean verificaConexao() {
-        boolean conectado;
+    public void verificaConexao() {
         ConnectivityManager conectivtyManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (conectivtyManager.getActiveNetworkInfo() != null
                 && conectivtyManager.getActiveNetworkInfo().isAvailable()
                 && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-            conectado = true;
         } else {
-            conectado = false;
+            Toast.makeText(getApplicationContext(), "Falha na conexão com a internet.",
+                    Toast.LENGTH_LONG).show();
         }
-        return conectado;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -179,8 +182,8 @@ public class CardapioActivity extends AppCompatActivity
     }
 
     private void VerifyCurrentUser() {
-        if (AccessToken.getCurrentAccessToken() == null && (googleApiClient == null && !googleApiClient.isConnected())) {
-            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
+        if (AccessToken.getCurrentAccessToken() == null && (mGoogleApiClient == null && !mGoogleApiClient.isConnected())) {
+            Toast.makeText(getApplicationContext(), "O usuário está deslogado!", Toast.LENGTH_SHORT).show();
             goLoginScreen();
         }
     }
@@ -192,7 +195,7 @@ public class CardapioActivity extends AppCompatActivity
     }
 
     private void signOutGoogle() {
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {

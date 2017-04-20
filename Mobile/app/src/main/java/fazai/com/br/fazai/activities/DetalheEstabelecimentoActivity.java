@@ -17,7 +17,6 @@ public class DetalheEstabelecimentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe_estabelecimento);
-
         ButterKnife.bind(this);
 
         //carregando fragment em tempo de execução
