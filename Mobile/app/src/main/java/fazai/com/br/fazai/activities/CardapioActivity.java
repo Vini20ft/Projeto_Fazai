@@ -36,19 +36,18 @@ import fazai.com.br.fazai.interfaces.OnCardapioClick;
 import fazai.com.br.fazai.model.Cardapio;
 import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
 
-public class CardapioActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+public class CardapioActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener,
         NavigationView.OnNavigationItemSelectedListener, OnCardapioClick,
         LoaderManager.LoaderCallbacks<List<Cardapio>>,
         AdapterView.OnItemClickListener {
 
-    ListView listViewCardapio;
+    protected ListView listViewCardapio;
 
     protected CardapioAdapter adapter;
-    LoaderManager mLoaderManager;
-
-    List<Cardapio> mCardapioList;
-
-    private GoogleApiClient googleApiClient;
+    protected LoaderManager mLoaderManager;
+    protected List<Cardapio> mCardapioList;
+    protected GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

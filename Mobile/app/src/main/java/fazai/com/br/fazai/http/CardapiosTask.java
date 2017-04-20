@@ -5,6 +5,7 @@ import android.support.v4.content.AsyncTaskLoader;
 
 import java.util.List;
 
+import fazai.com.br.fazai.http.parser.CardapioParser;
 import fazai.com.br.fazai.model.Cardapio;
 
 /**
@@ -24,7 +25,7 @@ public class CardapiosTask extends AsyncTaskLoader<List<Cardapio>> {
     protected void onStartLoading() {
         super.onStartLoading();
 
-        if (idEstabelecimento <- 0) return;
+        if (idEstabelecimento <= 0) return;
 
         if (mCardapios == null) {
             forceLoad();

@@ -1,4 +1,4 @@
-package fazai.com.br.fazai.http;
+package fazai.com.br.fazai.http.parser;
 
 import com.google.gson.Gson;
 
@@ -17,7 +17,7 @@ import okhttp3.Response;
  */
 
 public class CardapioParser {
-    protected static List<Cardapio> searchAllById(/*int idCardapio*/) throws IOException {
+    public static List<Cardapio> searchAllById(/*int idCardapio*/) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 

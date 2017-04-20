@@ -44,11 +44,10 @@ public class MainActivity extends AppCompatActivity
     private GoogleApiClient googleApiClient;
 
     @BindView(R.id.listEstabelecimentos)
-    ListView mListEstabelecimentos;
+    protected ListView mListEstabelecimentos;
 
     protected EstabelecimentoAdapter adapter;
     protected List<Estabelecimento> mEstabelecimentoList;
-
     protected LoaderManager mLoaderManager;
 
     @Override
