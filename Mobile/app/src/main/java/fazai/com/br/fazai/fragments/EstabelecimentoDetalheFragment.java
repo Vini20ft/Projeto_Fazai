@@ -1,8 +1,8 @@
 package fazai.com.br.fazai.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import fazai.com.br.fazai.R;
+import fazai.com.br.fazai.activities.CardapioActivity;
 import fazai.com.br.fazai.http.EstabelecimentoByIdTask;
 import fazai.com.br.fazai.model.Estabelecimento;
 
@@ -93,6 +94,15 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
             Toast.makeText(getActivity(), "Falha na conexão com a internet.",
                     Toast.LENGTH_LONG).show();
         }
+
+        /* ------ABRIR ACTIVITY DE CARDAPIOS APENAS PARA TESTE ------- */
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CardapioActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mLoaderManager = getLoaderManager();
         mLoaderManager.initLoader(1, getArguments(), this);

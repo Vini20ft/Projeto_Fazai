@@ -7,8 +7,8 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 import fazai.com.br.fazai.model.Estabelecimento;
-import fazai.com.br.fazai.model.EstabelecimentoSearchResult;
 import fazai.com.br.fazai.model.Localizacao;
+import fazai.com.br.fazai.model.searchResult.EstabelecimentoSearchResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
