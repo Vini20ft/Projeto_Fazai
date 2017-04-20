@@ -37,19 +37,20 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
     CollapsingToolbarLayout appBarLayout;
 
     @BindView(R.id.txtTituloEstabelecimento)
-    TextView txtTituloEstabelecimento;
+    TextView mTituloEstabelecimento;
+
     @BindView(R.id.ratingEstabelecimento)
-    RatingBar ratingBarEstabelecimento;
+    RatingBar mRatingBarEstabelecimento;
+
     @Nullable @BindView(R.id.image_foto)
-    ImageView imageFoto;
-
-    LoaderManager mLoaderManager;
-
-    private Estabelecimento estabelecimento;
-    private Unbinder unbinder;
+    ImageView mImageEstabelecimento;
 
     @BindView(R.id.fab)
-    FloatingActionButton fab;
+    FloatingActionButton mFab;
+
+    private LoaderManager mLoaderManager;
+    private Estabelecimento mEstabelecimento;
+    private Unbinder unbinder;
 
     public EstabelecimentoDetalheFragment() {
 
@@ -83,7 +84,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
         appBarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.toolbar_layout);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Abrir cardápio", Toast.LENGTH_SHORT).show();
@@ -96,7 +97,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
         }
 
         /* ------ABRIR ACTIVITY DE CARDAPIOS APENAS PARA TESTE ------- */
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CardapioActivity.class);
@@ -112,11 +113,11 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
     public void updateUI(Estabelecimento data) {
         appBarLayout.setTitle(data.nome);
-        txtTituloEstabelecimento.setText(data.nome);
-        ratingBarEstabelecimento.setRating(data.rating);
+        mTituloEstabelecimento.setText(data.nome);
+        mRatingBarEstabelecimento.setRating(data.rating);
 
-        if (imageFoto != null)
-            Glide.with(getActivity()).load(data.foto).into(imageFoto);
+        if (mImageEstabelecimento != null)
+            Glide.with(getActivity()).load(data.foto).into(mImageEstabelecimento);
     }
 
     @Override public void onDestroyView() {
@@ -133,8 +134,8 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
     @Override
     public void onLoadFinished(Loader<Estabelecimento> loader, Estabelecimento data) {
         if (data != null) {
-            estabelecimento = data;
-            updateUI(estabelecimento);
+            mEstabelecimento = data;
+            updateUI(mEstabelecimento);
         } else {
             Toast.makeText(getActivity(), "Erro ao carregar informações.", Toast.LENGTH_SHORT).show();
         }
