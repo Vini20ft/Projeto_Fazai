@@ -10,6 +10,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +31,8 @@ import com.google.android.gms.common.api.Status;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.CardapiosTask;
 import fazai.com.br.fazai.interfaces.OnCardapioClick;
@@ -40,14 +43,18 @@ public class CardapioActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener,
         NavigationView.OnNavigationItemSelectedListener, OnCardapioClick,
         LoaderManager.LoaderCallbacks<List<Cardapio>>,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
+    @BindView(R.id.listCardapio)
     protected ListView listViewCardapio;
 
     protected CardapioAdapter adapter;
     protected LoaderManager mLoaderManager;
     protected List<Cardapio> mCardapioList;
     protected GoogleApiClient googleApiClient;
+
+    @BindView(R.id.swipeCardapio)
+    SwipeRefreshLayout mSwipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +75,14 @@ public class CardapioActivity extends AppCompatActivity
                     Toast.LENGTH_LONG).show();
         }
 
-        listViewCardapio = (ListView) findViewById(R.id.listCardapio);
+        ButterKnife.bind(this);
+
         listViewCardapio.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
+
+        mSwipe.setColorSchemeResources(R.color.colorPrimary);
+        mSwipe.setOnRefreshListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -96,6 +107,7 @@ public class CardapioActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Cardapio>> onCreateLoader(int id, Bundle args) {
+        showProgress();
         //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
         return new CardapiosTask(getApplicationContext(), 1);
     }
@@ -105,7 +117,9 @@ public class CardapioActivity extends AppCompatActivity
         if (data != null) {
             mCardapioList = data;
             adapter = new CardapioAdapter(this, mCardapioList);
+            adapter.notifyDataSetChanged();
             listViewCardapio.setAdapter(adapter);
+            mSwipe.setRefreshing(false);
         }
     }
 
@@ -196,5 +210,17 @@ public class CardapioActivity extends AppCompatActivity
 
     }
 
+    private void showProgress() {
+        mSwipe.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipe.setRefreshing(true);
+            }
+        });
+    }
 
+    @Override
+    public void onRefresh() {
+        mLoaderManager.restartLoader(0, null, this);
+    }
 }

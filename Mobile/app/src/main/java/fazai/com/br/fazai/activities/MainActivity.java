@@ -8,6 +8,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +40,8 @@ import fazai.com.br.fazai.ui.adapter.EstabelecimentoAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener,
-        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick {
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick,
+        SwipeRefreshLayout.OnRefreshListener {
 
     private GoogleApiClient googleApiClient;
 
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity
     protected EstabelecimentoAdapter adapter;
     protected List<Estabelecimento> mEstabelecimentoList;
     protected LoaderManager mLoaderManager;
+
+    @BindView(R.id.swipeMain)
+    SwipeRefreshLayout mSwipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +72,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ButterKnife.bind(this);
+
         mListEstabelecimentos.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
+
+        mSwipe.setColorSchemeResources(R.color.colorPrimary);
+        mSwipe.setOnRefreshListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -175,6 +184,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
+        showProgress();
         return new EstabelecimentosTask(getApplicationContext());
     }
 
@@ -183,7 +193,9 @@ public class MainActivity extends AppCompatActivity
         if (data != null) {
             mEstabelecimentoList = data;
             adapter = new EstabelecimentoAdapter(this, mEstabelecimentoList);
+            adapter.notifyDataSetChanged();
             mListEstabelecimentos.setAdapter(adapter);
+            mSwipe.setRefreshing(false);
         }
     }
 
@@ -203,5 +215,19 @@ public class MainActivity extends AppCompatActivity
         Intent it = new Intent(this, DetalheEstabelecimentoActivity.class);
         it.putExtra("id", estabelecimento.id);
         startActivity(it);
+    }
+
+    private void showProgress() {
+        mSwipe.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipe.setRefreshing(true);
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        mLoaderManager.restartLoader(0, null, this);
     }
 }
