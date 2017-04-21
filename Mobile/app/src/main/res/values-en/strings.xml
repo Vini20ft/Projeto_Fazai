@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Faz Aí</string>
-    <string name="facebook_app_id">755309927978194</string>
-    <string name="cancel_login">Login canceled</string>
-    <string name="error_login">There was an error logging in</string>
-    <string name="error_logout">There was an error logging out</string>
-</resources>

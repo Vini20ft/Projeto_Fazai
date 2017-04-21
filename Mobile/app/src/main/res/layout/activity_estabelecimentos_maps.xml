@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:backgroundTint="@color/colorAccent"
-                android:drawableStart="@drawable/ic_search"
+                android:drawableStart="@mipmap/ic_find"
                 android:onClick="pesquisarFoodTruck" />
 
         </LinearLayout>

@@ -1,0 +1,37 @@
+<resources>
+    <string name="cancel_login">Login cancelado</string>
+    <string name="error_login">Ocorreu um erro ao efetuar login</string>
+    <string name="error_logout">Ocorreu um erro ao efetuar logout</string>
+
+    <string name="title_activity_estabelecimentos_maps">Mapa</string>
+    <string name="txtLogin">Continuar com:</string>
+    <string name="msgCampoPesquisaFoodVazio">Informe o nome do FoodTruck !</string>
+
+    <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
+
+    <string name="action_settings">Configurações</string>
+
+
+    <!--menu lateral-->
+    <string name="perfil">Perfil</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="compartilhar">Compartilhar</string>
+    <string name="cardapio">Cardápio</string>
+    <string name="menu_principal">menu principal</string>
+    <string name="status_pedido">Status do pedido</string>
+    <string name="conta">Conta</string>
+    <string name="sair">Sair</string>
+    <string name="sobre">Sobre</string>
+
+    <!--Fragment detalhe do Food Truck-->
+    <string name="endereco">Endereço: </string>
+    <string name="horario_funcionamento">horário de funcionamento: </string>
+    <string name="ligar">Ligar</string>
+    <string name="navegacao_mapa">Iniciar Navegação</string>
+
+    <!-- Permissões -->
+    <string name="habilitar_permissão">Você tem que habilitar essa permissão para poder continuar</string>
+    <string name="permissão_concedida">Permissão concedida</string>
+    <string name="permissão_negada">Permissão negada</string>
+</resources>
