@@ -1,4 +1,4 @@
-package fazai.com.br.fazai.http;
+package fazai.com.br.fazai.http.parser;
 
 import com.google.gson.Gson;
 
@@ -7,8 +7,8 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 import fazai.com.br.fazai.model.Estabelecimento;
-import fazai.com.br.fazai.model.EstabelecimentoSearchResult;
 import fazai.com.br.fazai.model.Localizacao;
+import fazai.com.br.fazai.model.searchResult.EstabelecimentoSearchResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -16,7 +16,7 @@ import okhttp3.Response;
 
 public class EstabelecimentoParser {
 
-    protected static Estabelecimento searchDetailById(/*int id*/) throws IOException {
+    public static Estabelecimento searchDetailById(/*int id*/) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 
@@ -68,7 +68,7 @@ public class EstabelecimentoParser {
         return null;
     }
 
-    protected static List<Estabelecimento> searchAll() throws IOException {
+    public static List<Estabelecimento> searchAll() throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 
@@ -123,7 +123,7 @@ public class EstabelecimentoParser {
         return null;
     }
 
-    protected static Estabelecimento searchByLocation(Localizacao localizacao) throws IOException {
+    public static Estabelecimento searchByLocation(Localizacao localizacao) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 

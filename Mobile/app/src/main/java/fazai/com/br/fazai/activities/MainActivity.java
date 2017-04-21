@@ -13,14 +13,16 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -35,48 +37,67 @@ import com.google.android.gms.common.api.Status;
 import java.util.List;
 import java.util.logging.Handler;
 
-import fazai.com.br.fazai.DetalheFoodTruckFragment;
-import fazai.com.br.fazai.Manifest;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.EstabelecimentosTask;
+import fazai.com.br.fazai.interfaces.OnEstabelecimentoClick;
 import fazai.com.br.fazai.model.Estabelecimento;
 import fazai.com.br.fazai.ui.adapter.EstabelecimentoAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener,
-        LoaderManager.LoaderCallbacks<List<Estabelecimento>> {
 
-        private GoogleApiClient googleApiClient;
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick,
+        SwipeRefreshLayout.OnRefreshListener {
 
-        private RecyclerView recyclerView;
-        private GridLayoutManager gridLayoutManager;
-        private EstabelecimentoAdapter adapter;
-        private List<Estabelecimento> mEstabelecimentoList;
+    @BindView(R.id.listEstabelecimentos)
+    ListView mListEstabelecimentos;
 
-        private LoaderManager mLoaderManager;
+    @BindView(R.id.swipeMain)
+    SwipeRefreshLayout mSwipe;
 
-        public SharedPreferences sharedPreferences;
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.setDrawerListener(toggle);
-            toggle.syncState();
+    private EstabelecimentoAdapter adapter;
+    private List<Estabelecimento> mEstabelecimentoList;
+    private LoaderManager mLoaderManager;
+    private GoogleApiClient googleApiClient;
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-            recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-            gridLayoutManager = new GridLayoutManager(this,2);
-            recyclerView.setLayoutManager(gridLayoutManager);
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        mNavigationView.setNavigationItemSelectedListener(this);
+
+        mListEstabelecimentos.setOnItemClickListener(this);
+        mLoaderManager = getSupportLoaderManager();
+        mLoaderManager.initLoader(0, null, this);
+
+        mSwipe.setColorSchemeResources(R.color.colorPrimary);
+        mSwipe.setOnRefreshListener(this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
 
             mLoaderManager = getSupportLoaderManager();
             mLoaderManager.initLoader(0, null, this);
@@ -103,10 +124,10 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
+
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(this, ConfiguracoesActivity.class));
+
         }
 
         @Override
@@ -118,18 +139,14 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
 
-            return super.onOptionsItemSelected(item);
+
+        if (id == R.id.nav_mapa) {
+            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_sair) {
+            signOut();
         }
 
-        @SuppressWarnings("StatementWithEmptyBody")
-        @Override
-        public boolean onNavigationItemSelected(MenuItem item) {
-
-            int id = item.getItemId();
-
-            if (id == R.id.nav_mapa) {
-                Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
-                startActivity(intent);
 
             }else if (id == R.id.nav_menu_principal) {
 
@@ -175,22 +192,17 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        private void signOutFacebook() {
-            LoginManager.getInstance().logOut();
-            goLoginScreen();
-        }
 
-        private void signOutGoogle() {
-            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+    private void signOutGoogle() {
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        if (status.isSuccess()) {
+                            goLoginScreen();
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.error_logout, Toast.LENGTH_SHORT).show();
 
-                    new ResultCallback<Status>() {
-                        @Override
-                        public void onResult(Status status) {
-                            if (status.isSuccess()) {
-                                goLoginScreen();
-                            } else {
-                                Toast.makeText(getApplicationContext(), R.string.error_logout, Toast.LENGTH_SHORT).show();
-                            }
                         }
                     });
         }
@@ -200,29 +212,22 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        @Override
-        public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
-            return new EstabelecimentosTask(getApplicationContext());
-        }
 
-        @Override
-        public void onLoadFinished(Loader<List<Estabelecimento>> loader, final List<Estabelecimento> data) {
-            if (data != null) {
-                mEstabelecimentoList = data;
-                adapter = new EstabelecimentoAdapter(this, mEstabelecimentoList);
-                recyclerView.setAdapter(adapter);
+    @Override
+    public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
+        showProgress();
+        return new EstabelecimentosTask(getApplicationContext());
+    }
 
-            /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    @Override
+    public void onLoadFinished(Loader<List<Estabelecimento>> loader, final List<Estabelecimento> data) {
+        if (data != null) {
+            mEstabelecimentoList = data;
+            adapter = new EstabelecimentoAdapter(this, mEstabelecimentoList);
+            adapter.notifyDataSetChanged();
+            mListEstabelecimentos.setAdapter(adapter);
+            mSwipe.setRefreshing(false);
 
-                    if(gridLayoutManager.findLastCompletelyVisibleItemPosition() == data.size()-1){
-                        EstabelecimentosTask estabelecimentosTask = new EstabelecimentosTask(getApplicationContext());
-                        estabelecimentosTask.loadInBackground();
-                    }
-                }
-            });*/
-            }
         }
 
         @Override
@@ -269,5 +274,32 @@ public class MainActivity extends AppCompatActivity
         Log.i( TAG, "Lat: "+latitude+" | Long: "+longitude );
     }
    */
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Estabelecimento estabelecimento = (Estabelecimento) mListEstabelecimentos.getItemAtPosition(position);
+        (this).onEstabelecimentoClick(estabelecimento);
+    }
+
+    @Override
+    public void onEstabelecimentoClick(Estabelecimento estabelecimento) {
+        Intent it = new Intent(this, DetalheEstabelecimentoActivity.class);
+        it.putExtra("id", estabelecimento.id);
+        startActivity(it);
+    }
+
+    private void showProgress() {
+        mSwipe.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipe.setRefreshing(true);
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        mLoaderManager.restartLoader(0, null, this);
+    }
 
 }
