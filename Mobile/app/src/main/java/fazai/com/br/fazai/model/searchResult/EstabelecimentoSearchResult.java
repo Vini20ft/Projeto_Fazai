@@ -1,12 +1,11 @@
-package fazai.com.br.fazai.model;
+package fazai.com.br.fazai.model.searchResult;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by caio.e.nascimento on 4/3/2017.
- */
+import fazai.com.br.fazai.model.Estabelecimento;
+
 
 public class EstabelecimentoSearchResult {
 

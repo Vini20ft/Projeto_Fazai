@@ -14,7 +14,7 @@ public class Endereco {
     @SerializedName("rua")
     public String rua;
     @SerializedName("numero")
-    public int numero;
+    public String numero;
     @SerializedName("telefone")
     public String telefone;
     @SerializedName("localizacao")
@@ -24,7 +24,7 @@ public class Endereco {
         localizacao = new Localizacao();
     }
 
-    public Endereco(String estado, String bairro, String cidade, String rua, int numero, String telefone) {
+    public Endereco(String estado, String bairro, String cidade, String rua, String numero, String telefone) {
         this.estado = estado;
         this.bairro = bairro;
         this.cidade = cidade;
