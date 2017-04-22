@@ -36,4 +36,5 @@ public class EstabelecimentosTask extends AsyncTaskLoader<List<Estabelecimento>>
         }
         return mEstabelecimentos;
     }
+
 }
