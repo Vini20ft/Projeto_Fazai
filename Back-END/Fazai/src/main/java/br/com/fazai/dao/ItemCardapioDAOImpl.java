@@ -3,11 +3,7 @@ package br.com.fazai.dao;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-
-
-import br.com.fazai.model.Funcionario;
 import br.com.fazai.model.ItemCardapio;
 
 

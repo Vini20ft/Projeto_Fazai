@@ -12,7 +12,7 @@
       <class>br.com.fazai.model.Estabelecimento</class>
       <class>br.com.fazai.model.Id</class>
       <class>br.com.fazai.model.ItemCardapio</class>
-      <class>br.com.fazai.model.Pagamento</class>
+      <!--   <class>br.com.fazai.model.Pagamento</class> á definir -->
       <class>br.com.fazai.model.Pedido_Cardapio_Item</class>
       <class>br.com.fazai.model.Pedido</class>
       <properties>
