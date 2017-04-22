@@ -9,7 +9,11 @@
     <ImageView
         android:layout_width="72dp"
         android:layout_height="96dp"
+<<<<<<< HEAD
         app:srcCompat="@mipmap/ic_faz_ai"
+=======
+        app:srcCompat="@mipmap/ic_launcher"
+>>>>>>> refs/remotes/Vini20ft/master
         android:id="@+id/item_estab_foto" />
 
     <TextView

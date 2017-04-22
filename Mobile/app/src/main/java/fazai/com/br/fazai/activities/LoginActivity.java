@@ -1,6 +1,8 @@
 package fazai.com.br.fazai.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+<<<<<<< HEAD
+=======
+import java.util.Arrays;
+
+>>>>>>> refs/remotes/Vini20ft/master
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
@@ -29,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @BindView(R.id.login_button)
     LoginButton mLoginButton;
+<<<<<<< HEAD
 
     @BindView(R.id.signInButton)
     SignInButton signInButton;
@@ -36,9 +44,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @BindView(R.id.fb)
     Button mFb;
 
+=======
+
+    @BindView(R.id.signInButton)
+    SignInButton signInButton;
+
+    @BindView(R.id.fb)
+    Button mFb;
+
+>>>>>>> refs/remotes/Vini20ft/master
     private CallbackManager mCallbackManager;
     private GoogleApiClient mGoogleApiClient;
     public static final int SIGN_IN_CODE = 777;
+
+    // ShredPreferences
+    public SharedPreferences sharedPreferences;
+    private String senha;
+
+    // fim ShredPreferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,21 +90,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onCancel() {
                 Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
             }
+        }
 
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-       /* signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(intent, SIGN_IN_CODE);
-            }
-        });*/
-    }
 
     private void VerifyCurrentUser() {
         if (AccessToken.getCurrentAccessToken() != null || (mGoogleApiClient != null && mGoogleApiClient.isConnected())) {
@@ -131,5 +141,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onClickGooglePlus(View v){
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(intent, SIGN_IN_CODE);
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/Vini20ft/master
     }
 }

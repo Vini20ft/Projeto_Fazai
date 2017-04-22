@@ -99,8 +99,8 @@ public class EstabelecimentoParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        long latitude = localizacao.latitude;
-        long longitude = localizacao.longitude;
+        double latitude = localizacao.latitude;
+        double longitude = localizacao.longitude;
 
         String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentosList.json");
         Request request = new Request.Builder().url(urlApi).build();
@@ -128,8 +128,8 @@ public class EstabelecimentoParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        long latitude = localizacao.latitude;
-        long longitude = localizacao.longitude;
+        double latitude = localizacao.latitude;
+        double longitude = localizacao.longitude;
 
         String urlApi = String.format("url do servico");
         Request request = new Request.Builder().url(urlApi).build();
