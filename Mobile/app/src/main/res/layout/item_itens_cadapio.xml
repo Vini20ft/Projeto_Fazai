@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="96dp"
+        app:srcCompat="@mipmap/ic_faz_ai"
+        android:id="@+id/item_foto_itens_cardapio" />
+
+    <TextView
+        android:text="Nome do prato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_descricao_itens_cardapio"
+        android:layout_alignLeft="@+id/item_descricao_itens_cardapio"
+        android:layout_alignStart="@+id/item_descricao_itens_cardapio"
+        android:layout_marginTop="12dp"
+        android:id="@+id/item_nome_prato" />
+
+    <TextView
+        android:text="Descrição do prato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="13dp"
+        android:id="@+id/item_descricao_itens_cardapio"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/item_foto_itens_cardapio"
+        android:layout_toEndOf="@+id/item_foto_itens_cardapio" />
+
+    <TextView
+        android:id="@+id/item_valor_itens_cardapio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_foto_itens_cardapio"
+        android:layout_alignStart="@+id/item_nome_prato"
+        android:text="Valor do prato" />
+</RelativeLayout>

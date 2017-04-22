@@ -34,19 +34,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
-import fazai.com.br.fazai.http.CardapiosTask;
-import fazai.com.br.fazai.interfaces.OnCardapioClick;
-import fazai.com.br.fazai.model.Cardapio;
-import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
+import fazai.com.br.fazai.http.ItemCardapioTask;
+import fazai.com.br.fazai.interfaces.OnItemCardapioClick;
+import fazai.com.br.fazai.model.ItemCardapio;
+import fazai.com.br.fazai.ui.adapter.ItemCardapioAdapter;
 
-public class CardapioActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, OnCardapioClick,
-        LoaderManager.LoaderCallbacks<List<Cardapio>>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class ItensCardapioActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, OnItemCardapioClick,
+        LoaderManager.LoaderCallbacks<List<ItemCardapio>>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.listCardapio)
-    ListView mListCardapio;
+    @BindView(R.id.listItemCardapio)
+    ListView mListItemCardapio;
 
-    @BindView(R.id.swipeCardapio)
+    @BindView(R.id.swipeItemCardapio)
     SwipeRefreshLayout mSwipe;
 
     @BindView(R.id.toolbar)
@@ -58,22 +58,20 @@ public class CardapioActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
 
-    private CardapioAdapter mAdapter;
+    private ItemCardapioAdapter mAdapter;
     private LoaderManager mLoaderManager;
-    private List<Cardapio> mCardapioList;
+    private List<ItemCardapio> mItemCardapioList;
     private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cardapio);
+        setContentView(R.layout.activity_itens_cardapio);
         ButterKnife.bind(this);
-
         initToolBar();
-
         verificaConexao();
 
-        mListCardapio.setOnItemClickListener(this);
+        mListItemCardapio.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
 
@@ -100,42 +98,6 @@ public class CardapioActivity extends AppCompatActivity
         mNavigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
-    public void onCardapioClick(Cardapio cardapio) {
-        Intent it = new Intent(this, ItensCardapioActivity.class);
-        it.putExtra("id_cardapio", 1/*cardapio.id*/);
-        startActivity(it);
-    }
-
-    @Override
-    public Loader<List<Cardapio>> onCreateLoader(int id, Bundle args) {
-        showProgress();
-        //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
-        return new CardapiosTask(getApplicationContext(), /*idEstabelecimento*/ 1);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Cardapio>> loader, List<Cardapio> data) {
-        if (data != null) {
-            mCardapioList = data;
-            mAdapter = new CardapioAdapter(this, mCardapioList);
-            mAdapter.notifyDataSetChanged();
-            mListCardapio.setAdapter(mAdapter);
-            mSwipe.setRefreshing(false);
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Cardapio>> loader) {
-
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Cardapio cardapio = (Cardapio) mListCardapio.getItemAtPosition(i);
-        this.onCardapioClick(cardapio);
-    }
-
     public void verificaConexao() {
         ConnectivityManager conectivtyManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (conectivtyManager.getActiveNetworkInfo() != null
@@ -147,30 +109,13 @@ public class CardapioActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.nav_mapa) {
-            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_sair) {
-            signOut();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id. drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    public void signOut() {
-        if (AccessToken.getCurrentAccessToken() != null) {
-            signOutFacebook();
-        } else {
-            signOutGoogle();
-        }
+    private void showProgress() {
+        mSwipe.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipe.setRefreshing(true);
+            }
+        });
     }
 
     private void signOutFacebook() {
@@ -191,6 +136,14 @@ public class CardapioActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void signOut() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            signOutFacebook();
+        } else {
+            signOutGoogle();
+        }
+    }
+
     private void signOutGoogle() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -206,21 +159,67 @@ public class CardapioActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
+        if (id == R.id.nav_mapa) {
+            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_sair) {
+            signOut();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id. drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
-    private void showProgress() {
-        mSwipe.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipe.setRefreshing(true);
-            }
-        });
+    @Override
+    public Loader<List<ItemCardapio>> onCreateLoader(int id, Bundle args) {
+        showProgress();
+        //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
+        return new ItemCardapioTask(getApplicationContext(), /*idEstabelecimento*/ 1);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<ItemCardapio>> loader, List<ItemCardapio> data) {
+        if (data != null) {
+            mItemCardapioList = data;
+            mAdapter = new ItemCardapioAdapter(this, mItemCardapioList);
+            mAdapter.notifyDataSetChanged();
+            mListItemCardapio.setAdapter(mAdapter);
+            mSwipe.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<ItemCardapio>> loader) {
+
     }
 
     @Override
     public void onRefresh() {
         mLoaderManager.restartLoader(0, null, this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        ItemCardapio itemCardapio = (ItemCardapio) mListItemCardapio.getItemAtPosition(i);
+        this.onItemCardapioClick(itemCardapio);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onItemCardapioClick(ItemCardapio itemCardapio) {
+        /*Intent it = new Intent(this, ItensCardapioCompraActivity.class);
+        it.putExtra("id_item_cardapio", itemCardapio.id);
+        startActivity(it);*/
+
+        Toast.makeText(getApplicationContext(), "Abrir tela de compra do item",
+                Toast.LENGTH_LONG).show();
     }
 }
