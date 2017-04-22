@@ -9,6 +9,10 @@
     <string name="title_activity_main">Lista de FoodTrucks</string>
     <string name="txtLogin">Continuar com:</string>
     <string name="msgCampoPesquisaFoodVazio">Informe o nome do FoodTruck</string>
+<<<<<<< HEAD
+
+=======
+>>>>>>> refs/remotes/Vini20ft/master
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
