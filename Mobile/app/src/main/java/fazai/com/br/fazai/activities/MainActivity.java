@@ -41,6 +41,8 @@ import java.util.logging.Handler;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.EstabelecimentosTask;
 import fazai.com.br.fazai.interfaces.OnEstabelecimentoClick;
@@ -49,10 +51,16 @@ import fazai.com.br.fazai.ui.adapter.EstabelecimentoAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener,
+<<<<<<< HEAD
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick,
+        SwipeRefreshLayout.OnRefreshListener {
+
+=======
 
         LoaderManager.LoaderCallbacks<List<Estabelecimento>>, AdapterView.OnItemClickListener, OnEstabelecimentoClick,
         SwipeRefreshLayout.OnRefreshListener {
 
+>>>>>>> refs/remotes/Vini20ft/master
     @BindView(R.id.listEstabelecimentos)
     ListView mListEstabelecimentos;
 
@@ -127,7 +135,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, ConfiguracoesActivity.class));
+<<<<<<< HEAD
+=======
 
+>>>>>>> refs/remotes/Vini20ft/master
         }
 
         @Override
@@ -139,7 +150,10 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> refs/remotes/Vini20ft/master
         if (id == R.id.nav_mapa) {
             Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
@@ -227,6 +241,8 @@ public class MainActivity extends AppCompatActivity
             adapter.notifyDataSetChanged();
             mListEstabelecimentos.setAdapter(adapter);
             mSwipe.setRefreshing(false);
+<<<<<<< HEAD
+=======
 
         }
 
@@ -270,6 +286,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
             }
+>>>>>>> refs/remotes/Vini20ft/master
         }
         Log.i( TAG, "Lat: "+latitude+" | Long: "+longitude );
     }
@@ -298,8 +315,36 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+<<<<<<< HEAD
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Estabelecimento estabelecimento = (Estabelecimento) mListEstabelecimentos.getItemAtPosition(position);
+        (this).onEstabelecimentoClick(estabelecimento);
+    }
+
+    @Override
+    public void onEstabelecimentoClick(Estabelecimento estabelecimento) {
+        Intent it = new Intent(this, DetalheEstabelecimentoActivity.class);
+        it.putExtra("id", estabelecimento.id);
+        startActivity(it);
+    }
+
+    private void showProgress() {
+        mSwipe.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipe.setRefreshing(true);
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        mLoaderManager.restartLoader(0, null, this);
+    }
+=======
     public void onRefresh() {
         mLoaderManager.restartLoader(0, null, this);
     }
 
+>>>>>>> refs/remotes/Vini20ft/master
 }
