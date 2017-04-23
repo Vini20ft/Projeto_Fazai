@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.ItemCardapioTask;
 import fazai.com.br.fazai.interfaces.OnItemCardapioClick;
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.model.ItemCardapio;
 import fazai.com.br.fazai.ui.adapter.ItemCardapioAdapter;
 
@@ -177,8 +178,14 @@ public class ItensCardapioActivity extends AppCompatActivity
     @Override
     public Loader<List<ItemCardapio>> onCreateLoader(int id, Bundle args) {
         showProgress();
-        //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
-        return new ItemCardapioTask(getApplicationContext(), /*idEstabelecimento*/ 1);
+
+        int idCardapio = 0;
+
+        if (args != null) {
+            idCardapio = args.getInt(Constantes.CARDAPIO_ID);
+        }
+
+        return new ItemCardapioTask(getApplicationContext(), /*idCardapio*/ 1);
     }
 
     @Override

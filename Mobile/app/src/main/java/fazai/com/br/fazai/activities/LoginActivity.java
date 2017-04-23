@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void VerifyCurrentUser() {
         if (AccessToken.getCurrentAccessToken() != null || (mGoogleApiClient != null && mGoogleApiClient.isConnected())) {
-            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Usuário deslogado!", Toast.LENGTH_SHORT).show();
             goMainScreen();
         }
     }

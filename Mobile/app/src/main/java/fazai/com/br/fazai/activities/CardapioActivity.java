@@ -37,6 +37,7 @@ import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.CardapiosTask;
 import fazai.com.br.fazai.interfaces.OnCardapioClick;
 import fazai.com.br.fazai.model.Cardapio;
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
 
 public class CardapioActivity extends AppCompatActivity
@@ -110,7 +111,13 @@ public class CardapioActivity extends AppCompatActivity
     @Override
     public Loader<List<Cardapio>> onCreateLoader(int id, Bundle args) {
         showProgress();
-        //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
+
+        int idEstabelecimento = 0;
+
+        if (args != null) {
+            idEstabelecimento = args.getInt(Constantes.ESTABELECIMENTO_ID);
+        }
+
         return new CardapiosTask(getApplicationContext(), /*idEstabelecimento*/ 1);
     }
 

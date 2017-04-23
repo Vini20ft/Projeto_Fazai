@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 import fazai.com.br.fazai.model.Cardapio;
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.model.searchResult.CardapioSearchResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +20,7 @@ public class CardapioParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("https://dl.dropboxusercontent.com/s/lkj999wr2wicb7l/cardapios.json");
+        String urlApi = String.format(Constantes.SERVICE_TODOS_CARDAPIO);
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor
