@@ -21,6 +21,8 @@ public class Estabelecimento {
     public Endereco endereco;
     @SerializedName("foto")
     public String foto;
+    @SerializedName("telefone")
+    public String telefone;
     @SerializedName("rating")
     public int rating;
     @SerializedName("cardapio")
@@ -31,7 +33,7 @@ public class Estabelecimento {
         cardapioList = new ArrayList<>();
     }
 
-    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, List<Cardapio> cardapios) {
+    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, List<Cardapio> cardapios, String telefone) {
         this.id = id;
         this.cnpj = cnpj;
         this.nome = nome;
@@ -39,5 +41,6 @@ public class Estabelecimento {
         this.especialidade = especialidade;
         this.foto = foto;
         this.cardapioList = cardapios;
+        this.telefone = telefone;
     }
 }
