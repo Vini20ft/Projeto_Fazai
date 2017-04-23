@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-
-import org.springframework.transaction.annotation.Transactional;
-
 import br.com.fazai.model.Estabelecimento;
 @Repository("estabelecimentoDAO")
 public class EstabelecimentoDAOImpl extends UtilJpaSpring implements EstabelecimentoDAO{
