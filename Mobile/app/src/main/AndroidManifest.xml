@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<!--    <uses-permission android:name="android.permission.CALL_PHONE"/>-->
+    <!-- <uses-permission android:name="android.permission.CALL_PHONE"/> -->
 
     <permission
         android:name="info.androidhive.googlemapsv2.permission.MAPS_RECEIVE"
@@ -53,7 +53,10 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity android:name=".activities.CardapioActivity" />
-        <activity android:name=".activities.ConfiguracoesActivity" android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".activities.ConfiguracoesActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activities.ItensCardapioActivity"></activity>
     </application>
 
 </manifest>

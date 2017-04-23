@@ -6,20 +6,21 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
-import fazai.com.br.fazai.model.Cardapio;
-import fazai.com.br.fazai.model.searchResult.CardapioSearchResult;
+import fazai.com.br.fazai.model.ItemCardapio;
+import fazai.com.br.fazai.model.searchResult.ItemCardapioSearchResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class CardapioParser {
-    public static List<Cardapio> searchAllById(/*int idCardapio*/) throws IOException {
+public class ItensCardapioParser {
+
+    public static List<ItemCardapio> searchAllByIdCardapio(/*int idCardapio*/) throws IOException {
         //estabelece a conexão com o servidor
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("https://dl.dropboxusercontent.com/s/lkj999wr2wicb7l/cardapios.json");
+        String urlApi = String.format("url do serviço");
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor
@@ -31,13 +32,14 @@ public class CardapioParser {
 
             //converter o result json em obj java
             Gson gson = new Gson();
-            CardapioSearchResult result = gson.fromJson(json, CardapioSearchResult.class);
+            ItemCardapioSearchResult result = gson.fromJson(json, ItemCardapioSearchResult.class);
 
             if (result != null)
-                return result.cardapios;
+                return result.itensCardapio;
         }
 
         return null;
 
     }
+
 }
