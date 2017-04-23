@@ -2,26 +2,17 @@ package fazai.com.br.fazai.activities;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
-import fazai.com.br.fazai.interfaces.OnEstabelecimentoClick;
-import fazai.com.br.fazai.model.Estabelecimento;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 
@@ -108,6 +99,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 ConfiguracoesActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(langPref, lang);
+        //editor.apply();
         editor.commit();
     }
 }

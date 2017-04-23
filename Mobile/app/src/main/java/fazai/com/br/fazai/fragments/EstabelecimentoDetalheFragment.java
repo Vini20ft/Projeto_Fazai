@@ -29,6 +29,7 @@ import butterknife.Unbinder;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.activities.CardapioActivity;
 import fazai.com.br.fazai.http.EstabelecimentoByIdTask;
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.model.Estabelecimento;
 
 
@@ -58,7 +59,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
     public static EstabelecimentoDetalheFragment newInstance(String estabelecimentoId) {
         Bundle bundle = new Bundle();
-        bundle.putString("id_estabelecimento", estabelecimentoId);
+        bundle.putString(Constantes.ESTABELECIMENTO_ID, estabelecimentoId);
         EstabelecimentoDetalheFragment fragment = new EstabelecimentoDetalheFragment();
         fragment.setArguments(bundle);
 
@@ -127,8 +128,8 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
     @Override
     public Loader<Estabelecimento> onCreateLoader(int id, Bundle args) {
-        //int estabelecimentoId = args.getInt("id_estabelecimento");
-        return new EstabelecimentoByIdTask(getActivity(), 1);
+        int estabelecimentoId = args.getInt(Constantes.ESTABELECIMENTO_ID);
+        return new EstabelecimentoByIdTask(getActivity(), /*estabelecimentoId*/ 1);
     }
 
     @Override

@@ -37,6 +37,7 @@ import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.CardapiosTask;
 import fazai.com.br.fazai.interfaces.OnCardapioClick;
 import fazai.com.br.fazai.model.Cardapio;
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
 
 public class CardapioActivity extends AppCompatActivity
@@ -110,7 +111,13 @@ public class CardapioActivity extends AppCompatActivity
     @Override
     public Loader<List<Cardapio>> onCreateLoader(int id, Bundle args) {
         showProgress();
-        //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
+
+        int idEstabelecimento = 0;
+
+        if (args != null) {
+            idEstabelecimento = args.getInt(Constantes.ESTABELECIMENTO_ID);
+        }
+
         return new CardapiosTask(getApplicationContext(), /*idEstabelecimento*/ 1);
     }
 
@@ -149,18 +156,22 @@ public class CardapioActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
+        Intent intent;
 
-        if (id == R.id.nav_mapa) {
-            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
+        if (id == R.id.nav_menu_principal) {
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_mapa) {
+            intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sair) {
             signOut();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id. drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
