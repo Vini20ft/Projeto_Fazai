@@ -1,4 +1,8 @@
 <resources>
+    <string name="app_name">Faz Aí</string>
+    <string name="facebook_app_id">755309927978194</string>
+    <string name="facebook_app_id1"></string>
+
     <string name="cancel_login">Iniciar sesión cancelado</string>
     <string name="error_login">Hubo un registro de errores</string>
     <string name="error_logout">Se produjo un error al cerrar la sesión</string>
@@ -25,10 +29,22 @@
 
     // detanhe do food truck
     <string name="aguarde">Espere...</string>
-    <string name="phone">Teléfono</string>
+    <string name="ligar">Enlace</string>
+    <string name="estado">Estado: </string>
+    <string name="cidade">Ciudad: </string>
+    <string name="bairro">Barrio: </string>
+    <string name="numero">Número: </string>
+    <string name="rua">Calle: </string>
+
+    <string name="endereco">Dirección</string>
+
 
     <string name="mapa_dos_food_trucks">Mapa de Food Trucks</string>
 
 
+    <string name="title_activity_main">Lista Food Trucks</string>
     <string name="title_activity_detalhe_estabelecimento">Detalles del establecimiento</string>
+    <string name="faculdade">Facultad</string>
+    <string name="equipe">Equipo: </string>
+    <string name="banca">Banco</string>
 </resources>

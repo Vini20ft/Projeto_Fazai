@@ -24,6 +24,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fazai.com.br.fazai.Constante;
 import fazai.com.br.fazai.R;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -53,7 +54,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        VerifyCurrentUser();
+        // ShredPreferences para acessar só uma vez o login
+
+        sharedPreferences = getSharedPreferences(Constante.getPrefName(), MODE_PRIVATE);
+        senha = sharedPreferences.getString("senha", "");
+
+        if(senha == "0" || senha == "") {
+            VerifyCurrentUser();
+            // SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("senha", "1");
+            editor.commit();
+            // fim SharedPreferences
+
+            VerifyCurrentUser();
 
         mCallbackManager = CallbackManager.Factory.create();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -80,6 +94,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             }
         });
+    } else{
+            SharedPreferences sharedPreferences = getSharedPreferences(Constante.getPrefName(), MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("senha", "1");
+            editor.commit();
+
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void VerifyCurrentUser() {

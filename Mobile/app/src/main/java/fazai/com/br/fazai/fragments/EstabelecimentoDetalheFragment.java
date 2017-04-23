@@ -40,15 +40,11 @@ import fazai.com.br.fazai.activities.CardapioActivity;
 import fazai.com.br.fazai.http.EstabelecimentoByIdTask;
 import fazai.com.br.fazai.model.Estabelecimento;
 
-import static fazai.com.br.fazai.R.layout.activity_detalhe_estabelecimento;
 
 
 public class EstabelecimentoDetalheFragment extends Fragment implements LoaderManager.LoaderCallbacks<Estabelecimento>{
 
     CollapsingToolbarLayout appBarLayout;
-
-    @BindView(R.id.txtTituloEstabelecimento)
-    TextView mTituloEstabelecimento;
 
     @BindView(R.id.ratingEstabelecimento)
     RatingBar mRatingBarEstabelecimento;
@@ -60,8 +56,24 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
     FloatingActionButton mFab;
 
     @BindView(R.id.btn_ligar)
-    Button btnLigar;
+    Button mbtnLigar;
 
+    @BindView(R.id.txtBairro)
+    TextView mTxtBairro;
+
+    @BindView(R.id.txtCidade)
+    TextView mTxtCidade;
+
+    @BindView(R.id.txtEstado)
+    TextView mTxtEstado;
+
+    @BindView(R.id.txtNumero)
+    TextView mTxtNumero;
+
+    @BindView(R.id.txtRua)
+    TextView mTxtRua;
+
+    private String mLigar;
     private LoaderManager mLoaderManager;
     private Estabelecimento mEstabelecimento;
     private Unbinder unbinder;
@@ -106,10 +118,19 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_estabelecimento_detalhe, container, false);
+        View view1 = inflater.inflate(R.layout.content_detalhe_estabelecimento, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        mbtnLigar.setOnClickListener(new View.OnClickListener(){
 
-
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("tel:" + mLigar);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                intent.setData(Uri.parse(String.valueOf(uri)));
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -142,28 +163,19 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
         mLoaderManager = getLoaderManager();
         mLoaderManager.initLoader(1, getArguments(), this);
-/*
-        view = inflater.inflate(R.layout.content_detalhe_estabelecimento, container, false);
-        btnLigar.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("tel:81987412985");
-                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                intent.setData(Uri.parse(String.valueOf(uri)));
-                startActivity(intent);
-            }
-        });
-*/
-
 
         return view;
     }
 
     public void updateUI(Estabelecimento data) {
         appBarLayout.setTitle(data.nome);
-        mTituloEstabelecimento.setText(data.nome);
         mRatingBarEstabelecimento.setRating(data.rating);
+        mLigar = (data.telefone);
+        mTxtBairro.setText(data.endereco.bairro);
+        mTxtCidade.setText(data.endereco.cidade);
+        mTxtEstado.setText(data.endereco.estado);
+        mTxtNumero.setText(data.endereco.numero);
+        mTxtRua.setText(data.endereco.rua);
 
         if (mImageEstabelecimento != null)
             Glide.with(getActivity()).load(data.foto).into(mImageEstabelecimento);

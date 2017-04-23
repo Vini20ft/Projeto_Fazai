@@ -1,7 +1,6 @@
 package fazai.com.br.fazai.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -143,13 +141,15 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         }else if (id == R.id.nav_menu_principal) {
-
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }else if (id == R.id.nav_compartilhar) {
 
         }else if (id == R.id.nav_pedido) {
 
         }else if (id == R.id.nav_sobre) {
-
+            Intent intent = new Intent(this, SobreActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_sair) {
             signOut();

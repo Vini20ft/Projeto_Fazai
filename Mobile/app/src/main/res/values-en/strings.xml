@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Faz Aí</string>
+    <string name="facebook_app_id">755309927978194</string>
+    <string name="facebook_app_id1"></string>
+    <string name="cancel_login">Login canceled</string>
+    <string name="error_login">There was an error logging in</string>
+    <string name="error_logout">There was an error logging out</string>
+    <string name="title_activity_estabelecimentos_maps">Map</string>
+    <string name="title_activity_main">List of Food Trucks</string>
+    <string name="txtLogin">Keep with:</string>
+    <string name="msgCampoPesquisaFoodVazio">Enter the name of Food Truck</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!--menu lateral-->
+    <string name="perfil">Profile</string>
+    <string name="food_truck">Food Truck</string>
+    <string name="pedidos">Requests</string>
+    <string name="compartilhar">To share</string>
+    <string name="cardapio">Menu</string>
+    <string name="menu_principal">Main Menu</string>
+    <string name="status_pedido">Order Status</string>
+    <string name="conta">Account</string>
+    <string name="sair">Logoff</string>
+    <string name="sobre">about</string>
+
+    // detanhe do food truck
+    <string name="aguarde">Wait...</string>
+    <string name="ligar">Turn on</string>
+    <string name="estado">State: </string>
+    <string name="cidade">City: </string>
+    <string name="bairro">Neighborhood: </string>
+    <string name="numero">Number: </string>
+    <string name="rua">Street: </string>
+
+    <string name="endereco">Address</string>
+
+    <string name="mapa_dos_food_trucks">Map of Food Trucks</string>
+
+    <string name="title_activity_detalhe_estabelecimento">Details of the establishment</string>
+    <string name="faculdade">College</string>
+    <string name="equipe">Team: </string>
+    <string name="banca">Bank</string>
+
+</resources>

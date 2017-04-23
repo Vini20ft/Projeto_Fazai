@@ -22,22 +22,21 @@ public class Estabelecimento {
     @SerializedName("foto")
     public String foto;
     @SerializedName("rating")
-    public int rating;
-    @SerializedName("cardapio")
-    public List<Cardapio> cardapioList;
+    public float rating;
+    @SerializedName("telefone")
+    public String telefone;
 
     public Estabelecimento() {
         endereco = new Endereco();
-        cardapioList = new ArrayList<>();
     }
 
-    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, List<Cardapio> cardapios) {
+    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto,  String telefone) {
         this.id = id;
         this.cnpj = cnpj;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.especialidade = especialidade;
         this.foto = foto;
-        this.cardapioList = cardapios;
+        this.telefone = telefone;
     }
 }
