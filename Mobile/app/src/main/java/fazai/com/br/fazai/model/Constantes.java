@@ -13,4 +13,7 @@ public class Constantes {
     public static final String ESTABELECIMENTO_ID = "id_estabelecimento";
     public static final String CARDAPIO_ID = "id_cardapio";
     public static final String ITEM_CARDAPIO_ID = "id_item_cardapio";
+
+    //UTILITARIOS
+    public static final int TEMPO_SPLASH = 3000;
 }
