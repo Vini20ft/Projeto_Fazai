@@ -18,15 +18,25 @@
             android:layout_width="287dp"
             android:layout_height="wrap_content"
             android:id="@+id/txtTituloEstabelecimento"
-            android:text="Aguarde..."/>
+            android:text="@string/aguarde"/>
         <RatingBar
             android:id="@+id/ratingEstabelecimento"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:theme="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:isIndicator="true"
-            android:clickable="false"
             android:stepSize="0.1"
+            android:rating="0.0"
             android:numStars="5"/>
+        <Button
+            android:id="@+id/btn_ligar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@mipmap/ic_phone"
+            android:text="@string/phone"
+            />
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

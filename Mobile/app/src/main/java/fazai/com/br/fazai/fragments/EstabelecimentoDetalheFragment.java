@@ -1,8 +1,11 @@
 package fazai.com.br.fazai.fragments;
 
+import android.support.v7.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,12 +13,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -31,8 +40,10 @@ import fazai.com.br.fazai.activities.CardapioActivity;
 import fazai.com.br.fazai.http.EstabelecimentoByIdTask;
 import fazai.com.br.fazai.model.Estabelecimento;
 
+import static fazai.com.br.fazai.R.layout.activity_detalhe_estabelecimento;
 
-public class EstabelecimentoDetalheFragment extends Fragment implements LoaderManager.LoaderCallbacks<Estabelecimento> {
+
+public class EstabelecimentoDetalheFragment extends Fragment implements LoaderManager.LoaderCallbacks<Estabelecimento>{
 
     CollapsingToolbarLayout appBarLayout;
 
@@ -48,9 +59,13 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
     @BindView(R.id.fab)
     FloatingActionButton mFab;
 
+    @BindView(R.id.btn_ligar)
+    Button btnLigar;
+
     private LoaderManager mLoaderManager;
     private Estabelecimento mEstabelecimento;
     private Unbinder unbinder;
+    private ShareActionProvider mShareActionProvider;
 
     public EstabelecimentoDetalheFragment() {
 
@@ -64,17 +79,37 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
         return fragment;
     }
+    // Compartinhar no Menu
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_detalhe_estabelecimento, menu);
+
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
+        Intent it = new Intent(Intent.ACTION_SEND);
+        it.putExtra(Intent.EXTRA_TEXT, "getNomeFoodTruck");
+        mShareActionProvider.setShareIntent(it);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_estabelecimento_detalhe, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+
+
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -107,6 +142,20 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
         mLoaderManager = getLoaderManager();
         mLoaderManager.initLoader(1, getArguments(), this);
+/*
+        view = inflater.inflate(R.layout.content_detalhe_estabelecimento, container, false);
+        btnLigar.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("tel:81987412985");
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                intent.setData(Uri.parse(String.valueOf(uri)));
+                startActivity(intent);
+            }
+        });
+*/
+
 
         return view;
     }
@@ -158,4 +207,6 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
         }
         return conectado;
     }
+
+
 }

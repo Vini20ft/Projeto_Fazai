@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="fazai.com.br.fazai.activities.DetalheEstabelecimentoActivity">
+
+    <item
+        android:id="@+id/menu_item_share"
+        android:title="@string/compartilhar"
+        app:showAsAction="ifRoom"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

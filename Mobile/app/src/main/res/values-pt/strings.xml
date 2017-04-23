@@ -5,7 +5,7 @@
 
     <string name="title_activity_estabelecimentos_maps">Mapa</string>
     <string name="txtLogin">Continuar com:</string>
-    <string name="msgCampoPesquisaFoodVazio">Informe o nome do FoodTruck !</string>
+    <string name="msgCampoPesquisaFoodVazio">Informe o nome do Food Truck</string>
 
     <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
@@ -18,20 +18,17 @@
     <string name="pedidos">Pedidos</string>
     <string name="compartilhar">Compartilhar</string>
     <string name="cardapio">Cardápio</string>
-    <string name="menu_principal">menu principal</string>
+    <string name="menu_principal">Menu Principal</string>
     <string name="status_pedido">Status do pedido</string>
     <string name="conta">Conta</string>
     <string name="sair">Sair</string>
     <string name="sobre">Sobre</string>
 
-    <!--Fragment detalhe do Food Truck-->
-    <string name="endereco">Endereço: </string>
-    <string name="horario_funcionamento">horário de funcionamento: </string>
-    <string name="ligar">Ligar</string>
-    <string name="navegacao_mapa">Iniciar Navegação</string>
+    // detanhe do food truck
+    <string name="aguarde">Aguarde...</string>
+    <string name="phone">Telefone</string>
 
-    <!-- Permissões -->
-    <string name="habilitar_permissão">Você tem que habilitar essa permissão para poder continuar</string>
-    <string name="permissão_concedida">Permissão concedida</string>
-    <string name="permissão_negada">Permissão negada</string>
+    <string name="mapa_dos_food_trucks">Mapa dos Food Trucks</string>
+
+    <string name="title_activity_detalhe_estabelecimento">Detalhes do estabelecimento</string>
 </resources>

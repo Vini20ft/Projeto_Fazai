@@ -6,28 +6,33 @@
     <string name="error_login">There was an error logging in</string>
     <string name="error_logout">There was an error logging out</string>
     <string name="title_activity_estabelecimentos_maps">Map</string>
-    <string name="title_activity_main">Lista de FoodTrucks</string>
-    <string name="txtLogin">Continuar com:</string>
-    <string name="msgCampoPesquisaFoodVazio">Informe o nome do FoodTruck</string>
-<<<<<<< HEAD
+    <string name="title_activity_main">List of FoodTrucks</string>
+    <string name="txtLogin">Keep with:</string>
+    <string name="msgCampoPesquisaFoodVazio">Enter the name of Food Truck</string>
 
-=======
->>>>>>> refs/remotes/Vini20ft/master
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Configurações</string>
+    <string name="action_settings">Settings</string>
 
     <!--menu lateral-->
-    <string name="perfil">Perfil</string>
-    <string name="mapa_dos_food_trucks">Mapa de FoodTrucks</string>
+    <string name="perfil">Profile</string>
     <string name="food_truck">Food Truck</string>
-    <string name="pedidos">Pedidos</string>
-    <string name="compartilhar">Compartilhar</string>
+    <string name="pedidos">Requests</string>
+    <string name="compartilhar">To share</string>
     <string name="cardapio">Menu</string>
-    <string name="status_pedido">Status do Pedido</string>
-    <string name="conta">Conta</string>
-    <string name="sair">Sair</string>
+    <string name="menu_principal">Main Menu</string>
+    <string name="status_pedido">Order Status</string>
+    <string name="conta">Account</string>
+    <string name="sair">Logoff</string>
+    <string name="sobre">about</string>
 
-    <string name="title_activity_detalhe_estabelecimento">Detalhe do Estabelecimento</string>
+    // detanhe do food truck
+    <string name="aguarde">Wait...</string>
+    <string name="phone">Phone</string>
+    
+    <string name="mapa_dos_food_trucks">Map of Food Trucks</string>
+
+    <string name="title_activity_detalhe_estabelecimento">Details of the establishment</string>
+
 </resources>

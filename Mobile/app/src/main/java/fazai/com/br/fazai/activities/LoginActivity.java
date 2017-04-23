@@ -22,12 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-<<<<<<< HEAD
-=======
-import java.util.Arrays;
-
->>>>>>> refs/remotes/Vini20ft/master
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
@@ -36,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @BindView(R.id.login_button)
     LoginButton mLoginButton;
-<<<<<<< HEAD
 
     @BindView(R.id.signInButton)
     SignInButton signInButton;
@@ -44,15 +37,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @BindView(R.id.fb)
     Button mFb;
 
-=======
-
-    @BindView(R.id.signInButton)
-    SignInButton signInButton;
-
-    @BindView(R.id.fb)
-    Button mFb;
-
->>>>>>> refs/remotes/Vini20ft/master
     private CallbackManager mCallbackManager;
     private GoogleApiClient mGoogleApiClient;
     public static final int SIGN_IN_CODE = 777;
@@ -90,8 +74,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onCancel() {
                 Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
             }
-        }
 
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+    }
 
     private void VerifyCurrentUser() {
         if (AccessToken.getCurrentAccessToken() != null || (mGoogleApiClient != null && mGoogleApiClient.isConnected())) {
@@ -141,9 +130,5 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onClickGooglePlus(View v){
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(intent, SIGN_IN_CODE);
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/Vini20ft/master
     }
 }
