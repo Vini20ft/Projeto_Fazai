@@ -3,6 +3,7 @@ package br.com.fazai.model;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,9 @@ public class Consumidor implements Serializable{
 	
 	//Gets e Sets de Consumidor.
 	
-	@OneToMany
+	@OneToMany(mappedBy="consumidor_fk",
+			   targetEntity=Pedido.class,
+			   cascade=CascadeType.ALL)
     private Collection<Pedido> historico_pedido_consumidor;
 	
 
