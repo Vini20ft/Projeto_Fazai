@@ -33,6 +33,8 @@ public class Estabelecimento {
 	private String razaoSocial_estabelecimento;
 	@Column(name = "st_especialidade", length = 120, nullable = false)
 	private String especialidade_estabelecimento;
+	@Column(name = "st_urlImage", length = 120, nullable = false)
+	private String url_image_Estabelecimento;
 	@Column(name = "st_latitude", length = 120, nullable = false)
 	private String latitude_estabelecimento;
 	@Column(name = "st_longitude", length = 120, nullable = false)
@@ -109,5 +111,14 @@ public class Estabelecimento {
 			String especialidade_estabelecimento) {
 		this.especialidade_estabelecimento = especialidade_estabelecimento;
 	}
+
+	public String getUrl_image_Estabelecimento() {
+		return url_image_Estabelecimento;
+	}
+
+	public void setUrl_image_Estabelecimento(String url_image_Estabelecimento) {
+		this.url_image_Estabelecimento = url_image_Estabelecimento;
+	}
+	
 
 }
