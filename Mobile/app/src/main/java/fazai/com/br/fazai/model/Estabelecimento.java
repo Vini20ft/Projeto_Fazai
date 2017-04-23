@@ -2,9 +2,6 @@ package fazai.com.br.fazai.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Estabelecimento {
     @SerializedName("id")
@@ -24,23 +21,20 @@ public class Estabelecimento {
     @SerializedName("telefone")
     public String telefone;
     @SerializedName("rating")
-    public int rating;
-    @SerializedName("cardapio")
-    public List<Cardapio> cardapioList;
+    public float rating;
 
     public Estabelecimento() {
         endereco = new Endereco();
-        cardapioList = new ArrayList<>();
     }
 
-    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, List<Cardapio> cardapios, String telefone) {
+    public Estabelecimento(int id, String cnpj, String nome, String razaoSocial, String especialidade, String foto, String telefone, float rating) {
         this.id = id;
         this.cnpj = cnpj;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.especialidade = especialidade;
         this.foto = foto;
-        this.cardapioList = cardapios;
         this.telefone = telefone;
+        this.rating = rating;
     }
 }
