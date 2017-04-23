@@ -161,16 +161,21 @@ public class ItensCardapioActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.nav_mapa) {
-            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
+        int id = item.getItemId();
+        Intent intent;
+
+        if (id == R.id.nav_menu_principal) {
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_mapa) {
+            intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sair) {
             signOut();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id. drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

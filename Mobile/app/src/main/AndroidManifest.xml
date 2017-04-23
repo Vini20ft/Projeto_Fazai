@@ -55,11 +55,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.CardapioActivity" />
+        <activity
+            android:name=".activities.CardapioActivity"
+            android:label="@string/title_acitivity_cardapios"/>
         <activity
             android:name=".activities.ConfiguracoesActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activities.ItensCardapioActivity" />
+        <activity
+            android:name=".activities.ItensCardapioActivity"
+            android:label="@string/title_acitivity_item_cardapio" />
     </application>
 
 </manifest>
