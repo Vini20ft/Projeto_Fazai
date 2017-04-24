@@ -60,7 +60,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         senha = sharedPreferences.getString("senha", "");
 
         if(senha == "0" || senha == "") {
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> origin/TiagoAschoff
             // SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("senha", "1");
