@@ -25,14 +25,17 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity
-            android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <meta-data
@@ -45,6 +48,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.MainActivity"
+            android:launchMode="singleTop"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.DetalheEstabelecimentoActivity">
@@ -52,11 +56,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.CardapioActivity" />
+        <activity
+            android:name=".activities.CardapioActivity"
+            android:label="@string/title_acitivity_cardapios"/>
         <activity
             android:name=".activities.ConfiguracoesActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activities.ItensCardapioActivity"></activity>
+        <activity
+            android:name=".activities.ItensCardapioActivity"
+            android:label="@string/title_acitivity_item_cardapio" />
     </application>
 
 </manifest>

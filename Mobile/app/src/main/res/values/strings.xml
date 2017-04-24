@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Faz Aí</string>
     <string name="facebook_app_id">755309927978194</string>
-    <string name="facebook_app_id1"></string>
     <string name="cancel_login">Login canceled</string>
     <string name="error_login">There was an error logging in</string>
     <string name="error_logout">There was an error logging out</string>
@@ -17,6 +16,7 @@
     <!--menu lateral-->
     <string name="perfil">Perfil</string>
     <string name="mapa_dos_food_trucks">Mapa de FoodTrucks</string>
+    <string name="menu_principal">Menu Principal</string>
     <string name="food_truck">Food Truck</string>
     <string name="pedidos">Pedidos</string>
     <string name="compartilhar">Compartilhar</string>
@@ -24,6 +24,7 @@
     <string name="status_pedido">Status do Pedido</string>
     <string name="conta">Conta</string>
     <string name="sair">Sair</string>
-
     <string name="title_activity_detalhe_estabelecimento">Detalhe do Estabelecimento</string>
+    <string name="title_acitivity_cardapios">Lista de Cardápios</string>
+    <string name="title_acitivity_item_cardapio">Pratos do dia</string>
 </resources>

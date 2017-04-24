@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.model.Estabelecimento;
 import fazai.com.br.fazai.model.Localizacao;
 import fazai.com.br.fazai.model.searchResult.EstabelecimentoSearchResult;
@@ -21,7 +22,7 @@ public class EstabelecimentoParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("https://dl.dropboxusercontent.com/s/ymj0kr2u7ayauzk/estabelecimentoCardapio");
+        String urlApi = String.format(Constantes.SERVICE_DETALHE_ESTABELECIMENTO);
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor
@@ -73,36 +74,7 @@ public class EstabelecimentoParser {
         OkHttpClient client = new OkHttpClient();
 
         //fazendo requisicao ao servidor
-        String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentosList");
-        Request request = new Request.Builder().url(urlApi).build();
-
-        //resposta do servidor
-        Response response = client.newCall(request).execute();
-
-        //verificando se não houve erro de conexão
-        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
-            String json = response.body().string();
-
-            //converter o result json em obj java
-            Gson gson = new Gson();
-            EstabelecimentoSearchResult result = gson.fromJson(json, EstabelecimentoSearchResult.class);
-
-            if (result != null)
-                return result.estabelecimentos;
-        }
-
-        return null;
-    }
-
-    protected static List<Estabelecimento> searchAllByLocation(Localizacao localizacao) throws IOException {
-        //estabelece a conexão com o servidor
-        OkHttpClient client = new OkHttpClient();
-
-        //fazendo requisicao ao servidor
-        double latitude = localizacao.latitude;
-        double longitude = localizacao.longitude;
-
-        String urlApi = String.format("https://dl.dropboxusercontent.com/s/frjpvau0617exia/estabelecimentosList.json");
+        String urlApi = String.format(Constantes.SERVICE_TODOS_ESTABELECIMENTOS);
         Request request = new Request.Builder().url(urlApi).build();
 
         //resposta do servidor

@@ -9,16 +9,16 @@
 
     <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
+    <string name="msgInfoDetalheEstabelecimentoMap">Deseja mais informações deste FoodTruck ?</string>
 
     <string name="action_settings">Configurações</string>
-
 
     <!--menu lateral-->
     <string name="perfil">Perfil</string>
     <string name="pedidos">Pedidos</string>
     <string name="compartilhar">Compartilhar</string>
     <string name="cardapio">Cardápio</string>
-    <string name="menu_principal">menu principal</string>
+    <string name="menu_principal">Menu principal</string>
     <string name="status_pedido">Status do pedido</string>
     <string name="conta">Conta</string>
     <string name="sair">Sair</string>

@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.ItemCardapioTask;
 import fazai.com.br.fazai.interfaces.OnItemCardapioClick;
+import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.model.ItemCardapio;
 import fazai.com.br.fazai.ui.adapter.ItemCardapioAdapter;
 
@@ -160,16 +161,21 @@ public class ItensCardapioActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.nav_mapa) {
-            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
+        int id = item.getItemId();
+        Intent intent;
+
+        if (id == R.id.nav_menu_principal) {
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_mapa) {
+            intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sair) {
             signOut();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id. drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -177,8 +183,14 @@ public class ItensCardapioActivity extends AppCompatActivity
     @Override
     public Loader<List<ItemCardapio>> onCreateLoader(int id, Bundle args) {
         showProgress();
-        //int idEstabelecimento = args != null ? args.getInt("idEstabelecimento") : null;
-        return new ItemCardapioTask(getApplicationContext(), /*idEstabelecimento*/ 1);
+
+        int idCardapio = 0;
+
+        if (args != null) {
+            idCardapio = args.getInt(Constantes.CARDAPIO_ID);
+        }
+
+        return new ItemCardapioTask(getApplicationContext(), /*idCardapio*/ 1);
     }
 
     @Override
