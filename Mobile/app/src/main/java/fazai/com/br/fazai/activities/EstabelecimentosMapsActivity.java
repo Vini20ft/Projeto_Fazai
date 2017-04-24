@@ -25,9 +25,7 @@ import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.res.ResourcesCompat;
@@ -36,7 +34,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +44,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -62,7 +58,6 @@ import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.EstabelecimentosTask;
 import fazai.com.br.fazai.http.RotaTask;
 import fazai.com.br.fazai.model.Estabelecimento;
-import fazai.com.br.fazai.util.MapStateManager;
 
 public class EstabelecimentosMapsActivity extends FragmentActivity implements OnMapReadyCallback,
         LoaderManager.LoaderCallbacks<List<Estabelecimento>>, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -70,8 +65,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     private static final int REQUEST_ERRO_PLAY_SERVICES = 1;
     private static final int LOADER_ROTA = 2;
     private static final String EXTRA_ROTA = "rota";
-    private static final String EXTRA_MAP = "map";
-
     private ArrayList<LatLng> mRota;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -80,21 +73,21 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     private LocationRequest mLocationRequest;
     private LatLng mOrigem;
     private LatLng mDestino;
-
+    private LatLng mMarker;
     private Marker marker;
     private List<Estabelecimento> dadosEstabelecimentos;
     private Polyline polylineFinal;
-    SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estabelecimentos_maps);
+        //Inicia GoogleAPiClient e SupportFragment
+        setUpMap();
 
         if (savedInstanceState == null) {
             needsInit = true;
         }
-        setUpMap();
 
         if (!verificaConexao()) {
             Toast.makeText(getApplicationContext(), "Falha na conexão com a internet.",
@@ -113,30 +106,10 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
 
     @Override
     protected void onStop() {
-        super.onStop();
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
-        MapStateManager mgr = new MapStateManager(this);
-        mgr.saveMapState(mMap);
-       // Toast.makeText(this,"Estado do mapa foi salvo ?  PAUSE",Toast.LENGTH_LONG);
-
-    }
-
-
-
-    @Override
-    protected void onPause() {
-     super.onPause();
-     MapStateManager mgr = new MapStateManager(this);
-     mgr.saveMapState(mMap);
-       // Toast.makeText(this,"Estado do mapa foi salvo ?  PAUSE",Toast.LENGTH_LONG);
-    }
-
-    @Override
-    protected  void onResume(){
-        super.onResume();
-        setUpMap();
+        super.onStop();
     }
 
     //Rotas
@@ -144,7 +117,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(EXTRA_ROTA,mRota);
-        getSupportFragmentManager().putFragment(outState,"com.google.android.gms.maps.SupportMapFragment",mapFragment);
     }
 
     @Override
@@ -171,6 +143,17 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     public void onLoadFinished(Loader<List<Estabelecimento>> loader, List<Estabelecimento> data) {
         if (data != null) {
             //modificando latitude e longitude em tempo de Execução apenas para de desenvolvimento
+            for (Estabelecimento est : data ){
+                if(est.nome.equals("food truck 1")){
+                    est.endereco.localizacao.latitude =  -8.0862665f;
+                            est.endereco.localizacao.longitude =  -34.9617981f;
+                }
+                if(est.nome.equals("food truck 3")){
+                    est.endereco.localizacao.latitude =  -8.0902042f;
+                            est.endereco.localizacao.longitude = -34.9605708f;
+
+                }
+            }
             if(data != null){
                 dadosEstabelecimentos = data;
             }
@@ -186,19 +169,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        //modo salvo
-        MapStateManager mgr = new MapStateManager(this);
-        CameraPosition position = mgr.getSavedCameraPosition();
-        if(position != null){
-            CameraUpdate update = CameraUpdateFactory.newCameraPosition(position);
-           // Toast.makeText(this,"entrando no resume",Toast.LENGTH_LONG).show();
-            mMap.moveCamera(update);
-            mMap.setMapType(mgr.getSavedMapType());
-        }
-
-
-        //modo normal
         if (googleMap != null) {
             new EstabelecimentosTask(getApplicationContext());
         }
@@ -221,7 +191,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
                 marker.showInfoWindow();
                 String name = marker.getTitle().toString();
                 mDestino = marker.getPosition();
-                desenharRota();
                 carregarRota();
                 if(mRota == null) {
                     mLoaderManager.restartLoader(LOADER_ROTA, null, mRotaCallBack);
@@ -239,47 +208,6 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
                 String titulo = marker.getTitle();
 
                 Estabelecimento estabelecimento = buscarEstabelecimento(latitude,longitude,titulo);
-
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(EstabelecimentosMapsActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.dialog_confirmacao_detalhe_maps,null);
-                //Componentes do Dialog
-                final TextView mTxtNomeEstabelecimento = (TextView) mView.findViewById(R.id.txtNomeEstabelecimentoDialogDetalheMap);
-                final Button mBtnDetalheEstabelecimentoMap = (Button) mView.findViewById(R.id.btnDialogDetalheEstabelecimentoMap);
-                final Button mBtnCloseDialog = (Button) mView.findViewById(R.id.btnCloseDialogDetalheMap);
-
-                //Carregar nome do Estabelecimento no Dialog
-                mTxtNomeEstabelecimento.setText(estabelecimento.nome);
-
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.closeOptionsMenu();
-                dialog.show();
-
-
-
-
-                //Evento de Click do Dialog
-                mBtnDetalheEstabelecimentoMap.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                      // Toast.makeText(EstabelecimentosMapsActivity.this,"Abrir Detalhe",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(EstabelecimentosMapsActivity.this,DetalheEstabelecimentoActivity.class);
-                        startActivity(intent);
-                        dialog.cancel();
-                    }
-                });
-
-
-
-                mBtnCloseDialog.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                      dialog.cancel();
-                    }
-                });
-
-
-
 
                 if(estabelecimento != null){
                     Intent intent = new Intent();
@@ -314,15 +242,13 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     }
 
     private void setUpMap() {
-        if(mMap == null) {
-            mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
-            mapFragment.getMapAsync(this);
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
+        SupportMapFragment mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+        mapFragment.getMapAsync(this);
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
 
     }
 
@@ -348,12 +274,12 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
                 double latitude = estabelecimento.endereco.localizacao.latitude;
                 double longitude = estabelecimento.endereco.localizacao.longitude;
 
-                customAddMarker(new LatLng(latitude, longitude), estabelecimento.nome, estabelecimento.endereco.rua,false);
+                customAddMarker(new LatLng(latitude, longitude), estabelecimento.nome, estabelecimento.endereco.rua);
             }
         }
     }
 
-    public void customAddMarker(LatLng latLng, String title, String snippet,boolean isSearch) {
+    public void customAddMarker(LatLng latLng, String title, String snippet) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng).title(title)
                 .snippet("Aqui!!")
@@ -366,13 +292,7 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
         shape.draw(canvas);
 
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerBitmap));
-
-
         marker = mMap.addMarker(markerOptions);
-        if(isSearch){
-            marker.showInfoWindow();
-
-        }
         /*mMarker = latLng;*/
 
     }
@@ -385,13 +305,7 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
               Estabelecimento estabelecimento = this.getEstabelecimentoFoodTruckPorNome(foodTruckInformado);
               if(estabelecimento != null){
                 LatLng posicao = new LatLng(estabelecimento.endereco.localizacao.latitude,estabelecimento.endereco.localizacao.longitude);
-                  //Apagando rota anterior
-                  if(polylineFinal != null){
-                      polylineFinal.remove();
-                  }
-                  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(posicao,17.0f));
-                  customAddMarker(posicao, estabelecimento.nome, estabelecimento.endereco.rua,true);
-
+                  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mOrigem,17.0f));
               }
           }else{
               Toast.makeText(this, R.string.msgCampoPesquisaFoodVazio, Toast.LENGTH_SHORT).show();
