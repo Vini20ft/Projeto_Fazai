@@ -9,6 +9,7 @@
 
     <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
+    <string name="msgInfoDetalheEstabelecimentoMap">Deseja mais informações deste FoodTruck ?</string>
 
     <string name="action_settings">Configurações</string>
 
