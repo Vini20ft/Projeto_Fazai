@@ -1,10 +1,14 @@
 package fazai.com.br.fazai.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import fazai.com.br.fazai.Manifest;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.http.EstabelecimentosTask;
 import fazai.com.br.fazai.interfaces.OnEstabelecimentoClick;
@@ -90,6 +95,23 @@ public class MainActivity extends AppCompatActivity
             .build();
 
 
+        //Verificar permissao localização
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkLocationPermission();
+        }
+
+        //Verificar permissao ligação
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkCallPhonePermission();
+        }
+
+        //Verificar permissao Mapa
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkMapsReceivePermission();
+        }
+
+
+
         mLoaderManager = getSupportLoaderManager();
         mLoaderManager.initLoader(0, null, this);
 
@@ -98,8 +120,165 @@ public class MainActivity extends AppCompatActivity
                 .build();
 
         VerifyCurrentUser();
+
     }
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 97;
+    public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 98;
+    public static final int MY_PERMISSIONS_REQUEST_MAPS_RECEIVE = 99;
+
+    // #################################### VERIFICANDO PERMISSAO LOCATION ###################################################
+
+    public boolean checkLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // #################################### VERIFICANDO PERMISSAO CALL_PHONE ###################################################
+
+    public boolean checkCallPhonePermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CALL_PHONE)) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CALL_PHONE},
+                        MY_PERMISSIONS_REQUEST_CALL_PHONE);
+
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CALL_PHONE},
+                        MY_PERMISSIONS_REQUEST_CALL_PHONE);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // #################################### VERIFICANDO PERMISSAO MAPS_RECEIVE ###################################################
+
+    public boolean checkMapsReceivePermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.MAPS_RECEIVE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.MAPS_RECEIVE)) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.MAPS_RECEIVE},
+                        MY_PERMISSIONS_REQUEST_MAPS_RECEIVE);
+
+
+            } else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.MAPS_RECEIVE},
+                        MY_PERMISSIONS_REQUEST_MAPS_RECEIVE);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+     // ##################### METODO QUE trata o resultado da verificação do oncreate ###################################################
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted. Do the
+                    // contacts-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                    }
+
+                } else {
+
+                    // Permission denied, Disable the functionality that depends on this permission.
+                    Toast.makeText(this, "Permissão não concedida!", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.CALL_PHONE)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                    }
+
+                } else {
+
+                    // Permission denied, Disable the functionality that depends on this permission.
+                    Toast.makeText(this, "Permissão não concedida!", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_MAPS_RECEIVE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.MAPS_RECEIVE)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                    }
+
+                } else {
+
+                    Toast.makeText(this, "Permissão não concedida!", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other permissions this app might request.
+            // You can add here other case statements according to your requirement.
+        }
+    }
 
     @Override
     public void onBackPressed() {
