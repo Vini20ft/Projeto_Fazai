@@ -127,44 +127,5 @@ public class EstabelecimentoController {
 		return my_obj.toString();
 
 	}
-	
-	@RequestMapping(value = "/EstabelecimentoList/codigo={codigo}", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-	public @ResponseBody String estabelecimentoListDetail(@PathVariable int codigo) {
-		// instancia um novo JSONObject
-		JSONObject my_obj = new JSONObject();
-
-		Estabelecimento estabelecimentoListDetalhe = this.estabelecimentoService.consultarEstabelecimentoPorCodigo(codigo);
-				
-		List<EstabelecimentoMobile> estabelecimentoMobiles = new ArrayList<EstabelecimentoMobile>();
-
-		if (estabelecimentoListDetalhe.getId_estabelecimento() == codigo) {
-			
-				EstabelecimentoMobile estabelecimentoMobile = new EstabelecimentoMobile();
-				Endereco endereco = new Endereco();
-				Localizacao localizacao = new Localizacao();
-
-				estabelecimentoMobile.setNome(estabelecimentoListDetalhe
-						.getNome_estabelecimento());
-				estabelecimentoMobile.setCnpj(estabelecimentoListDetalhe
-						.getCnpj_estabelecimento());
-				estabelecimentoMobile.setFoto(estabelecimentoListDetalhe
-						.getUrl_image_Estabelecimento());
-				localizacao.setLatitude(estabelecimentoListDetalhe
-						.getLatitude_estabelecimento());
-				localizacao.setLogitude(estabelecimentoListDetalhe
-						.getLongitude_estabelecimento());
-				endereco.setLocalizacao(localizacao);
-				estabelecimentoMobile.setEndereco(endereco);
-
-				estabelecimentoMobiles.add(estabelecimentoMobile);
-			
-		}
-
-		my_obj.put("estabelecimentoList", estabelecimentoMobiles);
-
-		return my_obj.toString();
-
-	}
-
 
 }

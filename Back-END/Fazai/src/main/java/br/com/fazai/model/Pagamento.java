@@ -1,6 +1,17 @@
 package br.com.fazai.model;
 
-/*
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name="TB_PAGAMENTO")
@@ -71,4 +82,4 @@ public class Pagamento implements Serializable{
 		}		
 
 }
-*/
+

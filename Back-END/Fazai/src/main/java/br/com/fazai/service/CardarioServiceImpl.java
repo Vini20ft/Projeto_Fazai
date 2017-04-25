@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fazai.dao.CardapioDAO;
+import br.com.fazai.dao.EstabelecimentoDAO;
 import br.com.fazai.model.Cardapio;
+import br.com.fazai.model.Estabelecimento;
 
 @Service ("cardapioService")
 @Transactional(readOnly = true)

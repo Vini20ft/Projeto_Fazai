@@ -10,28 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.fazai.model.Pedido;
-import br.com.fazai.service.PedidoService;
 
+import br.com.fazai.model.Consumidor;
+import br.com.fazai.service.ConsumidorService;
 
 
 @Controller
-@RequestMapping("/pedido")
-public class PedidoController {
+@RequestMapping("/consumidor")
+public class ConsumidorController {
 	
-	
-
-	/**
-	 * Injetando o objeto cardapioDAO 
-	 */
 	@Autowired
-	private PedidoService pedidoServ;
-
+	private ConsumidorService consumidorServ;
 	
 
-	public void setPedidoService(
-			PedidoService pedidoServ) {
-		this.pedidoServ = pedidoServ;
+	public void setCardapioService(
+			ConsumidorService consumidorServ) {
+		this.consumidorServ = consumidorServ;
 	}
 	
 	/**
@@ -40,11 +34,11 @@ public class PedidoController {
 	 * @RequestMapping => method => Defini o o m�todo http que o m�todo vai responder.
 	 */
 	@RequestMapping(value="/salvar", method= RequestMethod.POST)
-	public @ResponseBody void Salvar(@RequestBody Pedido pedido){
+	public @ResponseBody void Salvar(@RequestBody Consumidor consumidor){
  
 		try {
  
-			this.pedidoServ.salvarPedido(pedido);
+			this.consumidorServ.salvarConsumidor(consumidor);
 
  
 		} catch (Exception e) {
@@ -54,11 +48,11 @@ public class PedidoController {
 	}
  
 	@RequestMapping(value="/alterar", method= RequestMethod.PUT)
-	public @ResponseBody void Alterar(@RequestBody Pedido pedido){
+	public @ResponseBody void Alterar(@RequestBody Consumidor consumidor){
  
 		try {
  
-			this.pedidoServ.alterarPedido(pedido);
+			this.consumidorServ.alterarConsumidor(consumidor);
 
  
 		} catch (Exception e) {
@@ -69,9 +63,9 @@ public class PedidoController {
  
  
 	@RequestMapping(value="/consultarTodos", method= RequestMethod.GET)
-	public @ResponseBody List<Pedido> ConsultarTodos(){
+	public @ResponseBody List<Consumidor> ConsultarTodos(){
  
-		return this.pedidoServ.TodosPedidos();
+		return this.consumidorServ.todosConsumidores();
  
 	}
  
@@ -79,9 +73,9 @@ public class PedidoController {
 	@RequestMapping(value="/excluirRegistro/{codigo}", method= RequestMethod.DELETE)
 	public @ResponseBody void ExcluirRegistro(@PathVariable int codigo){
  
-		this.pedidoServ.Excluir(codigo);
+		this.consumidorServ.Excluir(codigo);
  
 	}
- 
+	
 
 }
