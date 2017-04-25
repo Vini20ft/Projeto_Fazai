@@ -43,4 +43,31 @@ public class ItensCardapioParser {
 
     }
 
+    public static ItemCardapio searchByIdCardapio(/*int idCardapio*/) throws IOException {
+        //estabelece a conexão com o servidor
+        OkHttpClient client = new OkHttpClient();
+
+        //fazendo requisicao ao servidor
+        String urlApi = String.format(Constantes.SERVICE_DETALHE_ITEM_CARDAPIO);
+        Request request = new Request.Builder().url(urlApi).build();
+
+        //resposta do servidor
+        Response response = client.newCall(request).execute();
+
+        //verificando se não houve erro de conexão
+        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+            String json = response.body().string();
+
+            //converter o result json em obj java
+            Gson gson = new Gson();
+            ItemCardapioSearchResult result = gson.fromJson(json, ItemCardapioSearchResult.class);
+
+            if (result != null)
+                return result.itemCardapio;
+        }
+
+        return null;
+
+    }
+
 }

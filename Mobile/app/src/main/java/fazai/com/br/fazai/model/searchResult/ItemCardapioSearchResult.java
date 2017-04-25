@@ -10,4 +10,7 @@ import fazai.com.br.fazai.model.ItemCardapio;
 public class ItemCardapioSearchResult {
     @SerializedName("itensCardapio")
     public List<ItemCardapio> itensCardapio;
+
+    @SerializedName("itemCardapio")
+    public ItemCardapio itemCardapio;
 }
