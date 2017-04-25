@@ -43,6 +43,7 @@ public class ItemCardapioAdapter extends ArrayAdapter<ItemCardapio> {
             Glide.with(getContext()).load(itemCardapio.imagem).into(viewHolder.imgFoto);
             viewHolder.txtNome.setText(itemCardapio.nome);
             viewHolder.txtDescricao.setText(itemCardapio.descricao);
+            viewHolder.txtValor.setText("R$ "+ itemCardapio.valor);
         }
 
         return convertView;
@@ -55,6 +56,8 @@ public class ItemCardapioAdapter extends ArrayAdapter<ItemCardapio> {
         TextView txtNome;
         @BindView(R.id.item_descricao_itens_cardapio)
         TextView txtDescricao;
+        @BindView(R.id.item_valor_itens_cardapio)
+        TextView txtValor;
 
         ViewHolder(View parent) {
             ButterKnife.bind(this, parent);

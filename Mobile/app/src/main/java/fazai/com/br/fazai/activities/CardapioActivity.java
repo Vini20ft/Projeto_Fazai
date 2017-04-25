@@ -104,7 +104,7 @@ public class CardapioActivity extends AppCompatActivity
     @Override
     public void onCardapioClick(Cardapio cardapio) {
         Intent it = new Intent(this, ItensCardapioActivity.class);
-        it.putExtra("id_cardapio", 1/*cardapio.id*/);
+        it.putExtra(Constantes.CARDAPIO_ID, 1/*cardapio.id*/);
         startActivity(it);
     }
 
