@@ -10,23 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.fazai.model.ItemCardapio;
-import br.com.fazai.service.ItemCardapioService;
+import br.com.fazai.model.Pedido;
+import br.com.fazai.service.PedidoService;
 
-
+ 
 
 @Controller
-@RequestMapping("/itemcardapio")
-public class ItemCardapioController {
+@RequestMapping("/pedido")
+public class PedidoController {
+ 
+
+	/**
+	 * Injetando o objeto pedidoDAO
+	 */
+	@Autowired
+	private PedidoService pedidoServ;
 
 	
-	@Autowired
-	private ItemCardapioService itemcardapioServ;
-	
-	
-	public void setItemCardapioService(
-			ItemCardapioService itemcardapioServ) {
-		this.itemcardapioServ = itemcardapioServ;
+
+	public void setPedidoService(
+			PedidoService pedidoServ) {
+		this.pedidoServ = pedidoServ;
 	}
 	
 	/**
@@ -35,11 +39,11 @@ public class ItemCardapioController {
 	 * @RequestMapping => method => Defini o o m�todo http que o m�todo vai responder.
 	 */
 	@RequestMapping(value="/salvar", method= RequestMethod.POST)
-	public @ResponseBody void Salvar(@RequestBody ItemCardapio itemcardapio){
+	public @ResponseBody void Salvar(@RequestBody Pedido cardapio){
  
 		try {
  
-			this.itemcardapioServ.salvarItemCardapio(itemcardapio);
+			this.pedidoServ.salvarPedido(cardapio);
 
  
 		} catch (Exception e) {
@@ -49,11 +53,11 @@ public class ItemCardapioController {
 	}
  
 	@RequestMapping(value="/alterar", method= RequestMethod.PUT)
-	public @ResponseBody void Alterar(@RequestBody ItemCardapio itemcardapio){
+	public @ResponseBody void Alterar(@RequestBody Pedido cardapio){
  
 		try {
  
-			this.itemcardapioServ.alterarItemCardapio(itemcardapio);
+			this.pedidoServ.alterarPedido(cardapio);
 
  
 		} catch (Exception e) {
@@ -64,9 +68,9 @@ public class ItemCardapioController {
  
  
 	@RequestMapping(value="/consultarTodos", method= RequestMethod.GET)
-	public @ResponseBody List<ItemCardapio> ConsultarTodos(){
+	public @ResponseBody List<Pedido> ConsultarTodos(){
  
-		return this.itemcardapioServ.TodosItens();
+		return this.pedidoServ.todosPedidos();
  
 	}
  
@@ -74,9 +78,8 @@ public class ItemCardapioController {
 	@RequestMapping(value="/excluirRegistro/{codigo}", method= RequestMethod.DELETE)
 	public @ResponseBody void ExcluirRegistro(@PathVariable int codigo){
  
-		this.itemcardapioServ.Excluir(codigo);
+		this.pedidoServ.Excluir(codigo);
  
 	}
  
-	
 }
