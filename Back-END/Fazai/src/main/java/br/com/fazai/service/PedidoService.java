@@ -5,12 +5,15 @@ import java.util.List;
 import br.com.fazai.model.Pedido;
 
 public interface PedidoService {
-	
 
-	public void salvarPedido(Pedido pedido);
-	public void alterarPedido(Pedido pedido);
-	public Pedido consultarPedidoPorCodigo(int codigo);
-	public void Excluir(int codigo);
-	public List<Pedido> todosPedidos();
+	List<Pedido> TodosPedidos();
+
+	void Excluir(int codigo);
+
+	Pedido consultarPedidoPorCodigo(int codigo);
+
+	void alterarPedido(Pedido pedido);
+
+	void salvarPedido(Pedido pedido);
 
 }

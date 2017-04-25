@@ -227,11 +227,8 @@ public class ItensCardapioActivity extends AppCompatActivity
 
     @Override
     public void onItemCardapioClick(ItemCardapio itemCardapio) {
-        /*Intent it = new Intent(this, ItensCardapioCompraActivity.class);
+        Intent it = new Intent(this, DetalheItemCardapioActivity.class);
         it.putExtra("id_item_cardapio", itemCardapio.id);
-        startActivity(it);*/
-
-        Toast.makeText(getApplicationContext(), "Abrir tela de compra do item",
-                Toast.LENGTH_LONG).show();
+        startActivity(it);
     }
 }

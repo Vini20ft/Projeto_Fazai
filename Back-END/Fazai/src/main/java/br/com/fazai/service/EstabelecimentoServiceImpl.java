@@ -37,7 +37,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 
 	@Override
 	public Estabelecimento consultarEstabelecimentoPorCodigo(int codigo) {
-		return this.estabelecimentoDAO.consultarEstabelecimentoPorCodigo(codigo);
+		return null;
 	}
 
 	@Override

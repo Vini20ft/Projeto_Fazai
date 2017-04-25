@@ -27,4 +27,7 @@
     <string name="title_activity_detalhe_estabelecimento">Detalhe do Estabelecimento</string>
     <string name="title_acitivity_cardapios">Lista de Cardápios</string>
     <string name="title_acitivity_item_cardapio">Pratos do dia</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

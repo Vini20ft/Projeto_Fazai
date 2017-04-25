@@ -32,11 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -48,8 +46,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.MainActivity"
-            android:launchMode="singleTop"
             android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.DetalheEstabelecimentoActivity">
             <meta-data
@@ -58,13 +56,14 @@
         </activity>
         <activity
             android:name=".activities.CardapioActivity"
-            android:label="@string/title_acitivity_cardapios"/>
+            android:label="@string/title_acitivity_cardapios" />
         <activity
             android:name=".activities.ConfiguracoesActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.ItensCardapioActivity"
             android:label="@string/title_acitivity_item_cardapio" />
+        <activity android:name=".activities.DetalheItemCardapioActivity"></activity>
     </application>
 
 </manifest>

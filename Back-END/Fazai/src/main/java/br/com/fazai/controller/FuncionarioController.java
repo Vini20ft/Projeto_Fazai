@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.fazai.dao.FuncionarioDAOImpl;
 import br.com.fazai.model.Funcionario;
+import br.com.fazai.service.EstabelecimentoService;
 import br.com.fazai.service.FuncionarioService;
 
  
