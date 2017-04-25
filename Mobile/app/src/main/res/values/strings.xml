@@ -1,38 +1,32 @@
 <resources>
     <string name="app_name">Faz Aí</string>
     <string name="facebook_app_id">755309927978194</string>
-    <string name="facebook_app_id1"></string>
     <string name="cancel_login">Login canceled</string>
     <string name="error_login">There was an error logging in</string>
     <string name="error_logout">There was an error logging out</string>
     <string name="title_activity_estabelecimentos_maps">Map</string>
-    <string name="title_activity_main">Principal</string>
-    <string name="title_activity_login">Login</string>
-    <string name="txtLogin">Keep with:</string>
-    <string name="msgCampoPesquisaFoodVazio">Enter the name of FoodTruck!</string>
-
+    <string name="title_activity_main">Lista de FoodTrucks</string>
+    <string name="txtLogin">Continuar com:</string>
+    <string name="msgCampoPesquisaFoodVazio">Informe o nome do FoodTruck</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
 
     <!--menu lateral-->
-    <string name="perfil">Profile</string>
+    <string name="perfil">Perfil</string>
+    <string name="mapa_dos_food_trucks">Mapa de FoodTrucks</string>
+    <string name="menu_principal">Menu Principal</string>
     <string name="food_truck">Food Truck</string>
-    <string name="pedidos">Requests</string>
-    <string name="compartilhar">To share</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="compartilhar">Compartilhar</string>
     <string name="cardapio">Menu</string>
-    <string name="menu_principal">main menu</string>
-    <string name="status_pedido">Order Status</string>
-    <string name="conta">Account</string>
-    <string name="sair">Logoff</string>
-    <string name="sobre">about</string>
-
-    <!--Fragment detalhe do Food Truck-->
-    <string name="endereco">Address: </string>
-    <string name="horario_funcionamento">Operating hours: </string>
-    <string name="ligar">Turn on</string>
-    <string name="navegacao_mapa">Start Navigation</string>
+    <string name="status_pedido">Status do Pedido</string>
+    <string name="conta">Conta</string>
+    <string name="sair">Sair</string>
+    <string name="title_activity_detalhe_estabelecimento">Detalhe do Estabelecimento</string>
+    <string name="title_acitivity_cardapios">Lista de Cardápios</string>
+    <string name="title_acitivity_item_cardapio">Pratos do dia</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"	
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee.xsd				
+						">
+ 
+ 	<!-- ONDE ESTÃO OS COMPONENTES DO SPRING (EX:@Controller, @Repository, @Service e @Component )-->
+	<context:component-scan base-package="br.com.fazai.service" />
+	<context:component-scan base-package="br.com.fazai.model" />
+	<context:component-scan base-package="br.com.fazai.dao" />
+	<context:component-scan base-package="br.com.fazai.controller" />
+ 
+	<!-- SEM ESSA TAG ELE NÃO RETORNA O JSON -->
+	<mvc:annotation-driven />
+ 
+	<!-- SEM ESSA TAG NÃO CARREGA OS CSS/JS -->
+	<mvc:default-servlet-handler/>
+ 
+ 
+ 	 <!-- GERENCIAMENTO DO JPA PELO SPRING-->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">     
+    	<property name="persistenceUnitName" value="PERSISTENCE_UNIT" />	     
+ 	</bean>
+ 
+ 	 <!-- gerenciamento das transações -->
+	 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+  		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>  
+
+ 
+ 
+	 <tx:annotation-driven transaction-manager="transactionManager"/>
+ 
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>

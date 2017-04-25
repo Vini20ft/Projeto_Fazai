@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="96dp"
+        app:srcCompat="@mipmap/ic_faz_ai"
+        android:id="@+id/item_foto_cardapio" />
+
+    <TextView
+        android:text="Dia da semana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_cardapio_titulo"
+        android:layout_alignLeft="@+id/item_cardapio_titulo"
+        android:layout_alignStart="@+id/item_cardapio_titulo"
+        android:layout_marginTop="12dp"
+        android:id="@+id/item_dia_semana" />
+
+    <TextView
+        android:text="Titulo Cardapio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="13dp"
+        android:id="@+id/item_cardapio_titulo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/item_foto_cardapio"
+        android:layout_toEndOf="@+id/item_foto_cardapio" />
+</RelativeLayout>
