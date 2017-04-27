@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.fazai.dao.CardapioDAO;
 import br.com.fazai.dao.ConsumidorDAO;
-import br.com.fazai.model.Cardapio;
 import br.com.fazai.model.Consumidor;
 
 
