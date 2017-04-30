@@ -3,13 +3,12 @@ package br.com.fazai.service;
 
 import java.util.List;
 
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.fazai.dao.EstabelecimentoDAO;
 import br.com.fazai.dao.FuncionarioDAO;
-import br.com.fazai.model.Estabelecimento;
 import br.com.fazai.model.Funcionario;
 
 
@@ -29,6 +28,18 @@ public class FuncionarioServiceImpl implements FuncionarioService{
 	public void salvarFuncionario(Funcionario funcionario) {
 		this.funcionarioDAO.salvarFuncionario(funcionario);
 		
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public Funcionario loginFuncionario(Funcionario funcionario) {
+		return this.funcionarioDAO.loginFuncionrio(funcionario);		
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void esqueciSenhaFuncionario(Funcionario funcionario) throws EmailException{
+		 this.funcionarioDAO.esqueciSenhaFuncionario(funcionario);
 	}
 
 	@Override
