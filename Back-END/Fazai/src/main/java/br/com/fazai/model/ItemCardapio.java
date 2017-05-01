@@ -112,4 +112,12 @@ public class ItemCardapio implements Serializable {
 		this.tempo_estimado = tempo_estimado;
 	}
 
+	public Cardapio getCardapio() {
+	    return cardapio;
+	}
+
+	public void setCardapio(Cardapio cardapio) {
+	    this.cardapio = cardapio;
+	}
+	
 }

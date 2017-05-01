@@ -7,6 +7,7 @@ public class EstabelecimentoMobile {
 	private String nome;
 	private String cnpj;
 	private String foto;
+        private float rating;
 	private Endereco endereco;
 
 	public String getNome() {
@@ -44,6 +45,14 @@ public class EstabelecimentoMobile {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public float getRating() {
+	    return rating;
+	}
+
+	public void setRating(float rating) {
+	    this.rating = rating;
 	}
 	
 	
