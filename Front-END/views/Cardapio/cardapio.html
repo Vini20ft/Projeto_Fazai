@@ -27,17 +27,17 @@
                                 <table class="footable table table-stripped toggle-arrow-tiny table-bordered table-hover" data-page-size="10">
                                     <thead>
                                         <tr>
-                                            <th>FoodTruck</th>
-                                            <th>Descrição</th>
+                                            <th width="20%">FoodTruck</th>
+                                            <th width="20%">Nome do Cardápio</th>
                                             <th>Observação</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="item in listaCardapio" style="cursor:pointer">
-                                            <td>{{item.foodTruck.nome}}</td>
-                                            <td>{{item.descricao}}</td>
-                                            <td>{{item.observacao}}</td>
+                                            <td>{{item.FoodTruck.Nome}}</td>
+                                            <td>{{item.Descricao}}</td>
+                                            <td>{{item.Observacao}}</td>
                                             <td align="right" width="160px">
                                                 <a href="" class="btn btn-info" ng-click="EditarItem(item)">Editar</a>
                                                 <a href="" class="btn btn-danger" ng-click="ExcluirItem(item)">Excluir</a>
@@ -62,5 +62,6 @@
             </div>
         </div>
         <br />
+        <toaster-container></toaster-container>
     </form>
 </div>

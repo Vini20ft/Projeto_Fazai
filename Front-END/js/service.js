@@ -1,8 +1,12 @@
-var urlBase = "http://localhost:000000";
+var urlBase = "http://localhost:10079/";
 
 function ServiceFazAi($http) {
     var _getService = function (controllerAction) {
         var urlRequest = urlBase + controllerAction;
+        return $http.get(urlRequest);
+    }
+    var _getServiceFoodTruck = function (controllerAction, item) {
+        var urlRequest = urlBase + controllerAction + '?listaIdFoodTruckFuncionario=' + item;
         return $http.get(urlRequest);
     }
     var _getForIdService = function (controllerAction, item) {
@@ -37,6 +41,7 @@ function ServiceFazAi($http) {
 
     return {
         getService: _getService,
+        getServiceFoodTruck: _getServiceFoodTruck,
         getForIdService: _getForIdService,
         filtroService: _filtroService,
         saveService: _saveService,

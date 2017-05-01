@@ -31,13 +31,17 @@
     ////////////////////////////////////////////////////
     $scope.verificarOuAtualizarCookies = function () {
         var emailUsuario = getCookie("emailUsuario");
+        var dadosFuncionario = getCookie("listaIdFoodTruckFuncionario");
         if (emailUsuario == "") $state.go('login');
-        else setCookie("emailUsuario", emailUsuario);
+        else {
+            setCookie("emailUsuario", emailUsuario);
+            setCookie("listaIdFoodTruckFuncionario", dadosFuncionario);
+        }
     }
 
     setCookie = function (cname, valor) {
         var d = new Date();
-        console.log("Set cookie - Data Atual: " + d.toUTCString());
+        //console.log("Set cookie - Data Atual: " + d.toUTCString());
         d.add(10).minutes(); // 10 minutos
         var expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + valor + ";" + expires + ";";

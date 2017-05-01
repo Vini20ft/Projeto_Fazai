@@ -2,15 +2,16 @@
 
     $scope.CardapioDados = {};
     $scope.CardapioDados.ItemCardapio = [];
+    $scope.CardapioDados.foodTruck = {};
     $scope.listaCardapio = {};
-    $scope.foodTrucks = {};
-    $scope.listaItemCardapio = [];
+    $scope.foodTrucks = [];
+    $scope.listaItemCardapio = {};
     $scope.Pesquisa = false;
 
     $scope.Pesquisar = function () {
         $scope.verificarOuAtualizarCookies();
         $scope.Pesquisa = true;
-        ServiceFazAi.getService('/Cardapio/Pesquisar').then(function (response) {
+        ServiceFazAi.getServiceFoodTruck('/Cardapio/GetAll', getCookie("listaIdFoodTruckFuncionario")).then(function (response) {
             $scope.listaCardapio = response.data;
             $scope.Pesquisa = false;
         }, function errorCallback(response) {
@@ -22,18 +23,13 @@
 
     $scope.CadastroEdicaoInit = function (edicao) {
         $scope.verificarOuAtualizarCookies();
-        $scope.foodTrucks = listaFoodTrucks;
-        if (edicao === true) {
-            $scope.CardapioDados = $stateParams.cardapioItem;
-            if ($scope.CardapioDados.foodTruck != undefined && $scope.CardapioDados.foodTruck != "") {
-                var foodTruckSelecionado = $scope.foodTrucks.filter(function (elemento) {
-                    return elemento.id === $scope.CardapioDados.foodTruck.id;
-                });
-                $scope.CardapioDados.foodTruck.selected = foodTruckSelecionado[0];
-            }
-            $scope.ToasterMsg('Carregar os dados para editar', 'error');
-        }
-        else $scope.ToasterMsg('Carregar os dados para cadastrar', 'error');
+        ServiceFazAi.getServiceFoodTruck('/FoodTruck/GetAllDropDown', getCookie("listaIdFoodTruckFuncionario")).then(function (response) {
+            $scope.foodTrucks = response.data;
+            if (edicao === true)
+                $scope.GetForId();
+        }, function errorCallback(response) {
+            $state.go('index.cardapio');
+        });
         $scope.Pesquisa = false;
     }
 
@@ -44,11 +40,15 @@
             $scope.ToasterMsg(camposObrigatorioItemCardapio, 'warning');
             return;
         }
+        if (itemSalvar.IdFoodTruck == undefined) {
+            if ($scope.CardapioDados.foodTruck.selected != undefined)
+                itemSalvar.IdFoodTruck = $scope.CardapioDados.foodTruck.selected.Id;
+        }
 
         $scope.Pesquisa = true;
 
         var urlSalvar = '/Cardapio/Insert';
-        if (edicao === true) urlSalvar = '/Cardapio/Edit';
+        if (edicao === true) urlSalvar = '/Cardapio/Update';
 
         ServiceFazAi.saveService(urlSalvar, itemSalvar).then(function (response) {
             $scope.ToasterMsg(salvoSucesso);
@@ -62,13 +62,13 @@
 
     $scope.EditarItem = function (itemLista) {
         $scope.verificarOuAtualizarCookies();
-        $state.go('index.cardapioEdicao/:cardapioItem', { cardapioItem: itemLista });
+        $state.go('index.cardapioEdicao/:cardapioItem', { cardapioItem: itemLista.Id });
     }
 
     $scope.ExcluirItem = function (itemLista) {
         $scope.verificarOuAtualizarCookies();
         $scope.Pesquisa = true;
-        ServiceFazAi.removeService('/Cardapio/Delete', itemLista.id).then(function (response) {
+        ServiceFazAi.removeService('/Cardapio/Delete', itemLista.Id).then(function (response) {
             $scope.ToasterMsg(excluidoSucesso);
             $scope.Pesquisar();
             $scope.Pesquisa = false;
@@ -76,16 +76,29 @@
             $scope.MsgErro(response, excluidoErro);
             $scope.Pesquisa = false;
         });
+    }
 
-        //var index = $scope.listaCardapio.indexOf(itemLista);
-        //if (index != -1) $scope.listaCardapio.splice(index, 1);
-        //$scope.ToasterMsg(excluidoSucesso, 'success');
+    $scope.GetForId = function () {
+        $scope.Pesquisa = true;
+        ServiceFazAi.getForIdService('/Cardapio/GetForId', $stateParams.cardapioItem).then(function (response) {
+            $scope.CardapioDados = response.data;
+
+            $scope.CardapioDados.foodTruck = {};
+            $scope.CardapioDados.foodTruck.selected = $scope.foodTrucks.filter(function (elemento) {
+                return elemento.Id === $scope.CardapioDados.IdFoodTruck;
+            })[0];
+
+            $scope.Pesquisa = false;
+
+        }, function errorCallback(response) {
+            $state.go('index.cardapio');
+        });
     }
 
     $scope.AdicionarItemCardapio = function () {
         $scope.verificarOuAtualizarCookies();
-        if ($scope.listaItemCardapio.nome == undefined || $scope.listaItemCardapio.nome == "" ||
-            $scope.listaItemCardapio.preco == undefined || $scope.listaItemCardapio.preco == "") {
+        if ($scope.listaItemCardapio.Nome == undefined || $scope.listaItemCardapio.Nome == "" ||
+            $scope.listaItemCardapio.Preco == undefined || $scope.listaItemCardapio.Preco == "") {
             $scope.ToasterMsg(camposObrigatorios, 'warning');
             return;
         }
@@ -94,8 +107,16 @@
         $scope.ToasterMsg(adicionadoSucesso, 'success');
     }
 
-    $scope.ExcluirItemCardapio = function (itemLista) {
+    $scope.ExcluirItemCardapio = function (itemLista, editar) {
         $scope.verificarOuAtualizarCookies();
+
+        if (editar === true) {
+            ServiceFazAi.removeService('/Cardapio/DeleteItemCardapio', itemLista.Id).then(function (response) {
+            }, function errorCallback(response) {
+                $scope.MsgErro(response, excluidoErro);
+            });
+        }
+
         var index = $scope.CardapioDados.ItemCardapio.indexOf(itemLista);
         if (index != -1) $scope.CardapioDados.ItemCardapio.splice(index, 1);
         $scope.ToasterMsg(excluidoSucesso, 'success');
@@ -107,13 +128,17 @@
     ////////////////////////////////////////////////////
     $scope.verificarOuAtualizarCookies = function () {
         var emailUsuario = getCookie("emailUsuario");
+        var dadosFuncionario = getCookie("listaIdFoodTruckFuncionario");
         if (emailUsuario == "") $state.go('login');
-        else setCookie("emailUsuario", emailUsuario);
+        else {
+            setCookie("emailUsuario", emailUsuario);
+            setCookie("listaIdFoodTruckFuncionario", dadosFuncionario);
+        }
     }
 
     setCookie = function (cname, valor) {
         var d = new Date();
-        console.log("Set cookie - Data Atual: " + d.toUTCString());
+        //console.log("Set cookie - Data Atual: " + d.toUTCString());
         d.add(10).minutes(); // 10 minutos
         var expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + valor + ";" + expires + ";";

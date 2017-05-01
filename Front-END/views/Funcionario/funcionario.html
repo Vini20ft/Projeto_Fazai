@@ -7,7 +7,7 @@
             <div class="col-sm-8">
                 <div class="title-action" ng-controller="funcionarioController">
                     <a href="" class="btn btn-primary" ui-sref="index.funcionarioCadastro">Novo</a>
-                  </div>
+                </div>
             </div>
         </div>
         <br />
@@ -27,35 +27,37 @@
                                 <table class="footable table table-stripped toggle-arrow-tiny table-bordered table-hover" data-page-size="10">
                                     <thead>
                                         <tr>
-                                          
                                             <th>Nome</th>
+                                            <th width="150px">Meus FoodTrucks</th>
                                             <th>Telefone</th>
-                                            <th>Rua</th>
+                                            <th>Logradouro</th>
                                             <th>Número</th>
                                             <th>Bairro</th>
                                             <th>Cidade</th>
                                             <th>Estado</th>
                                             <th>E-mail</th>
                                             <th>Login</th>
-                                            <th>Senha</th>
                                             <th>Perfil</th>
                                             <th></th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="Funcionario in FuncionarioDados" style="cursor:pointer">
                                             <td>{{Funcionario.Nome}}</td>
+                                            <td>
+                                                <h5 ng-repeat="item in Funcionario.FoodTruckFuncionario">
+                                                    &#8227; {{item.FoodTruck.Nome}}<br />
+                                                </h5>
+                                            </td>
                                             <td>{{Funcionario.Telefone}}</td>
-                                            <td>{{Funcionario.Rua}}</td>
+                                            <td>{{Funcionario.Logradouro}}</td>
                                             <td>{{Funcionario.Numero}}</td>
                                             <td>{{Funcionario.Bairro}}</td>
                                             <td>{{Funcionario.Cidade}}</td>
                                             <td>{{Funcionario.Estado}}</td>
                                             <td>{{Funcionario.Email}}</td>
                                             <td>{{Funcionario.Login}}</td>
-                                            <td>{{Funcionario.Senha}}</td>
-                                            <td>{{Funcionario.Perfil}}</td>
+                                            <td>{{Funcionario.Perfil.Descricao}}</td>
                                             <td align="right" width="160px">
                                                 <a href="" class="btn btn-info" ng-click="EditarItem(Funcionario)">Editar</a>
                                                 <a href="" class="btn btn-danger" ng-click="ExcluirItem(Funcionario)">Excluir</a>
@@ -80,5 +82,6 @@
             </div>
         </div>
         <br />
+        <toaster-container></toaster-container>
     </form>
 </div>
