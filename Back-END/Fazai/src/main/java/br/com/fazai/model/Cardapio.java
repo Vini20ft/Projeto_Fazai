@@ -20,15 +20,15 @@ public class Cardapio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cardapio_pk")
 	private int id_cardapio;
-	@Column(name = "st_tipo", length = 50, nullable = false)
-	private String tipo_cardapio;
+	@Column(name = "st_url_imagem", length = 50, nullable = false)
+	private String imagem_cardapio;
 	@Column(name = "st_descricao", length = 500, nullable = true)
 	private String descricao_cardapio;
 
 	// relacionamento com itens
 
 	@ManyToOne(targetEntity = Estabelecimento.class)
-	private Estabelecimento _estabelecimento_fk;
+	private Estabelecimento cardapio_estabelecimento_fk;
 
 	@OneToMany(mappedBy = "cardapio", targetEntity = ItemCardapio.class, cascade = CascadeType.ALL)
 	private Collection<ItemCardapio> lista_de_item;
@@ -41,12 +41,12 @@ public class Cardapio {
 		this.id_cardapio = id_cardapio;
 	}
 
-	public String getTipo_cardapio() {
-		return tipo_cardapio;
+	public String getImagem_cardapio_cardapio() {
+		return imagem_cardapio;
 	}
 
-	public void setTipo_cardapio(String tipo_cardapio) {
-		this.tipo_cardapio = tipo_cardapio;
+	public void setImagem_cardapio(String tipo_cardapio) {
+		this.imagem_cardapio = tipo_cardapio;
 	}
 
 	public String getDescricao_cardapio() {
@@ -65,13 +65,16 @@ public class Cardapio {
 		this.lista_de_item = lista_de_item;
 	}
 
-	public Estabelecimento getEstabelecimento() {
-		return _estabelecimento_fk;
+	public Estabelecimento getCardapio_estabelecimento_fk() {
+	    return cardapio_estabelecimento_fk;
 	}
 
-	public void setEstabelecimento(Estabelecimento estabelecimento) {
-		this._estabelecimento_fk = estabelecimento;
+	public void setCardapio_estabelecimento_fk(Estabelecimento cardapio_estabelecimento_fk) {
+	    this.cardapio_estabelecimento_fk = cardapio_estabelecimento_fk;
 	}
+	
+
+
 	
 
 }

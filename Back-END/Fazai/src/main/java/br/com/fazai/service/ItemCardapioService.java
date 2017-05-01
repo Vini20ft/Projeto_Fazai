@@ -11,5 +11,6 @@ public interface ItemCardapioService {
 	ItemCardapio consultarItemCardapioPorCodigo(int codigo);
 	void Excluir(int codigo);
 	List<ItemCardapio> TodosItens();
+	List<ItemCardapio> todosItemsporCardapio(int codigo_cardapio);
 
 }

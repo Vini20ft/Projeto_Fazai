@@ -23,7 +23,7 @@ import br.com.fazai.service.EstabelecimentoService;
  * 
  * @author vinicius.santana
  *
- *         Essa � a classe que o Spring vai gerenciar (Controller para o
+ *         Essa a classe que o Spring vai gerenciar (Controller para o
  *         estabelecimento)
  *
  * @Controller => informa que a classe � um controller a ser gerenciado pelo
@@ -31,108 +31,139 @@ import br.com.fazai.service.EstabelecimentoService;
  *
  * @RequestMapping => caminho para acessar o controller
  */
+
 @Controller
 @RequestMapping("/estabelecimento")
 public class EstabelecimentoController {
 
-	@Autowired
-	private EstabelecimentoService estabelecimentoService;
+    @Autowired
+    private EstabelecimentoService estabelecimentoService;
 
-	public void setEstabelecimentoService(
-			EstabelecimentoService estabelecimentoService) {
-		this.estabelecimentoService = estabelecimentoService;
+    public void setEstabelecimentoService(EstabelecimentoService estabelecimentoService) {
+	this.estabelecimentoService = estabelecimentoService;
+    }
+
+    /**
+     * 
+     * @RequestMapping => value => Defini o caminho para a chamada da view.
+     * @RequestMapping => method => Defini o o metodo http que o m�todo vai
+     *                 responder.
+     */
+    @RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    public @ResponseBody String Salvar(@RequestBody Estabelecimento estabelecimento) {
+
+	try {
+
+	    if (this.estabelecimentoService != null) {
+		this.estabelecimentoService.salvarEstabelecimento(estabelecimento);
+		return HttpStatus.CREATED.name().toString();
+	    } else {
+		return HttpStatus.CONFLICT.name().toString();
+	    }
+
+	} catch (Exception e) {
+	    return HttpStatus.HTTP_VERSION_NOT_SUPPORTED.name().toString();
 	}
 
-	/**
-	 * 
-	 * @RequestMapping => value => Defini o caminho para a chamada da view.
-	 * @RequestMapping => method => Defini o o m�todo http que o m�todo vai
-	 *                 responder.
-	 */
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public @ResponseBody String Salvar(
-			@RequestBody Estabelecimento estabelecimento) {
+    }
 
-		try {
-			
-			if (this.estabelecimentoService != null ){
-				this.estabelecimentoService.salvarEstabelecimento(estabelecimento);
-				return HttpStatus.CREATED.name().toString();
-			}else { 
-				return HttpStatus.CONFLICT.name().toString();
-			}
-			
-			
-		} catch (Exception e) {
-			return HttpStatus.HTTP_VERSION_NOT_SUPPORTED.name().toString();
-		}
+    @RequestMapping(value = "/alterar", method = RequestMethod.PUT)
+    public @ResponseBody void Alterar(@RequestBody Estabelecimento estabelecimento) {
 
-	}
+	try {
 
-	@RequestMapping(value = "/alterar", method = RequestMethod.PUT)
-	public @ResponseBody void Alterar(
-			@RequestBody Estabelecimento estabelecimento) {
+	    this.estabelecimentoService.alterarEstabelecimento(estabelecimento);
 
-		try {
-
-			this.estabelecimentoService.alterarEstabelecimento(estabelecimento);
-
-		} catch (Exception e) {
-
-		}
+	} catch (Exception e) {
 
 	}
 
-	@RequestMapping(value = "/consultarTodos", method = RequestMethod.GET)
-	public @ResponseBody List<Estabelecimento> ConsultarTodos() {
+    }
 
-		return this.estabelecimentoService.TodosEstabelecimentos();
+    @RequestMapping(value = "/consultarTodos", method = RequestMethod.GET)
+    public @ResponseBody List<Estabelecimento> ConsultarTodos() {
+
+	return this.estabelecimentoService.todosEstabelecimentos();
+
+    }
+
+    @RequestMapping(value = "/excluirRegistro/{codigo}", method = RequestMethod.DELETE)
+    public @ResponseBody void ExcluirRegistro(@PathVariable int codigo) {
+
+	this.estabelecimentoService.Excluir(codigo);
+
+    }
+
+    @RequestMapping(value = "/estabelecimentosList/cidade={cidade}", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    public @ResponseBody String estabelecimentoList(@PathVariable String cidade) {
+	// instancia um novo JSONObject
+	JSONObject my_obj = new JSONObject();
+
+	List<Estabelecimento> estabelecimentoList = this.estabelecimentoService.todosEstabelecimentosPorCidade(cidade);
+	List<EstabelecimentoMobile> estabelecimentoMobiles = new ArrayList<EstabelecimentoMobile>();
+
+	if (estabelecimentoList.size() > 0) {
+	    for (Estabelecimento estabelecimento : estabelecimentoList) {
+		EstabelecimentoMobile estabelecimentoMobile = new EstabelecimentoMobile();
+		Endereco endereco = new Endereco();
+		Localizacao localizacao = new Localizacao();
+
+		estabelecimentoMobile.setNome(estabelecimento.getNome_estabelecimento());
+		estabelecimentoMobile.setCnpj(estabelecimento.getCnpj_estabelecimento());
+		estabelecimentoMobile.setFoto(estabelecimento.getUrl_image_Estabelecimento());
+		localizacao.setLatitude(estabelecimento.getLatitude_estabelecimento());
+		localizacao.setLogitude(estabelecimento.getLongitude_estabelecimento());
+		endereco.setLocalizacao(localizacao);
+		estabelecimentoMobile.setEndereco(endereco);
+
+		estabelecimentoMobiles.add(estabelecimentoMobile);
+	    }
+	}
+
+	my_obj.put("estabelecimentoList", estabelecimentoMobiles);
+
+	return my_obj.toString();
+
+    }
+
+    @RequestMapping(value = "/estabelecimentoList/codigo={codigo}", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    public @ResponseBody String estabelecimentoListDetail(@PathVariable int codigo) {
+	// instancia um novo JSONObject
+	JSONObject my_obj = new JSONObject();
+
+	Estabelecimento estabelecimentoListDetalhe = this.estabelecimentoService
+		.consultarEstabelecimentoPorCodigo(codigo);
+
+	List<EstabelecimentoMobile> estabelecimentoMobiles = new ArrayList<EstabelecimentoMobile>();
+
+	if (estabelecimentoListDetalhe.getId_estabelecimento() == codigo) {
+
+	    try {
+		EstabelecimentoMobile estabelecimentoMobile = new EstabelecimentoMobile();
+		Endereco endereco = new Endereco();
+		Localizacao localizacao = new Localizacao();
+
+		estabelecimentoMobile.setNome(estabelecimentoListDetalhe.getNome_estabelecimento());
+		estabelecimentoMobile.setCnpj(estabelecimentoListDetalhe.getCnpj_estabelecimento());
+		estabelecimentoMobile.setFoto(estabelecimentoListDetalhe.getUrl_image_Estabelecimento());
+		estabelecimentoMobile.setRating(estabelecimentoListDetalhe.getRating_estabelecimento());
+		localizacao.setLatitude(estabelecimentoListDetalhe.getLatitude_estabelecimento());
+		localizacao.setLogitude(estabelecimentoListDetalhe.getLongitude_estabelecimento());
+		endereco.setEstado(estabelecimentoListDetalhe.getEstado_estabelecimento());
+		endereco.setCidade(estabelecimentoListDetalhe.getCidade_estabelecimento());
+		endereco.setLocalizacao(localizacao);
+		estabelecimentoMobile.setEndereco(endereco);
+
+		estabelecimentoMobiles.add(estabelecimentoMobile);
+	    } catch (Exception e) {
+		return e.toString();
+	    }
 
 	}
 
-	@RequestMapping(value = "/excluirRegistro/{codigo}", method = RequestMethod.DELETE)
-	public @ResponseBody void ExcluirRegistro(@PathVariable int codigo) {
+	my_obj.put("estabelecimentoList", estabelecimentoMobiles);
 
-		this.estabelecimentoService.Excluir(codigo);
+	return my_obj.toString();
 
-	}
-
-	@RequestMapping(value = "/EstabelecimentoList", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-	public @ResponseBody String estabelecimentoList() {
-		// instancia um novo JSONObject
-		JSONObject my_obj = new JSONObject();
-
-		List<Estabelecimento> estabelecimentoList = this.estabelecimentoService
-				.TodosEstabelecimentos();
-		List<EstabelecimentoMobile> estabelecimentoMobiles = new ArrayList<EstabelecimentoMobile>();
-
-		if (estabelecimentoList.size() > 0) {
-			for (Estabelecimento estabelecimento : estabelecimentoList) {
-				EstabelecimentoMobile estabelecimentoMobile = new EstabelecimentoMobile();
-				Endereco endereco = new Endereco();
-				Localizacao localizacao = new Localizacao();
-
-				estabelecimentoMobile.setNome(estabelecimento
-						.getNome_estabelecimento());
-				estabelecimentoMobile.setCnpj(estabelecimento
-						.getCnpj_estabelecimento());
-				estabelecimentoMobile.setFoto(estabelecimento
-						.getUrl_image_Estabelecimento());
-				localizacao.setLatitude(estabelecimento
-						.getLatitude_estabelecimento());
-				localizacao.setLogitude(estabelecimento
-						.getLongitude_estabelecimento());
-				endereco.setLocalizacao(localizacao);
-				estabelecimentoMobile.setEndereco(endereco);
-
-				estabelecimentoMobiles.add(estabelecimentoMobile);
-			}
-		}
-
-		my_obj.put("estabelecimentoList", estabelecimentoMobiles);
-
-		return my_obj.toString();
-
-	}
-
+    }
 }

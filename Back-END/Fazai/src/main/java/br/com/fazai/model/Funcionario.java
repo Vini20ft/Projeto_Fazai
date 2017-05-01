@@ -20,9 +20,9 @@ public class Funcionario {
 	private String nome_funcionario;
 	@Column(name="st_email", length=80, nullable=false)
 	private String email_funcionario;
-	@Column(name="st_login", length=30, nullable=false)
+	@Column(name="st_login", length=30)
 	private String login;
-	@Column(name="st_senha", length=15, nullable=false)
+	@Column(name="st_senha", length=15)
 	private String senha;
 	@Column(name="st_telefone", length=15, nullable=false)
 	private String telefone_funcionario;
@@ -30,19 +30,13 @@ public class Funcionario {
 	private String rua_funcionario;
 	@Column(name="st_cidade", length=50, nullable=false)
 	private String cidade_funcionario;
+	@Column(name="st_estado", length=50, nullable=false)
+	private String estado_funcionario;
 	@Column(name="st_perfil", length=11, nullable=false)
 	private String perfil_funcionario;
 	@Column(name="st_bairro", length=60,nullable=false)
 	private String bairro_funcionario;
-	@Column(name="st_numero", length=60,nullable=false)
-	private int numero_funcionario;
 	
-	 public int getNumero_funcionario() {
-		return numero_funcionario;
-	}
-	public void setNumero_funcionario(int numero_funcionario) {
-		this.numero_funcionario = numero_funcionario;
-	}
 	
 	public int getId_funcionario() {
 		return id_funcionario;

@@ -50,7 +50,12 @@ public class ItemCardapioServiceImpl implements ItemCardapioService{
 
 	@Override
 	public List<ItemCardapio> TodosItens() {	
-		return this.itemcardapioDAO.TodosItems();
+		return this.itemcardapioDAO.todosItems();
+	}
+
+	@Override
+	public List<ItemCardapio> todosItemsporCardapio(int codigo_cardapio) {
+	    return this.itemcardapioDAO.todosItemsporCardapio(codigo_cardapio);
 	}
 
 }
