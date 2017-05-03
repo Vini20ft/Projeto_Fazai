@@ -38,6 +38,7 @@ import fazai.com.br.fazai.http.CardapiosTask;
 import fazai.com.br.fazai.interfaces.OnCardapioClick;
 import fazai.com.br.fazai.model.Cardapio;
 import fazai.com.br.fazai.model.Constantes;
+import fazai.com.br.fazai.model.VerifyConnection;
 import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
 
 public class CardapioActivity extends AppCompatActivity
@@ -63,6 +64,8 @@ public class CardapioActivity extends AppCompatActivity
     private LoaderManager mLoaderManager;
     private List<Cardapio> mCardapioList;
     private GoogleApiClient mGoogleApiClient;
+    private VerifyConnection verifyConnection;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,8 @@ public class CardapioActivity extends AppCompatActivity
 
         initToolBar();
 
-        verificaConexao();
+        verifyConnection = new VerifyConnection(this);
+        verifyConnection.verificaConexao();
 
         mListCardapio.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
@@ -174,17 +178,6 @@ public class CardapioActivity extends AppCompatActivity
         this.onCardapioClick(cardapio);
     }
 
-    public void verificaConexao() {
-        ConnectivityManager conectivtyManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conectivtyManager.getActiveNetworkInfo() != null
-                && conectivtyManager.getActiveNetworkInfo().isAvailable()
-                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-        } else {
-            Toast.makeText(getApplicationContext(), "Falha na conexão com a internet.",
-                    Toast.LENGTH_LONG).show();
-        }
-    }
-
 
     public void signOut() {
         if (AccessToken.getCurrentAccessToken() != null) {
@@ -201,7 +194,7 @@ public class CardapioActivity extends AppCompatActivity
 
     private void VerifyCurrentUser() {
         if (AccessToken.getCurrentAccessToken() == null && (mGoogleApiClient == null && !mGoogleApiClient.isConnected())) {
-            Toast.makeText(getApplicationContext(), "O usuário está deslogado!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.o_usuario_esta_deslogado, Toast.LENGTH_SHORT).show();
             goLoginScreen();
         }
     }

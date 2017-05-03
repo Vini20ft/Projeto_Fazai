@@ -16,11 +16,10 @@
         android:text="Nome do prato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item_descricao_itens_cardapio"
-        android:layout_alignLeft="@+id/item_descricao_itens_cardapio"
-        android:layout_alignStart="@+id/item_descricao_itens_cardapio"
-        android:layout_marginTop="12dp"
-        android:id="@+id/item_nome_prato" />
+        android:id="@+id/item_nome_prato"
+        android:layout_above="@+id/item_valor_itens_cardapio"
+        android:layout_alignStart="@+id/txtValorItemCardapio"
+        android:layout_marginBottom="11dp" />
 
     <TextView
         android:text="Descrição do prato"
@@ -29,7 +28,7 @@
         android:layout_marginLeft="33dp"
         android:layout_marginStart="33dp"
         android:layout_marginTop="13dp"
-        android:id="@+id/item_descricao_itens_cardapio"
+        android:id="@+id/txtValorItemCardapio"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/item_foto_itens_cardapio"
@@ -39,7 +38,7 @@
         android:id="@+id/item_valor_itens_cardapio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/valor_do_prato"
         android:layout_alignBottom="@+id/item_foto_itens_cardapio"
-        android:layout_alignStart="@+id/item_nome_prato"
-        android:text="Valor do prato" />
+        android:layout_alignStart="@+id/item_nome_prato" />
 </RelativeLayout>

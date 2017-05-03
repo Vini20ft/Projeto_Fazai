@@ -1,34 +1,96 @@
 <resources>
-    <string name="cancel_login">Iniciar sesión cancelado</string>
-    <string name="error_login">Hubo un registro de errores</string>
-    <string name="error_logout">Se produjo un error al cerrar la sesión</string>
+    <string name="app_name">Faz Aí</string>
+    <string name="facebook_app_id">755309927978194</string>
+    <string name="facebook_app_id1"></string>
+
+    <string name="cancel_login">Login cancelado</string>
+    <string name="error_login">Ocorreu um erro ao efetuar login</string>
+    <string name="error_logout">Ocorreu um erro ao efetuar logout</string>
 
     <string name="title_activity_estabelecimentos_maps">Mapa</string>
-    <string name="txtLogin">continuar con:</string>
-    <string name="msgCampoPesquisaFoodVazio">Introduzca el nombre del food truck!</string>
+    <string name="txtLogin">Continuar com:</string>
+    <string name="msgCampoPesquisaFoodVazio">Informe o nome do FoodTruck !</string>
 
-    <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
-    <string name="navigation_drawer_close">Cerrar el cajón de navegación</string>
+    <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
+    <string name="msgInfoDetalheEstabelecimentoMap">Deseja mais informações deste FoodTruck ?</string>
 
-    <string name="action_settings">Ajustes</string>
+    <string name="action_settings">Configurações</string>
 
     <!--menu lateral-->
     <string name="perfil">Perfil</string>
-    <string name="pedidos">Aplicaciones</string>
-    <string name="compartilhar">Compartir</string>
-    <string name="cardapio">Menú</string>
-    <string name="menu_principal">Menú principal</string>
-    <string name="status_pedido">Estado del pedido</string>
-    <string name="conta">Cuenta</string>
-    <string name="sair">Desconectarse</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="compartilhar">Compartilhar</string>
+    <string name="cardapio">Cardápio</string>
+    <string name="menu_principal">Menu principal</string>
+    <string name="status_pedido">Status do pedido</string>
+    <string name="conta">Conta</string>
+    <string name="sair">Sair</string>
     <string name="sobre">Sobre</string>
 
     <!--Fragment detalhe do Food Truck-->
-    <string name="endereco">Dirección: </string>
-    <string name="horario_funcionamento">horas de oficina: </string>
-    <string name="ligar">enlace</string>
-    <string name="navegacao_mapa">Iniciar navegación</string>
+    <string name="endereco">Endereço: </string>
+    <string name="horario_funcionamento">horário de funcionamento: </string>
+    <string name="ligar">Ligar</string>
+    <string name="navegacao_mapa">Iniciar Navegação</string>
+    <string name="estado">Estado: </string>
+    <string name="cidade">Cidade: </string>
+    <string name="bairro">Bairro: </string>
+    <string name="numero">Número: </string>
+    <string name="rua">Rua: </string>
+    <string name="title_activity_detalhe_estabelecimento">Detalhes do estabelecimento</string>
+
+
+    <!-- Tela de Sobre -->
+    <string name="mapa_dos_food_trucks">Mapa dos Food Trucks</string>
+    <string name="title_activity_main">Lista de Food Trucks</string>
+    <string name="faculdade">Faculdade</string>
+    <string name="equipe">Equipe: </string>
+    <string name="unibratec">UNIBRATEC</string>
+    <string name="tiago_aschoff">Tiago Aschoff</string>
+    <string name="caio">Caio Ernandes</string>
+    <string name="samy">Ially Samara</string>
+    <string name="danilo">Danilo Matias</string>
+    <string name="leomir">Leomir Oliveira</string>
+    <string name="misael">Misael Ribeiro</string>
+    <string name="ricardo">Ricardo Rodrigues</string>
+    <string name="thiago">Thiago Charamba</string>
+    <string name="vinicius">Vinicius Freitas</string>
+    <string name="banca">Banca</string>
+    <string name="flavius">Flavius Anderson Felix Pereira</string>
+    <string name="alessandro">Alessandro Monteiro Lima</string>
+    <string name="luna">Alexandre José Henrique de Oliveira Luna</string>
+    <string name="fernando">José Fernando Monteiro da Siva</string>
+    <string name="title_activity_sobre">Faz Aí</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Permissões -->
+    <string name="habilitar_permissão">Você tem que habilitar essa permissão para poder continuar</string>
+    <string name="permissão_concedida">Permissão concedida</string>
+    <string name="permissão_negada">Permissão negada</string>
     <string name="titulo_item_cardapio">Titulo Item Cardapio</string>
     <string name="descricao_item_cardapio">Descricao Item Cardapio</string>
     <string name="valor_item_cardapio">Valor Item Cardapio</string>
+
+    <!-- Toast -->
+    <string name="falha_na_conexão_com_a_internet">Falha na conexão com a internet.</string>
+    <string name="erro_ao_carregar_informações">Erro ao carregar informações.</string>
+    <string name="abrir_tela_de_compra">Abrir tela de compra</string>
+    <string name="o_usuario_esta_deslogado">O usuário está deslogado!</string>
+    <string name="abrir_cardapio">Abrir cardápio</string>
+
+    <!-- Outros -->
+    <string name="pt">pt</string>
+    <string name="en">en</string>
+    <string name="es">es</string>
+    <string name="ok">Ok</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="title_acitivity_cardapios">Lista de Cardápios</string>
+    <string name="title_acitivity_item_cardapio">Pratos do dia</string>
+    <string name="aguarde">Aquarde...</string>
+    <string name="valor_do_prato">Valor do prato</string>
+
 </resources>

@@ -134,7 +134,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements View.OnC
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Abrir cardápio", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.abrir_cardapio, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -187,7 +187,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements View.OnC
             mEstabelecimento = data;
             updateUI(mEstabelecimento);
         } else {
-            Toast.makeText(getActivity(), "Erro ao carregar informações.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.erro_ao_carregar_informações, Toast.LENGTH_SHORT).show();
         }
     }
 
