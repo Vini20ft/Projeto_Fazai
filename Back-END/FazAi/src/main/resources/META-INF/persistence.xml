@@ -18,9 +18,9 @@
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
          <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://fazai.mysql.uhserver.com/fazai?autoReconnect=true"/>
-         <property name="javax.persistence.jdbc.user" value="fazai"/>
-         <property name="javax.persistence.jdbc.password" value="projeto@2017"/>  
+         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fazai"/>
+         <property name="javax.persistence.jdbc.user" value="root"/>
+         <property name="javax.persistence.jdbc.password" value="1234"/>  
          <property name="hibernate.show_sql" value="true"/>
          <property name="hibernate.format_sql" value="true"/>
          <property name="hibernate.hbm2ddl.auto" value="update"/>
