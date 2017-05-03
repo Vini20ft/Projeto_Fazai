@@ -5,13 +5,19 @@
     $scope.listaCardapio = {};
     $scope.foodTrucks = {};
     $scope.listaItemCardapio = [];
-    $scope.Pesquisa = true;
+    $scope.Pesquisa = false;
 
     $scope.Pesquisar = function () {
         $scope.verificarOuAtualizarCookies();
-        $scope.ToasterMsg('Criar pesquisa', 'error');
-        $scope.Pesquisa = false;
-        $scope.listaCardapio = listaCardapio;
+        $scope.Pesquisa = true;
+        ServiceFazAi.getService('/Cardapio/Pesquisar').then(function (response) {
+            $scope.listaCardapio = response.data;
+            $scope.Pesquisa = false;
+        }, function errorCallback(response) {
+            $scope.MsgErro(response, pesquisaErro);
+            $scope.Pesquisa = false;
+        });
+        //$scope.listaCardapio = listaCardapio;
     }
 
     $scope.CadastroEdicaoInit = function (edicao) {
@@ -33,12 +39,25 @@
 
     $scope.Salvar = function (edicao) {
         $scope.verificarOuAtualizarCookies();
+        var itemSalvar = $scope.CardapioDados;
         if ($scope.CardapioDados.ItemCardapio == undefined || $scope.CardapioDados.ItemCardapio.length == undefined || $scope.CardapioDados.ItemCardapio.length <= 0) {
             $scope.ToasterMsg(camposObrigatorioItemCardapio, 'warning');
             return;
         }
-        if (edicao === true) $scope.ToasterMsg('Criar lógica para editar', 'error');
-        else $scope.ToasterMsg('Criar lógica para cadastrar', 'error');
+
+        $scope.Pesquisa = true;
+
+        var urlSalvar = '/Cardapio/Insert';
+        if (edicao === true) urlSalvar = '/Cardapio/Edit';
+
+        ServiceFazAi.saveService(urlSalvar, itemSalvar).then(function (response) {
+            $scope.ToasterMsg(salvoSucesso);
+            $scope.Pesquisa = false;
+            $state.go('index.cardapio');
+        }, function errorCallback(response) {
+            $scope.MsgErro(response, salvoErro);
+            $scope.Pesquisa = false;
+        });
     }
 
     $scope.EditarItem = function (itemLista) {
@@ -48,17 +67,19 @@
 
     $scope.ExcluirItem = function (itemLista) {
         $scope.verificarOuAtualizarCookies();
-
+        $scope.Pesquisa = true;
         ServiceFazAi.removeService('/Cardapio/Delete', itemLista.id).then(function (response) {
             $scope.ToasterMsg(excluidoSucesso);
             $scope.Pesquisar();
+            $scope.Pesquisa = false;
         }, function errorCallback(response) {
             $scope.MsgErro(response, excluidoErro);
+            $scope.Pesquisa = false;
         });
 
-        var index = $scope.listaCardapio.indexOf(itemLista);
-        if (index != -1) $scope.listaCardapio.splice(index, 1);
-        $scope.ToasterMsg(excluidoSucesso, 'success');
+        //var index = $scope.listaCardapio.indexOf(itemLista);
+        //if (index != -1) $scope.listaCardapio.splice(index, 1);
+        //$scope.ToasterMsg(excluidoSucesso, 'success');
     }
 
     $scope.AdicionarItemCardapio = function () {

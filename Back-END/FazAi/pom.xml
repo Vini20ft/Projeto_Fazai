@@ -1,86 +1,88 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.fazai</groupId>
-  <artifactId>FazAi</artifactId>
+  <groupId>br.com.fazai</groupId>
+  <artifactId>Fazai</artifactId>
   <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>FazAi Maven Webapp</name>
+  <version>1.0-SNAPSHOT</version>
+  <name>Fazai Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
-  <repositories>
-  	<repository>
-    	<id>snapshot-repository.java.net</id>
-    	<name>Java.net Snapshot Repository for Maven</name>
-    	<url>https://maven.java.net/content/repositories/snapshots/</url>
-    	<layout>default</layout>
-	</repository>  
-  </repositories>
- 
-  <properties>
-    <jersey.version>2.22.1</jersey.version>
+   
+   <properties>
+	<spring.version>4.2.4.RELEASE</spring.version>
+	<jackson.version>1.9.13</jackson.version>
+	<jersey.version>2.22.1</jersey.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    
- 	<!-- Generic properties -->
-	<java.version>1.8</java.version>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	
-	<!-- Hibernate / JPA -->
-	<hibernate.version>4.3.5.Final</hibernate.version>
-	<jsf.version>2.2.10</jsf.version>
-	
-	<!-- Logging -->
-	<logback.version>1.0.13</logback.version>
-	<slf4j.version>1.7.5</slf4j.version>
- </properties>
+  </properties>
+  
  
-  <dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.glassfish.jersey</groupId>
-            <artifactId>jersey-bom</artifactId>
-            <version>${jersey.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-  </dependencyManagement>
- 
+  
+  
   <dependencies>
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>2.4</version>
-    </dependency>
+  
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+</dependency>
+  	<!-- Spring  -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
  
-    <dependency>
-        <groupId>org.glassfish.jersey.ext</groupId>
-        <artifactId>jersey-mvc-jsp</artifactId>
-    </dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.8.10</version>
+</dependency>
+	
  
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
-        <version>1.2</version>
-    </dependency>
+ 	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
  
-    <dependency>
-        <groupId>org.glassfish.jersey.containers</groupId>
-        <artifactId>jersey-container-servlet-core</artifactId>
-    </dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
  
-    <dependency>
-        <groupId>javax.ws.rs</groupId>
-        <artifactId>javax.ws.rs-api</artifactId>
-        <version>2.0.1</version>
-    </dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
  
-    <dependency>
-        <groupId>org.glassfish.jersey.media</groupId>
-        <artifactId>jersey-media-moxy</artifactId>
-    </dependency>
+	 <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${spring.version}</version>
+	 </dependency>
+
+	<!-- LOG -->
+	 <dependency>
+	     <groupId>org.springframework.boot</groupId>
+	     <artifactId>spring-boot-starter-web</artifactId>
+	     <version>1.2.1.RELEASE</version>
+	 </dependency>
  
+	 <dependency>
+	     <groupId>org.springframework.boot</groupId>
+	     <artifactId>spring-boot-starter-tomcat</artifactId>
+	     <version>1.2.1.RELEASE</version>
+	     <scope>provided</scope>
+	  </dependency>
 	<dependency>
    		<groupId>org.hibernate</groupId>
    		<artifactId>hibernate-core</artifactId>
@@ -92,93 +94,57 @@
 		<artifactId>hibernate-entitymanager</artifactId>
 		<version>5.1.0.Final</version>
 	</dependency>
-
     <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.37</version>
     </dependency>
     
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-    	<groupId>org.slf4j</groupId>
-    	<artifactId>slf4j-api</artifactId>
-    	<version>1.7.5</version>
-	</dependency>
-
+    <!-- json -->
 	<dependency>
-    	<groupId>org.slf4j</groupId>
-    	<artifactId>slf4j-simple</artifactId>
-    	<version>1.7.5</version>
+    	<groupId>org.json</groupId>
+    	<artifactId>json</artifactId>
+    	<version>20160810</version>
 	</dependency>
 	
-	<!-- Hibernate -->
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-entitymanager</artifactId>
-		<version>${hibernate.version}</version>
-	</dependency>
-	
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-core</artifactId>
-		<version>${hibernate.version}</version>
-	</dependency>
-	
-	<!-- JSF Dependencies -->
-	<dependency>
-		<groupId>com.sun.faces</groupId>
-		<artifactId>jsf-api</artifactId>
-		<version>${jsf.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.sun.faces</groupId>
-		<artifactId>jsf-impl</artifactId>
-		<version>${jsf.version}</version>
-	</dependency>
-	
-	<!-- Gson -->
- 	<dependency>
- 		<groupId>com.google.code.gson</groupId>
- 		<artifactId>gson</artifactId>
- 		<version>2.2.4</version>
- 	</dependency>
- 	
- 	<!-- commons-email -->
-
+	<!-- simple-email -->
 	<dependency>
     	<groupId>org.apache.commons</groupId>
     	<artifactId>commons-email</artifactId>
-    	<version>1.2</version>
+    	<version>1.1</version>
 	</dependency>
-
-	<!-- Activation -->
-
-	<dependency>
-    	<groupId>javax.activation</groupId>
-    	<artifactId>activation</artifactId>
-    	<version>1.1.1</version>
-	</dependency>
-
-	<!--JavaEmail-->
-
-	<dependency>
-    	<groupId>javax.mail</groupId>
-    	<artifactId>mail</artifactId>
-    	<version>1.4.3</version>
-	</dependency>
- 
+    
+    <dependency>
+  <groupId>com.github.jsimone</groupId>
+  <artifactId>webapp-runner</artifactId>
+  <version>7.0.34.1</version>
+  <scope>provided</scope>
+</dependency>
   </dependencies>
- 
-  <build>  
-	<finalName>FazAi</finalName>   
+ <build>  
+	<finalName>Fazai</finalName>   
 	<plugins>
+	        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.3</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals><goal>copy</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.github.jsimone</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>7.0.57.2</version>
+                                <destFileName>webapp-runner.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 	    <plugin>
 	       <artifactId>maven-compiler-plugin</artifactId>
 	         <configuration>
@@ -186,6 +152,6 @@
 	             <target>1.8</target>
 	         </configuration>
 	     </plugin>
-	 </plugins>
+	 </plugins>    
   </build>
 </project>
