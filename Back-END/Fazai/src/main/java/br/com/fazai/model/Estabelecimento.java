@@ -43,7 +43,123 @@ public class Estabelecimento {
     private String cidade_estabelecimento;
     @Column(name = "st_estado", length = 50, nullable = false)
     private String estado_estabelecimento;
-    @Column(name = "dc_rating")
+    
+    public int getId_estabelecimento() {
+		return id_estabelecimento;
+	}
+
+	public void setId_estabelecimento(int id_estabelecimento) {
+		this.id_estabelecimento = id_estabelecimento;
+	}
+
+	public String getCnpj_estabelecimento() {
+		return cnpj_estabelecimento;
+	}
+
+	public void setCnpj_estabelecimento(String cnpj_estabelecimento) {
+		this.cnpj_estabelecimento = cnpj_estabelecimento;
+	}
+
+	public String getNome_estabelecimento() {
+		return nome_estabelecimento;
+	}
+
+	public void setNome_estabelecimento(String nome_estabelecimento) {
+		this.nome_estabelecimento = nome_estabelecimento;
+	}
+
+	public String getRazaoSocial_estabelecimento() {
+		return razaoSocial_estabelecimento;
+	}
+
+	public void setRazaoSocial_estabelecimento(String razaoSocial_estabelecimento) {
+		this.razaoSocial_estabelecimento = razaoSocial_estabelecimento;
+	}
+
+	public String getEspecialidade_estabelecimento() {
+		return especialidade_estabelecimento;
+	}
+
+	public void setEspecialidade_estabelecimento(
+			String especialidade_estabelecimento) {
+		this.especialidade_estabelecimento = especialidade_estabelecimento;
+	}
+
+	public String getUrl_image_Estabelecimento() {
+		return url_image_Estabelecimento;
+	}
+
+	public void setUrl_image_Estabelecimento(String url_image_Estabelecimento) {
+		this.url_image_Estabelecimento = url_image_Estabelecimento;
+	}
+
+	public String getLatitude_estabelecimento() {
+		return latitude_estabelecimento;
+	}
+
+	public void setLatitude_estabelecimento(String latitude_estabelecimento) {
+		this.latitude_estabelecimento = latitude_estabelecimento;
+	}
+
+	public String getLongitude_estabelecimento() {
+		return longitude_estabelecimento;
+	}
+
+	public void setLongitude_estabelecimento(String longitude_estabelecimento) {
+		this.longitude_estabelecimento = longitude_estabelecimento;
+	}
+
+	public String getCidade_estabelecimento() {
+		return cidade_estabelecimento;
+	}
+
+	public void setCidade_estabelecimento(String cidade_estabelecimento) {
+		this.cidade_estabelecimento = cidade_estabelecimento;
+	}
+
+	public String getEstado_estabelecimento() {
+		return estado_estabelecimento;
+	}
+
+	public void setEstado_estabelecimento(String estado_estabelecimento) {
+		this.estado_estabelecimento = estado_estabelecimento;
+	}
+
+	public float getRating_estabelecimento() {
+		return rating_estabelecimento;
+	}
+
+	public void setRating_estabelecimento(float rating_estabelecimento) {
+		this.rating_estabelecimento = rating_estabelecimento;
+	}
+
+	public Collection<Pedido> getHistorico_pedido_foodtruck() {
+		return historico_pedido_foodtruck;
+	}
+
+	public void setHistorico_pedido_foodtruck(
+			Collection<Pedido> historico_pedido_foodtruck) {
+		this.historico_pedido_foodtruck = historico_pedido_foodtruck;
+	}
+
+	public Collection<Cardapio> getLista_cardapio() {
+		return lista_cardapio;
+	}
+
+	public void setLista_cardapio(Collection<Cardapio> lista_cardapio) {
+		this.lista_cardapio = lista_cardapio;
+	}
+
+	public Collection<Funcionario> getEstabelecimento_funcionario() {
+		return estabelecimento_funcionario;
+	}
+
+	public void setEstabelecimento_funcionario(
+			Collection<Funcionario> estabelecimento_funcionario) {
+		this.estabelecimento_funcionario = estabelecimento_funcionario;
+	}
+
+	@Column(name = "dc_rating")
     private float rating_estabelecimento;
 
     @OneToMany(mappedBy = "estabelecimento", targetEntity = Pedido.class, cascade = CascadeType.ALL)
@@ -56,92 +172,6 @@ public class Estabelecimento {
     @JoinTable(name = "FuncionarioFoodTruck", joinColumns = { @JoinColumn(name = "id_estabelecimento_pk"), }, inverseJoinColumns = { @JoinColumn(name = "id_funcionario_pk") })
     private Collection<Funcionario> estabelecimento_funcionario;
 
-    public String getLatitude_estabelecimento() {
-	return latitude_estabelecimento;
-    }
-
-    public void setLatitude_estabelecimento(String latitude_estabelecimento) {
-	this.latitude_estabelecimento = latitude_estabelecimento;
-    }
-
-    public String getLongitude_estabelecimento() {
-	return longitude_estabelecimento;
-    }
-
-    public void setLongitude_estabelecimento(String longitude_estabelecimento) {
-	this.longitude_estabelecimento = longitude_estabelecimento;
-    }
-
-    public int getId_estabelecimento() {
-	return id_estabelecimento;
-    }
-
-    public void setId_estabelecimento(int id_estabelecimento) {
-	this.id_estabelecimento = id_estabelecimento;
-    }
-
-    public String getCnpj_estabelecimento() {
-	return cnpj_estabelecimento;
-    }
-
-    public void setCnpj_estabelecimento(String cnpj_estabelecimento) {
-	this.cnpj_estabelecimento = cnpj_estabelecimento;
-    }
-
-    public String getNome_estabelecimento() {
-	return nome_estabelecimento;
-    }
-
-    public void setNome_estabelecimento(String nome_estabelecimento) {
-	this.nome_estabelecimento = nome_estabelecimento;
-    }
-
-    public String getRazaoSocial_estabelecimento() {
-	return razaoSocial_estabelecimento;
-    }
-
-    public void setRazaoSocial_estabelecimento(String razaoSocial_estabelecimento) {
-	this.razaoSocial_estabelecimento = razaoSocial_estabelecimento;
-    }
-
-    public String getEspecialidade_estabelecimento() {
-	return especialidade_estabelecimento;
-    }
-
-    public void setEspecialidade_estabelecimento(String especialidade_estabelecimento) {
-	this.especialidade_estabelecimento = especialidade_estabelecimento;
-    }
-
-    public String getUrl_image_Estabelecimento() {
-	return url_image_Estabelecimento;
-    }
-
-    public void setUrl_image_Estabelecimento(String url_image_Estabelecimento) {
-	this.url_image_Estabelecimento = url_image_Estabelecimento;
-    }
-
-    public float getRating_estabelecimento() {
-	return rating_estabelecimento;
-    }
-
-    public void setRating_estabelecimento(float rating_estabelecimento) {
-	this.rating_estabelecimento = rating_estabelecimento;
-    }
-
-    public String getCidade_estabelecimento() {
-        return cidade_estabelecimento;
-    }
-
-    public void setCidade_estabelecimento(String cidade_estabelecimento) {
-        this.cidade_estabelecimento = cidade_estabelecimento;
-    }
-
-    public String getEstado_estabelecimento() {
-        return estado_estabelecimento;
-    }
-
-    public void setEstado_estabelecimento(String estado_estabelecimento) {
-        this.estado_estabelecimento = estado_estabelecimento;
-    }
+  
  
 }
