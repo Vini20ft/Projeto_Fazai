@@ -106,29 +106,25 @@ public class CardapioActivity extends AppCompatActivity
     }
 
     public boolean onNavigationItemSelected(MenuItem item) {
-
         int id = item.getItemId();
 
-        if (id == R.id.nav_mapa) {
-            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
-            startActivity(intent);
+        Intent intent;
 
-        }else if (id == R.id.nav_menu_principal) {
-            Intent intent = new Intent(this, MainActivity.class);
+        if (id == R.id.nav_menu_principal) {
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_mapa) {
+            intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_compartilhar) {
 
         }else if (id == R.id.nav_pedido) {
 
         }else if (id == R.id.nav_sobre) {
-
+            intent = new Intent(this, SobreActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sair) {
             signOut();
-                /*
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("senha", "0");
-                editor.commit();
-                */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
