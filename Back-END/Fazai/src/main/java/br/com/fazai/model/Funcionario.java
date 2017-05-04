@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 
@@ -24,8 +27,10 @@ public class Funcionario {
 	private String login;
 	@Column(name="st_senha", length=15, nullable=false)
 	private String senha;
+	
 	@Column(name="st_telefone", length=15, nullable=false)
 	private String telefone_funcionario;
+	
 	@Column(name="st_rua", length=120, nullable=false)
 	private String rua_funcionario;
 	@Column(name="st_cidade", length=50, nullable=false)
@@ -43,6 +48,16 @@ public class Funcionario {
 	public void setNumero_funcionario(int numero_funcionario) {
 		this.numero_funcionario = numero_funcionario;
 	}
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+	@ManyToOne
+	 @JoinColumn(name="id_estabelecimento_fk")
+	 private Estabelecimento estabelecimento;
+	  
 	
 	public int getId_funcionario() {
 		return id_funcionario;

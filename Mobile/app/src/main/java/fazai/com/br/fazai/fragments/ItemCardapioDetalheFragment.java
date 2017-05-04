@@ -46,6 +46,9 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
     @BindView(R.id.txtDescricaoItemCardapio)
     TextView mDescricaoItemCardapio;
 
+    @BindView(R.id.txtValorItemCardapio)
+    TextView mValorItemCardapio;
+
     @Nullable
     @BindView(R.id.image_foto_item_cardapio)
     ImageView mImageItemCardapio;
@@ -145,6 +148,7 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
         appBarLayout.setTitle(data.nome);
         mTituloItemCardapio.setText(data.nome);
         mDescricaoItemCardapio.setText(data.descricao);
+        mValorItemCardapio.setText("R$ " + data.valor);
 
         if (mImageItemCardapio != null)
             Glide.with(getActivity()).load(data.imagem).into(mImageItemCardapio);

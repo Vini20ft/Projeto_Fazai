@@ -28,4 +28,7 @@
     <string name="horario_funcionamento">horas de oficina: </string>
     <string name="ligar">enlace</string>
     <string name="navegacao_mapa">Iniciar navegación</string>
+    <string name="titulo_item_cardapio">Titulo Item Cardapio</string>
+    <string name="descricao_item_cardapio">Descricao Item Cardapio</string>
+    <string name="valor_item_cardapio">Valor Item Cardapio</string>
 </resources>

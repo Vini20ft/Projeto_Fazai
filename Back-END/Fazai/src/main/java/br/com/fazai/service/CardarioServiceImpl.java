@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fazai.dao.CardapioDAO;
 import br.com.fazai.model.Cardapio;
+import br.com.fazai.model.ItemCardapio;
 
 @Service ("cardapioService")
 @Transactional(readOnly = true)
@@ -38,7 +39,7 @@ public class CardarioServiceImpl implements CardapioService{
 
 	@Override
 	public Cardapio consultarCardapioPorCodigo(int codigo) {
-		return null;
+		return this.cardapiodao.consultarCardapioPorCodigo(codigo);
 	}
 
 	@Override
@@ -49,8 +50,16 @@ public class CardarioServiceImpl implements CardapioService{
 	}
 
 	@Override
-	public List<Cardapio> todosCardapios() {	
-		return this.cardapiodao.TodosCardapios();
+	public List<Cardapio> todosCardapios(int codigo_estabelecimento) {
+	    // TODO Auto-generated method stub
+	    return this.cardapiodao.todosCardapios(codigo_estabelecimento);
+	}
+
+
+	@Override
+	public List<ItemCardapio> todosItemsPorCardapio(int codigo_cardapio) {
+	    // TODO Auto-generated method stub
+	    return this.cardapiodao.todosItemsPorCardapio(codigo_cardapio);
 	}
 	
 }

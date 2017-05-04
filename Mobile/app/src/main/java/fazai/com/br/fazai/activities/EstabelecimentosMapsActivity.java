@@ -171,9 +171,55 @@ public class EstabelecimentosMapsActivity extends FragmentActivity implements On
     public void onLoadFinished(Loader<List<Estabelecimento>> loader, List<Estabelecimento> data) {
         if (data != null) {
             //modificando latitude e longitude em tempo de Execução apenas para de desenvolvimento
-            if(data != null){
-                dadosEstabelecimentos = data;
+             dadosEstabelecimentos = data;
+                for (Estabelecimento est : data){
+                switch (est.nome.trim()){
+                    case "food truck 1":
+                      est.endereco.localizacao.latitude = -8.1541056;
+                      est.endereco.localizacao.longitude = -34.9202576;
+                      break;
+                    case "food truck 2":
+                      est.endereco.localizacao.latitude = -8.152128;
+                      est.endereco.localizacao.longitude = -34.9205178;
+                      break;
+                    case "food truck 3":
+                      est.endereco.localizacao.latitude = -8.152128;
+                      est.endereco.localizacao.longitude = -34.9205178;
+                      break;
+                    case "food truck 4":
+                      est.endereco.localizacao.latitude = -8.1559604;
+                      est.endereco.localizacao.longitude = -34.9110795;
+                      break;
+                    case "food truck 5":
+                        est.endereco.localizacao.latitude = -8.1566876;
+                        est.endereco.localizacao.longitude = -34.9116448;
+                        break;
+                    case "food truck 6":
+                        est.endereco.localizacao.latitude = -8.1568138;
+                        est.endereco.localizacao.longitude = -34.9115708;
+                        break;
+                    case "food truck 7":
+                        est.endereco.localizacao.latitude = -8.1340736;
+                        est.endereco.localizacao.longitude = -34.9021726;
+                        break;
+                    case "food truck 8":
+                        est.endereco.localizacao.latitude = -8.1340298;
+                        est.endereco.localizacao.longitude = -34.9016133;
+                        break;
+                    case "food truck 9":
+                        est.endereco.localizacao.latitude = -8.0910942;
+                        est.endereco.localizacao.longitude = -34.9558669;
+                        break;
+                    case "food truck 10":
+                        est.endereco.localizacao.latitude =  -7.1368038;
+                        est.endereco.localizacao.longitude = -34.8511042;
+                        break;
+
+                }
             }
+
+
+
             PreencherMarkers(data);
         }
     }

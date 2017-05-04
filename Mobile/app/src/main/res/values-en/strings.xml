@@ -28,6 +28,23 @@
     <string name="title_acitivity_cardapios">Lista de Cardápios</string>
     <string name="title_acitivity_item_cardapio">Pratos do dia</string>
 
+ // detanhe do food truck
+    <string name="aguarde">Wait...</string>
+    <string name="ligar">Turn on</string>
+    <string name="estado">State: </string>
+    <string name="cidade">City: </string>
+    <string name="bairro">Neighborhood: </string>
+    <string name="numero">Number: </string>
+    <string name="rua">Street: </string>
+
+    <string name="endereco">Address</string>
+    <string name="faculdade">College</string>
+    <string name="equipe">Team: </string>
+    <string name="banca">Bank</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo_item_cardapio">Titulo Item Cardapio</string>
+    <string name="descricao_item_cardapio">Descricao Item Cardapio</string>
+    <string name="valor_item_cardapio">Valor Item Cardapio</string>
 </resources>

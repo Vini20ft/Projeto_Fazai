@@ -101,6 +101,37 @@ public class CardapioActivity extends AppCompatActivity
         mNavigationView.setNavigationItemSelectedListener(this);
     }
 
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.nav_mapa) {
+            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
+            startActivity(intent);
+
+        }else if (id == R.id.nav_menu_principal) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_compartilhar) {
+
+        }else if (id == R.id.nav_pedido) {
+
+        }else if (id == R.id.nav_sobre) {
+
+        } else if (id == R.id.nav_sair) {
+            signOut();
+                /*
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("senha", "0");
+                editor.commit();
+                */
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     @Override
     public void onCardapioClick(Cardapio cardapio) {
         Intent it = new Intent(this, ItensCardapioActivity.class);
@@ -154,27 +185,6 @@ public class CardapioActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        int id = item.getItemId();
-        Intent intent;
-
-        if (id == R.id.nav_menu_principal) {
-            intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_mapa) {
-            intent = new Intent(this, EstabelecimentosMapsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_sair) {
-            signOut();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     public void signOut() {
         if (AccessToken.getCurrentAccessToken() != null) {

@@ -11,6 +11,7 @@ public interface EstabelecimentoDAO {
 	public void alterarEstabelecimento(Estabelecimento estabelecimento);
 	public Estabelecimento consultarEstabelecimentoPorCodigo(int codigo);
 	public void Excluir(int codigo);
-	public List<Estabelecimento> TodosEstabelecimentos();
+	public List<Estabelecimento> todosEstabelecimentos();
+	public List<Estabelecimento> todosEstabelecimentosPorCidade(String cidade);
 
 }

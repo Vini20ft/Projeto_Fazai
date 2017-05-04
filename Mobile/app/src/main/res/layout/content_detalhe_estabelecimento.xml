@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,19 +15,139 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtTituloEstabelecimento"
-            android:text="Aguarde..."/>
         <RatingBar
             android:id="@+id/ratingEstabelecimento"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:theme="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:isIndicator="true"
             android:clickable="false"
             android:stepSize="0.1"
+            android:rating="0.0"
             android:numStars="5"/>
+        <Button
+            android:id="@+id/btn_ligar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@mipmap/ic_phone"
+            android:textColor="@color/icons"
+            android:background="@color/colorPrimary"
+            android:text="@string/ligar"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars = "vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="@string/estado"
+                    />
+
+                <TextView
+                    android:id="@+id/txtEstado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/cardview_dark_background"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textAlignment="center"
+                    android:text=""
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="@string/cidade"
+                    />
+
+                <TextView
+                    android:id="@+id/txtCidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textAlignment="center"
+                    android:text=""
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="@string/bairro"
+                    />
+
+                <TextView
+                    android:id="@+id/txtBairro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textAlignment="center"
+                    android:text=""
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="@string/rua"
+                    />
+
+                <TextView
+                    android:id="@+id/txtRua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textAlignment="center"
+                    android:text=""
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="@string/numero"
+                    />
+
+                <TextView
+                    android:id="@+id/txtNumero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textAlignment="center"
+                    android:text=""
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

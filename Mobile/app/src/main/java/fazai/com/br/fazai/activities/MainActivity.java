@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity
             checkLocationPermission();
         }
 
+        //Verificar permissao ligação
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //checkCallPhonePermission();
+        }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -212,6 +216,13 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_mapa) {
             intent = new Intent(this, EstabelecimentosMapsActivity.class);
+            startActivity(intent);
+         }else if (id == R.id.nav_compartilhar) {
+
+        }else if (id == R.id.nav_pedido) {
+
+        }else if (id == R.id.nav_sobre) {
+          intent = new Intent(this, SobreActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sair) {
             signOut();
