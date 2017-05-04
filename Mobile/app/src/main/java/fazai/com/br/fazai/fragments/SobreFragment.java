@@ -17,10 +17,13 @@ import android.widget.Toast;
 
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.model.Estabelecimento;
+import fazai.com.br.fazai.model.VerifyConnection;
 
 public class SobreFragment extends Fragment{
-    CollapsingToolbarLayout appBarLayout;
-    private LoaderManager mLoaderManager;
+
+    public CollapsingToolbarLayout appBarLayout;
+    private VerifyConnection verifyConnection;
+
 
     public SobreFragment() {
     }
@@ -39,25 +42,15 @@ public class SobreFragment extends Fragment{
 
         appBarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.toolbar_layout_sobre);
 
-        if (!verificaConexao()) {
-            Toast.makeText(getActivity(), "Falha na conexão com a internet.",
+        verifyConnection = new VerifyConnection(getActivity());
+        verifyConnection.verificaConexao();
+
+        if (!verifyConnection.verificaConexao()) {
+            Toast.makeText(getActivity(), R.string.falha_na_conexão_com_a_internet,
                     Toast.LENGTH_LONG).show();
         }
 
         return view;
-    }
-
-    public  boolean verificaConexao() {
-        boolean conectado;
-        ConnectivityManager conectivtyManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conectivtyManager.getActiveNetworkInfo() != null
-                && conectivtyManager.getActiveNetworkInfo().isAvailable()
-                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-            conectado = true;
-        } else {
-            conectado = false;
-        }
-        return conectado;
     }
 
     public static SobreFragment newInstance(String sobreId) {

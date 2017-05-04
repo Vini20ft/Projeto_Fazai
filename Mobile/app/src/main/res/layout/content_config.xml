@@ -41,7 +41,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecione o idioma desejado"
+        android:text="@string/selecionar_idioma"
         android:textSize="20dp"
         android:layout_above="@+id/imageEua"
         android:layout_centerHorizontal="true"

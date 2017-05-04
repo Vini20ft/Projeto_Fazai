@@ -38,6 +38,7 @@ import fazai.com.br.fazai.http.CardapiosTask;
 import fazai.com.br.fazai.interfaces.OnCardapioClick;
 import fazai.com.br.fazai.model.Cardapio;
 import fazai.com.br.fazai.model.Constantes;
+import fazai.com.br.fazai.model.VerifyConnection;
 import fazai.com.br.fazai.ui.adapter.CardapioAdapter;
 
 public class CardapioActivity extends AppCompatActivity
@@ -63,6 +64,8 @@ public class CardapioActivity extends AppCompatActivity
     private LoaderManager mLoaderManager;
     private List<Cardapio> mCardapioList;
     private GoogleApiClient mGoogleApiClient;
+    private VerifyConnection verifyConnection;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,8 @@ public class CardapioActivity extends AppCompatActivity
 
         initToolBar();
 
-        verificaConexao();
+        verifyConnection = new VerifyConnection(this);
+        verifyConnection.verificaConexao();
 
         mListCardapio.setOnItemClickListener(this);
         mLoaderManager = getSupportLoaderManager();
@@ -102,29 +106,25 @@ public class CardapioActivity extends AppCompatActivity
     }
 
     public boolean onNavigationItemSelected(MenuItem item) {
-
         int id = item.getItemId();
 
-        if (id == R.id.nav_mapa) {
-            Intent intent = new Intent(this, EstabelecimentosMapsActivity.class);
-            startActivity(intent);
+        Intent intent;
 
-        }else if (id == R.id.nav_menu_principal) {
-            Intent intent = new Intent(this, MainActivity.class);
+        if (id == R.id.nav_menu_principal) {
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_mapa) {
+            intent = new Intent(this, EstabelecimentosMapsActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_compartilhar) {
 
         }else if (id == R.id.nav_pedido) {
 
         }else if (id == R.id.nav_sobre) {
-
+            intent = new Intent(this, SobreActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sair) {
             signOut();
-                /*
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("senha", "0");
-                editor.commit();
-                */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,17 +174,6 @@ public class CardapioActivity extends AppCompatActivity
         this.onCardapioClick(cardapio);
     }
 
-    public void verificaConexao() {
-        ConnectivityManager conectivtyManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conectivtyManager.getActiveNetworkInfo() != null
-                && conectivtyManager.getActiveNetworkInfo().isAvailable()
-                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-        } else {
-            Toast.makeText(getApplicationContext(), "Falha na conexão com a internet.",
-                    Toast.LENGTH_LONG).show();
-        }
-    }
-
 
     public void signOut() {
         if (AccessToken.getCurrentAccessToken() != null) {
@@ -201,7 +190,7 @@ public class CardapioActivity extends AppCompatActivity
 
     private void VerifyCurrentUser() {
         if (AccessToken.getCurrentAccessToken() == null && (mGoogleApiClient == null && !mGoogleApiClient.isConnected())) {
-            Toast.makeText(getApplicationContext(), "O usuário está deslogado!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.o_usuario_esta_deslogado, Toast.LENGTH_SHORT).show();
             goLoginScreen();
         }
     }

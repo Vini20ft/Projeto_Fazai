@@ -34,6 +34,8 @@ import fazai.com.br.fazai.http.ItemCardapioTask;
 import fazai.com.br.fazai.model.Constantes;
 import fazai.com.br.fazai.model.Estabelecimento;
 import fazai.com.br.fazai.model.ItemCardapio;
+import fazai.com.br.fazai.model.ValorReal;
+import fazai.com.br.fazai.model.VerifyConnection;
 
 
 public class ItemCardapioDetalheFragment extends Fragment implements LoaderManager.LoaderCallbacks<ItemCardapio> {
@@ -56,13 +58,11 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
     @BindView(R.id.fab_item_cardapio)
     FloatingActionButton mFab;
 
-    @BindView(R.id.txtComentarioItemCardapio)
-    EditText mComentarioItemCardapio;
-
     private LoaderManager mLoaderManager;
     private ItemCardapio mItemCardapio;
     private Unbinder unbinder;
-
+    private VerifyConnection verifyConnection;
+    private ValorReal valorReal;
 
     public ItemCardapioDetalheFragment() {
         // Required empty public constructor
@@ -95,15 +95,18 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Abrir tela de compra", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.abrir_tela_de_compra, Toast.LENGTH_SHORT).show();
             }
         });
 
         mLoaderManager = getLoaderManager();
         mLoaderManager.initLoader(1, getArguments(), this);
 
-        if (!verificaConexao()) {
-            Toast.makeText(getActivity(), "Falha na conexão com a internet.",
+        verifyConnection = new VerifyConnection(getActivity());
+        verifyConnection.verificaConexao();
+
+        if (!verifyConnection.verificaConexao()) {
+            Toast.makeText(getActivity(), R.string.falha_na_conexão_com_a_internet,
                     Toast.LENGTH_LONG).show();
         }
 
@@ -113,19 +116,6 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
     @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    public  boolean verificaConexao() {
-        boolean conectado;
-        ConnectivityManager conectivtyManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conectivtyManager.getActiveNetworkInfo() != null
-                && conectivtyManager.getActiveNetworkInfo().isAvailable()
-                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-            conectado = true;
-        } else {
-            conectado = false;
-        }
-        return conectado;
     }
 
     @Override
@@ -140,15 +130,18 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
             mItemCardapio = data;
             updateUI(mItemCardapio);
         } else {
-            Toast.makeText(getActivity(), "Erro ao carregar informações.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.erro_ao_carregar_informações, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void updateUI(ItemCardapio data) {
+
+        valorReal = new ValorReal();
+
         appBarLayout.setTitle(data.nome);
         mTituloItemCardapio.setText(data.nome);
         mDescricaoItemCardapio.setText(data.descricao);
-        mValorItemCardapio.setText("R$ " + data.valor);
+        mValorItemCardapio.setText(valorReal.ConverterValorReal(data.valor));
 
         if (mImageItemCardapio != null)
             Glide.with(getActivity()).load(data.imagem).into(mImageItemCardapio);

@@ -13,7 +13,7 @@
         android:id="@+id/item_estab_foto" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_estab_titulo"
@@ -23,7 +23,7 @@
         android:id="@+id/item_produto_preco" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
