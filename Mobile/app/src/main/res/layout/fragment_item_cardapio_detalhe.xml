@@ -20,7 +20,6 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            android:background="@drawable/borda"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -47,6 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"
+        android:src="@mipmap/ic_carrinho_compra"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
