@@ -10,7 +10,7 @@
     $scope.Pesquisar = function () {
         $scope.verificarOuAtualizarCookies();
         $scope.Pesquisa = true;
-        ServiceFazAi.removeService('/Cardapio/Delete', itemLista.id).then(function (response) {
+        ServiceFazAi.getService('/Cardapio/Pesquisar').then(function (response) {
             $scope.listaCardapio = response.data;
             $scope.Pesquisa = false;
         }, function errorCallback(response) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,16 +49,22 @@ public class EstabelecimentoController {
 	 * @RequestMapping => method => Defini o o m�todo http que o m�todo vai
 	 *                 responder.
 	 */
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public @ResponseBody void Salvar(
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public @ResponseBody String Salvar(
 			@RequestBody Estabelecimento estabelecimento) {
 
 		try {
-
-			this.estabelecimentoService.salvarEstabelecimento(estabelecimento);
-
+			
+			if (this.estabelecimentoService != null ){
+				this.estabelecimentoService.salvarEstabelecimento(estabelecimento);
+				return HttpStatus.CREATED.name().toString();
+			}else { 
+				return HttpStatus.CONFLICT.name().toString();
+			}
+			
+			
 		} catch (Exception e) {
-
+			return HttpStatus.HTTP_VERSION_NOT_SUPPORTED.name().toString();
 		}
 
 	}

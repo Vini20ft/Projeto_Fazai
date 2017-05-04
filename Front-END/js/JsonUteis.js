@@ -14,9 +14,7 @@ var listaFoodTrucks = [
     { id: 5, nome: "FoodTruck 5" }
 ];
 
-var
-
-    listaFuncionarioDados = [
+var listaFuncionarioDados = [
         {
             ID: "01",
             Nome: "Vinicius Oliveira",
@@ -31,6 +29,27 @@ var
             Senha: "123456",
             Perfil: "Gerente"
         }];
-                
-            
-             
+
+var listaPedido = [
+    { id: 1, pedido: 'TESTE', observacao: 'Percebemos, cada vez mais, que o julgamento imparcial das eventualidades é uma das consequências do retorno esperado a longo prazo.' },
+    { id: 2, pedido: 'TESTE', observacao: 'A certificação de metodologias que nos auxiliam a lidar com a percepção das dificuldades causa impacto indireto na reavaliação do investimento em reciclagem técnica.' },
+    { id: 3, pedido: 'TESTE', observacao: '' },
+    { id: 30, pedido: 'TESTE', observacao: '' },
+    { id: 5, pedido: 'TESTE', observacao: 'As experiências acumuladas demonstram que o início da atividade geral de formação de atitudes auxilia a preparação e a composição do sistema de participação geral.' },
+    { id: 6, pedido: 'TESTE', observacao: 'Neste sentido, a mobilidade dos capitais internacionais causa impacto indireto na reavaliação do fluxo de informações.' },
+    { id: 7, pedido: 'TESTE', observacao: '' },
+    { id: 8, pedido: 'TESTE', observacao: 'Percebemos, cada vez mais, que o julgamento imparcial das eventualidades é uma das consequências do retorno esperado a longo prazo.' },
+    { id: 4, pedido: 'TESTE', observacao: 'O empenho em analisar a consolidação das estruturas apresenta tendências no sentido de aprovar a manutenção dos índices pretendidos.' },
+    { id: 50, pedido: 'TESTE', observacao: '' },
+    { id: 13, pedido: 'TESTE', observacao: '' },
+    { id: 25, pedido: 'TESTE', observacao: 'Assim mesmo, a valorização de fatores subjetivos aponta para a melhoria dos relacionamentos verticais entre as hierarquias.' },
+    { id: 9, pedido: 'TESTE', observacao: '' },
+    { id: 40, pedido: 'TESTE', observacao: '' },
+    { id: 43, pedido: 'TESTE', observacao: '' },
+    { id: 99, pedido: 'TESTE', observacao: '' },
+    { id: 100, pedido: 'TESTE', observacao: 'Todavia, a expansão dos mercados mundiais aponta para a melhoria dos conhecimentos estratégicos para atingir a excelência.' },
+    { id: 109, pedido: 'TESTE', observacao: '' },
+];
+
+
+
