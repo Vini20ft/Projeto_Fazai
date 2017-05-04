@@ -98,5 +98,6 @@
     <string name="titulo_cardapio">Title Menu</string>
     <string name="nome_do_prato">Name of dish</string>
     <string name="descrição_do_prato">Description of the dish</string>
+    <string name="comentario_item_cardapio">Comentário</string>
 
 </resources>

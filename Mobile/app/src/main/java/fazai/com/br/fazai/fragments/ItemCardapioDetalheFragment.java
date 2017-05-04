@@ -58,9 +58,6 @@ public class ItemCardapioDetalheFragment extends Fragment implements LoaderManag
     @BindView(R.id.fab_item_cardapio)
     FloatingActionButton mFab;
 
-    @BindView(R.id.txtComentarioItemCardapio)
-    EditText mComentarioItemCardapio;
-
     private LoaderManager mLoaderManager;
     private ItemCardapio mItemCardapio;
     private Unbinder unbinder;
