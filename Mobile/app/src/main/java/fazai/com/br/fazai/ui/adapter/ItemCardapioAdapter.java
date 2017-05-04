@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.model.ItemCardapio;
+import fazai.com.br.fazai.model.ValorReal;
 
 
 public class ItemCardapioAdapter extends ArrayAdapter<ItemCardapio> {
@@ -39,11 +40,12 @@ public class ItemCardapioAdapter extends ArrayAdapter<ItemCardapio> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        ValorReal valorReal = new ValorReal();
         if (itemCardapio != null) {
             Glide.with(getContext()).load(itemCardapio.imagem).into(viewHolder.imgFoto);
             viewHolder.txtNome.setText(itemCardapio.nome);
             viewHolder.txtDescricao.setText(itemCardapio.descricao);
-            viewHolder.txtValor.setText("R$ "+ itemCardapio.valor);
+            viewHolder.txtValor.setText(valorReal.ConverterValorReal(itemCardapio.valor));
         }
 
         return convertView;
@@ -54,7 +56,7 @@ public class ItemCardapioAdapter extends ArrayAdapter<ItemCardapio> {
         ImageView imgFoto;
         @BindView(R.id.item_nome_prato)
         TextView txtNome;
-        @BindView(R.id.item_descricao_itens_cardapio)
+        @BindView(R.id.txtValorItemCardapio)
         TextView txtDescricao;
         @BindView(R.id.item_valor_itens_cardapio)
         TextView txtValor;

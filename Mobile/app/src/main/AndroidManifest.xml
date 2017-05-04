@@ -80,12 +80,16 @@
         <activity
             android:name=".activities.ItensCardapioActivity"
             android:label="@string/title_acitivity_item_cardapio" />
-        <activity android:name=".activities.DetalheItemCardapioActivity"></activity>
-
+        <activity
+            android:name=".activities.DetalheItemCardapioActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activities.ItensCardapioActivity" />
+    </activity>
 
           <activity
             android:name=".activities.SobreActivity"
-            android:label="@string/title_activity_sobre"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"

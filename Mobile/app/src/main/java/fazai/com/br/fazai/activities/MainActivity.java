@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity
                 } else {
 
                     // Permission denied, Disable the functionality that depends on this permission.
-                    Toast.makeText(this, "Permissão não concedida!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.permissão_negada, Toast.LENGTH_LONG).show();
                 }
                 return;
             }

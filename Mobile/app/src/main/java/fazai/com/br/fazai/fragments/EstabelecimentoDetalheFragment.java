@@ -34,15 +34,16 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.activities.CardapioActivity;
 import fazai.com.br.fazai.http.EstabelecimentoByIdTask;
 import fazai.com.br.fazai.model.Estabelecimento;
+import fazai.com.br.fazai.model.VerifyConnection;
 
 
-
-public class EstabelecimentoDetalheFragment extends Fragment implements LoaderManager.LoaderCallbacks<Estabelecimento>{
+public class EstabelecimentoDetalheFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Estabelecimento>{
 
     CollapsingToolbarLayout appBarLayout;
 
@@ -78,6 +79,8 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
     private Estabelecimento mEstabelecimento;
     private Unbinder unbinder;
     private ShareActionProvider mShareActionProvider;
+
+    private VerifyConnection verifyConnection;
 
     public EstabelecimentoDetalheFragment() {
 
@@ -118,19 +121,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_estabelecimento_detalhe, container, false);
-        View view1 = inflater.inflate(R.layout.content_detalhe_estabelecimento, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-        mbtnLigar.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("tel:" + mLigar);
-                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                intent.setData(Uri.parse(String.valueOf(uri)));
-                startActivity(intent);
-            }
-        });
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -143,14 +134,12 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Abrir cardápio", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.abrir_cardapio, Toast.LENGTH_SHORT).show();
             }
         });
 
-        if (!verificaConexao()) {
-            Toast.makeText(getActivity(), "Falha na conexão com a internet.",
-                    Toast.LENGTH_LONG).show();
-        }
+        verifyConnection = new VerifyConnection(getActivity());
+        verifyConnection.verificaConexao();
 
         /* ------ABRIR ACTIVITY DE CARDAPIOS APENAS PARA TESTE ------- */
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +187,7 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
             mEstabelecimento = data;
             updateUI(mEstabelecimento);
         } else {
-            Toast.makeText(getActivity(), "Erro ao carregar informações.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.erro_ao_carregar_informações, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -207,18 +196,12 @@ public class EstabelecimentoDetalheFragment extends Fragment implements LoaderMa
 
     }
 
-    public  boolean verificaConexao() {
-        boolean conectado;
-        ConnectivityManager conectivtyManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conectivtyManager.getActiveNetworkInfo() != null
-                && conectivtyManager.getActiveNetworkInfo().isAvailable()
-                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-            conectado = true;
-        } else {
-            conectado = false;
-        }
-        return conectado;
+    @OnClick(R.id.btn_ligar)
+    @Override
+    public void onClick(View v) {
+        Uri uri = Uri.parse("tel:" + mLigar);
+        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+        intent.setData(Uri.parse(String.valueOf(uri)));
+        startActivity(intent);
     }
-
-
 }

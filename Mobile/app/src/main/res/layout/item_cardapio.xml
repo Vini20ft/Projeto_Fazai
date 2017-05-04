@@ -13,7 +13,7 @@
         android:id="@+id/item_foto_cardapio" />
 
     <TextView
-        android:text="Dia da semana"
+        android:text="@string/dia_da_semana"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_cardapio_titulo"
@@ -23,7 +23,7 @@
         android:id="@+id/item_dia_semana" />
 
     <TextView
-        android:text="Titulo Cardapio"
+        android:text="@string/titulo_cardapio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"

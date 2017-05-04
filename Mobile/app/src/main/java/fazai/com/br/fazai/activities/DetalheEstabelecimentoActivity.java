@@ -25,7 +25,7 @@ public class DetalheEstabelecimentoActivity extends AppCompatActivity {
         //carregando fragment em tempo de execução
         String estabelecimentoId = getIntent().getStringExtra("id_estabelecimento");
         EstabelecimentoDetalheFragment fragment = EstabelecimentoDetalheFragment.newInstance(estabelecimentoId);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_produto_detalhe, fragment, "detalhe").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_detalhe_estabelecimento, fragment, "detalhe").commit();
 
     }
 }

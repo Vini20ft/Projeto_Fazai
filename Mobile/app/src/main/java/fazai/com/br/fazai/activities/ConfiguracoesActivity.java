@@ -36,21 +36,21 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         mImageBrazil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog("pt");
+                AlertDialog(String.valueOf(R.string.pt));
             }
         });
 
         mImageEua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog("en");
+                AlertDialog(String.valueOf(R.string.en));
             }
         });
 
         mImageSpain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog("es");
+                AlertDialog(String.valueOf(R.string.es));
             }
         });
     }
@@ -58,12 +58,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     public void AlertDialog(final String lang) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 loadLocale(lang);
             }
         });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
             }
