@@ -21,41 +21,43 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.util.Arrays;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private LoginButton loginButton;
-    private CallbackManager callbackManager;
+    @BindView(R.id.login_button)
+    LoginButton mLoginButton;
 
-    private GoogleApiClient googleApiClient;
-    private SignInButton signInButton;
-    private Button fb;
+    @BindView(R.id.signInButton)
+    SignInButton signInButton;
 
+    @BindView(R.id.fb)
+    Button mFb;
+
+    private CallbackManager mCallbackManager;
+    private GoogleApiClient mGoogleApiClient;
     public static final int SIGN_IN_CODE = 777;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         VerifyCurrentUser();
 
-        callbackManager = CallbackManager.Factory.create();
+        mCallbackManager = CallbackManager.Factory.create();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
-        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
-        init();
-
-
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        mLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 goMainScreen();
@@ -82,8 +84,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void VerifyCurrentUser() {
-        if (AccessToken.getCurrentAccessToken() != null || (googleApiClient != null && googleApiClient.isConnected())) {
-            Toast.makeText(getApplicationContext(), "Teste", Toast.LENGTH_SHORT).show();
+        if (AccessToken.getCurrentAccessToken() != null || (mGoogleApiClient != null && mGoogleApiClient.isConnected())) {
+            Toast.makeText(getApplicationContext(), R.string.o_usuario_esta_deslogado, Toast.LENGTH_SHORT).show();
             goMainScreen();
         }
     }
@@ -94,16 +96,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         startActivity(intent);
     }
 
-    public void init() {
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        fb = (Button) findViewById(R.id.fb);
-        signInButton = (SignInButton) findViewById(R.id.signInButton);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SIGN_IN_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -119,8 +115,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -128,18 +122,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     //metodo click FacebookLogin
     public void onClickFacebook(View v) {
-        if (v == fb) {
-            loginButton.performClick();
+        if (v == mFb) {
+            mLoginButton.performClick();
         }
     }
 
     //metodo click googlePlusLogin
     public void onClickGooglePlus(View v){
-        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(intent, SIGN_IN_CODE);
     }
-
-
-
 }
-

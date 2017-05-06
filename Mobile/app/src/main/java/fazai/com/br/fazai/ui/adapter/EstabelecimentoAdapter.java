@@ -1,60 +1,56 @@
 package fazai.com.br.fazai.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.PopupMenu;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fazai.com.br.fazai.R;
 import fazai.com.br.fazai.model.Estabelecimento;
 
-public class EstabelecimentoAdapter extends RecyclerView.Adapter<EstabelecimentoAdapter.ViewHolder> {
-
-    private Context mContext;
-    private List<Estabelecimento> mEstabelecimentoList;
-
+public class EstabelecimentoAdapter extends ArrayAdapter<Estabelecimento> {
     public EstabelecimentoAdapter(Context context, List<Estabelecimento> estabelecimentoList) {
-        this.mContext = context;
-        this.mEstabelecimentoList = estabelecimentoList;
+        super(context, 0, estabelecimentoList);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Estabelecimento estabelecimento = getItem(position);
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card,parent,false);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_estab, parent, false);
+            viewHolder = new ViewHolder(convertView);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
-        return new ViewHolder(itemView);
+        if (estabelecimento != null) {
+            Glide.with(getContext()).load(estabelecimento.foto).into(viewHolder.imgFoto);
+            viewHolder.txtTitulo.setText(estabelecimento.nome);
+        }
+
+        return convertView;
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.description.setText(mEstabelecimentoList.get(position).nome);
-        Glide.with(mContext).load(mEstabelecimentoList.get(position).foto).into(holder.imageView);
-    }
+    static class ViewHolder {
+        @BindView(R.id.item_estab_foto) ImageView imgFoto;
+        @BindView(R.id.item_estab_titulo) TextView txtTitulo;
 
-    @Override
-    public int getItemCount() {
-        return mEstabelecimentoList.size();
-    }
-
-    public  class ViewHolder extends  RecyclerView.ViewHolder{
-
-        public TextView description;
-        public ImageView imageView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            description = (TextView) itemView.findViewById(R.id.description);
-            imageView = (ImageView) itemView.findViewById(R.id.image);
+        ViewHolder(View parent) {
+            ButterKnife.bind(this, parent);
+            parent.setTag(this);
         }
     }
 }
