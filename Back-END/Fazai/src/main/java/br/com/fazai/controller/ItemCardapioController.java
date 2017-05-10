@@ -33,18 +33,27 @@ public class ItemCardapioController {
      * @RequestMapping => method => Defini o o m�todo http que o m�todo vai
      *                 responder.
      */
-    @RequestMapping(value = "/salvar", method = RequestMethod.POST)
-    public @ResponseBody void Salvar(@RequestBody ItemCardapio itemcardapio) {
+   @RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    public @ResponseBody String Salvar(@RequestBody ItemCardapio itemcardapio) {
 
 	try {
 
-	    this.itemcardapioServ.salvarItemCardapio(itemcardapio);
+
+		if (this.itemcardapioServ != null) {
+			 this.itemcardapioServ.salvarItemCardapio(itemcardapio);
+			return HttpStatus.CREATED.name().toString();
+		    } else {
+			return HttpStatus.CONFLICT.name().toString();
+		    }
+		
+	   
 
 	} catch (Exception e) {
 
-	}
+	    return HttpStatus.HTTP_VERSION_NOT_SUPPORTED.name().toString();
+			}
 
-    }
+		    }
 
     @RequestMapping(value = "/alterar", method = RequestMethod.PUT)
     public @ResponseBody void Alterar(@RequestBody ItemCardapio itemcardapio) {

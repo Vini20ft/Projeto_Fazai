@@ -45,19 +45,26 @@ public class FuncionarioController {
 	 * @RequestMapping => value  => Defini o caminho para a chamada da view. 
 	 * @RequestMapping => method => Defini o o m�todo http que o m�todo vai responder.
 	 */
-	@RequestMapping(value="/salvar", method= RequestMethod.POST)
-	public @ResponseBody void Salvar(@RequestBody Funcionario funcionario){
+	@RequestMapping(value="/salvar", method= RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public @ResponseBody String Salvar(@RequestBody Funcionario funcionario){
  
 		try {
  
-			this.funcionarioServ.salvarFuncionario(funcionario);
+			if (this.funcionarioServ != null) {
+				this.funcionarioServ.salvarFuncionario(funcionario);
+				return HttpStatus.CREATED.name().toString();
+			    } else {
+				return HttpStatus.CONFLICT.name().toString();
+			    }
+			
+			
 
  
 		} catch (Exception e) {
- 
+		    return HttpStatus.HTTP_VERSION_NOT_SUPPORTED.name().toString();
 		}
- 
-	}
+
+	    }
  
 	@RequestMapping(value="/alterar", method= RequestMethod.PUT)
 	public @ResponseBody void Alterar(@RequestBody Funcionario funcionario){

@@ -32,19 +32,26 @@ public class ConsumidorController {
 	 * @RequestMapping => value  => Defini o caminho para a chamada da view. 
 	 * @RequestMapping => method => Defini o o m�todo http que o m�todo vai responder.
 	 */
-	@RequestMapping(value="/salvar", method= RequestMethod.POST)
-	public @ResponseBody void Salvar(@RequestBody Consumidor consumidor){
+	@RequestMapping(value="/salvar", method= RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public @ResponseBody String Salvar(@RequestBody Consumidor consumidor){
  
 		try {
  
-			this.consumidorServ.salvarConsumidor(consumidor);
+			  if (this.consumidorServ != null) {
+				  this.consumidorServ.salvarConsumidor(consumidor);
+					return HttpStatus.CREATED.name().toString();
+				    } else {
+					return HttpStatus.CONFLICT.name().toString();
+				    }
+			
+			
 
  
 		} catch (Exception e) {
- 
+		    return HttpStatus.HTTP_VERSION_NOT_SUPPORTED.name().toString();
 		}
- 
-	}
+
+	    }
  
 	@RequestMapping(value="/alterar", method= RequestMethod.PUT)
 	public @ResponseBody void Alterar(@RequestBody Consumidor consumidor){
