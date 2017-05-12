@@ -9,7 +9,7 @@
 function MainCtrl($scope, $state) {
 
     this.usuario = {};
-    this.usuario.nome = "Teste usuário";
+    this.usuario.nome = "";
     this.helloText = 'Bem vindo ao Faz aí';
     this.descriptionText = '';
 
@@ -19,13 +19,17 @@ function MainCtrl($scope, $state) {
     ////////////////////////////////////////////////////
     $scope.verificarOuAtualizarCookies = function () {
         var emailUsuario = getCookie("emailUsuario");
+        var dadosFuncionario = getCookie("listaIdFoodTruckFuncionario");
         if (emailUsuario == "") $state.go('login');
-        else setCookie("emailUsuario", emailUsuario);
+        else {
+            setCookie("emailUsuario", emailUsuario);
+            setCookie("listaIdFoodTruckFuncionario", dadosFuncionario);
+        }
     }
 
     setCookie = function (cname, valor) {
         var d = new Date();
-        console.log("Set cookie - Data Atual: " + d.toUTCString());
+        //console.log("Set cookie - Data Atual: " + d.toUTCString());
         d.add(10).minutes(); // 10 minutos
         var expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + valor + ";" + expires + ";";
@@ -59,6 +63,22 @@ function MainCtrl($scope, $state) {
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
         console.log("Deletar todos os Cookies");
+    }
+
+    $scope.ToasterMsg = function (mensagem, tipo) {
+        toaster.pop({
+            type: tipo,
+            body: mensagem,
+            showCloseButton: true
+        });
+    }
+
+    $scope.MsgErro = function (response, mensagem) {
+        console.log(response.data);
+        if (response.status == 406)
+            $scope.ToasterMsg(response.data, 'error');
+        else
+            $scope.ToasterMsg(mensagem, 'error');
     }
     ////////////////////////////////////////////////////
     //Itens comum que deve ter em todos os controllers.

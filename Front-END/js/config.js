@@ -83,6 +83,25 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('index.primeiroAcesso', {
+            url: "/primeiroAcesso",
+            templateUrl: "views/primeiroAcesso.html",
+            data: { pageTitle: 'Primeiro Acesso' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
                             files: ['js/plugins/date.js']
                         }
                     ]);
