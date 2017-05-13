@@ -1,0 +1,29 @@
+﻿<div ng-controller="cardapioController">
+    <form method="get" class="form-horizontal" ng-submit="SalvarFoto()">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2 style="margin-top:13px"><i class="fa fa-cutlery" style="font-size:20px"></i> Adicionar foto</h2>
+            </div>
+            <div class="col-sm-8">
+                <div class="title-action">
+                    <button type="submit" class="btn btn-primary" ng-if="disabledUpload == false">Salvar</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row animated fadeInRightBig">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Selecione a foto*:</label>
+                            <div class="col-md-8"><input type="file" class="form-control" id="foto" ng-model="foto" accept="image/*" ng-required="true"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <toaster-container></toaster-container>
+    </form>
+</div>

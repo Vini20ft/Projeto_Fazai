@@ -1,0 +1,76 @@
+﻿<div ng-controller="foodtruckController" ng-init="CadastroEdicaoInit(false)">
+    <form method="get" class="form-horizontal" ng-submit="Salvar(false)">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2 style="margin-top:13px"><i class="fa fa-truck" style="font-size:20px"></i> Novo FoodTruck</h2>
+            </div>
+            <div class="col-sm-8">
+                <div class="title-action">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row animated fadeInRightBig">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="spiner-example" ng-if="Pesquisa == true">
+                            <div class="sk-spinner sk-spinner-three-bounce">
+                                <div class="sk-bounce1"></div>
+                                <div class="sk-bounce2"></div>
+                                <div class="sk-bounce3"></div>
+                            </div>
+                        </div>
+                        <div ng-if="Pesquisa == false">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nome*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FoodTruckDados.Nome" maxlength="100" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">RazaoSocial*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FoodTruckDados.RazaoSocial" maxlength="100" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">CNPJ*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="40" ng-model="FoodTruckDados.CNPJ" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Especialidade*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="40" ng-model="FoodTruckDados.Especialidade" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Logradouro*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FoodTruckDados.Rua" maxlength="400" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Número*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="FoodTruckDados.Numero" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Bairro*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FoodTruckDados.Bairro" maxlength="20" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Cidade*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="20" ng-model="FoodTruckDados.Cidade" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Estado*:</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="FoodTruckDados.Estados.selected"
+                                            ng-options="item as item.nome for item in Estados | orderBy:'nome'"
+                                            ng-required="true">
+                                        <option value="">Selecione um Estado</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">Telefone*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="FoodTruckDados.Telefone" ng-required="true"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Latitude*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" ng-model="FoodTruckDados.Latitude" maxlength="20" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Longitude*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" maxlength="20" ng-model="FoodTruckDados.Longitude" ng-required="true"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <toaster-container></toaster-container>
+    </form>
+</div>

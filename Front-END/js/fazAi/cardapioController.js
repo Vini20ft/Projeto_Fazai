@@ -7,6 +7,7 @@
     $scope.foodTrucks = [];
     $scope.listaItemCardapio = {};
     $scope.Pesquisa = false;
+    $scope.disabledUpload = false;
 
     $scope.Pesquisar = function () {
         $scope.verificarOuAtualizarCookies();
@@ -65,6 +66,16 @@
         $state.go('index.cardapioEdicao/:cardapioItem', { cardapioItem: itemLista.Id });
     }
 
+    $scope.ItensCardapioItem = function (itemLista) {
+        $scope.verificarOuAtualizarCookies();
+        $state.go('index.cardapioItens/:cardapioItem', { cardapioItem: itemLista.Id });
+    }
+
+    $scope.AdicionarFoto = function (itemLista) {
+        $scope.verificarOuAtualizarCookies();
+        $state.go('index.cardapioItemAdicionarFoto/:cardapioItem', { cardapioItem: itemLista.Id });
+    }
+
     $scope.ExcluirItem = function (itemLista) {
         $scope.verificarOuAtualizarCookies();
         $scope.Pesquisa = true;
@@ -120,6 +131,28 @@
         var index = $scope.CardapioDados.ItemCardapio.indexOf(itemLista);
         if (index != -1) $scope.CardapioDados.ItemCardapio.splice(index, 1);
         $scope.ToasterMsg(excluidoSucesso, 'success');
+    }
+
+    $scope.PesquisarInitItemCardapio = function () {
+        $scope.GetForId();
+    }
+
+    $scope.SalvarFoto = function () {
+
+        var formData = new FormData();
+        formData.append('file', $('#foto')[0].files[0]);
+        $scope.disabledUpload = true;
+
+        ServiceFazAi.uploadService('/Cardapio/Upload?id=' + $stateParams.cardapioItem, formData).then(function (response) {
+            $scope.disabledUpload = false;
+            $scope.ToasterMsg(salvoSucesso);
+            $state.go('index.cardapioItens/:cardapioItem', { cardapioItem: response.data });
+            //$state.go('index.cardapio');
+        }, function errorCallback(response) {
+            $scope.MsgErro(response, salvoErro);
+            $scope.disabledUpload = false;
+        });
+
     }
 
     ////////////////////////////////////////////////////
