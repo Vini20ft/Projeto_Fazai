@@ -110,11 +110,92 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         })
         .state('index.foodtruck', {
             url: "/foodtruck",
-            templateUrl: "views/foodtruck.html",
+            templateUrl: "views/Foodtruck/foodtruck.html",
             data: { pageTitle: 'Food truck' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
+                        },
+                        {
+                            name: 'ui.footable',
+                            files: ['js/plugins/footable/angular-footable.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('index.foodtruckCadastro', {
+            url: "/foodtruckCadastro",
+            templateUrl: "views/Foodtruck/foodtruckCadastro.html",
+            data: { pageTitle: 'Cadastro de Foodtruck' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('index.foodtruckEdicao/:foodtruckItem', {
+            url: "/foodtruckEdicao/:foodtruckItem",
+            templateUrl: "views/Foodtruck/foodtruckEdicao.html",
+            data: { pageTitle: 'Cadastro de Foodtruck' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('index.foodtruckAdicionarFoto/:foodtruckItem', {
+            url: "/foodtruckAdicionarFoto/:foodtruckItem",
+            templateUrl: "views/Foodtruck/foodtruckAdicionarFoto.html",
+            data: { pageTitle: 'Adicionar foto' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
                         {
                             files: ['js/plugins/date.js']
                         }
@@ -249,7 +330,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.cardapioEdicao/:cardapioItem', {
             url: "/cardapioEdicao/:cardapioItem",
             templateUrl: "views/Cardapio/cardapioEdicao.html",
-            data: { pageTitle: 'Cadastro de Card�pio' },
+            data: { pageTitle: 'Cadastro de Cardápio' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
@@ -259,6 +340,55 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         {
                             name: 'ui.footable',
                             files: ['js/plugins/footable/angular-footable.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('index.cardapioItens/:cardapioItem', {
+            url: "/cardapioItens/:cardapioItem",
+            templateUrl: "views/Cardapio/cardapioItens.html",
+            data: { pageTitle: 'Itens do Cardápio' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
+                        },
+                        {
+                            name: 'ui.footable',
+                            files: ['js/plugins/footable/angular-footable.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('index.cardapioItemAdicionarFoto/:cardapioItem', {
+            url: "/cardapioItemAdicionarFoto/:cardapioItem",
+            templateUrl: "views/Cardapio/cardapioItemAdicionarFoto.html",
+            data: { pageTitle: 'Adicionar foto' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
                         },
                         {
                             insertBefore: '#loadBefore',
@@ -287,19 +417,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             }
         })
          .state('EsqueceuSenha', {
-            url: "/EsqueceuSenha",
-            templateUrl: "views/EsqueceuSenha.html",
-            data: { pageTitle: 'Esqueceu Senha' },
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['js/plugins/date.js']
-                        }
-                    ]);
-                }
-            }
-        })
+             url: "/EsqueceuSenha",
+             templateUrl: "views/EsqueceuSenha.html",
+             data: { pageTitle: 'Esqueceu Senha' },
+             resolve: {
+                 loadPlugin: function ($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                         {
+                             files: ['js/plugins/date.js']
+                         }
+                     ]);
+                 }
+             }
+         })
 }
 angular
     .module('inspinia')

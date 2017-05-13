@@ -129,8 +129,9 @@
                         listaIdFoodTruckFuncionario += (item.IdFoodTruck);
                 });
                 setCookie("listaIdFoodTruckFuncionario", listaIdFoodTruckFuncionario);
-
-                $state.go('index.primeiroAcesso');
+                
+                $state.go('index.foodtruckEdicao/:foodtruckItem', { foodtruckItem: response.data.FoodTruckFuncionario[0].IdFoodTruck });
+                //$state.go('index.primeiroAcesso');
             }
             else
                 $state.go('index.funcionario');
