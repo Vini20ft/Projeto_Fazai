@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_cardapio.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_cardapio.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_conta.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_conta.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_pedido.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_pedido.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_find.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_find.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_compartilhar.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_compartilhar.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_carrinho_compra.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_carrinho_compra.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_phone.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_phone.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_faz_ai.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_faz_ai.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_home.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_home.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_mapa.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_mapa.png"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_sair.png",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_sair.png"
+    }
+]

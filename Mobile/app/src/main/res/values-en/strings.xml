@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Faz Aí</string>
+    <string name="facebook_app_id">755309927978194</string>
+    <string name="facebook_app_id1"></string>
+
+    <string name="cancel_login">Login canceled</string>
+    <string name="error_login">There was an error logging in</string>
+    <string name="error_logout">There was an error logging out</string>
+
+    <string name="title_activity_estabelecimentos_maps">Map</string>
+    <string name="txtLogin">Keep with: </string>
+    <string name="msgCampoPesquisaFoodVazio">Enter the name of the Food Truck! </string>
+
+    <string name="navigation_drawer_open">Open the navigation drawer</string>
+    <string name="navigation_drawer_close">Close the navigation drawer</string>
+    <string name="msgInfoDetalheEstabelecimentoMap">¿Desea obtener más información de este camión de alimentos? </string>
+
+    <string name="action_settings">Settings</string>
+
+    <!--menu lateral-->
+    <string name="perfil">Profile</string>
+    <string name="pedidos">Requests</string>
+    <string name="compartilhar">To share</string>
+    <string name="cardapio">Menu</string>
+    <string name="menu_principal">Main menu</string>
+    <string name="status_pedido">Order status</string>
+    <string name="conta">Bill</string>
+    <string name="sair">Exit</string>
+    <string name="sobre">About</string>
+
+    <!--Fragment detalhe do Food Truck-->
+    <string name="endereco">Address: </string>
+    <string name="horario_funcionamento">Operating hours: </string>
+    <string name="ligar">Call</string>
+    <string name="navegacao_mapa">Start Navigation</string>
+    <string name="estado">State: </string>
+    <string name="cidade">City: </string>
+    <string name="bairro">Neighborhood: </string>
+    <string name="numero">Number: </string>
+    <string name="rua">Street: </string>
+    <string name="title_activity_detalhe_estabelecimento">Details of the establishment</string>
+
+
+    <!-- Tela de Sobre -->
+    <string name="mapa_dos_food_trucks">Map of Food Trucks</string>
+    <string name="title_activity_main">List of Food Trucks</string>
+    <string name="faculdade">College</string>
+    <string name="equipe">Team: </string>
+    <string name="unibratec">UNIBRATEC</string>
+    <string name="tiago_aschoff">Tiago Aschoff</string>
+    <string name="caio">Caio Ernandes</string>
+    <string name="samy">Ially Samara</string>
+    <string name="danilo">Danilo Matias</string>
+    <string name="leomir">Leomir Oliveira</string>
+    <string name="misael">Misael Ribeiro</string>
+    <string name="ricardo">Ricardo Rodrigues</string>
+    <string name="thiago">Thiago Charamba</string>
+    <string name="vinicius">Vinicius Freitas</string>
+    <string name="banca">Bank</string>
+    <string name="flavius">Flavius Anderson Felix Pereira</string>
+    <string name="alessandro">Alessandro Monteiro Lima</string>
+    <string name="luna">Alexandre José Henrique de Oliveira Luna</string>
+    <string name="fernando">José Fernando Monteiro da Siva</string>
+
+    <!-- Permissões -->
+    <string name="habilitar_permissão">You must enable the permission to continue.</string>
+    <string name="permissão_concedida">Permission granted</string>
+    <string name="permissão_negada">Permission denied</string>
+    <string name="titulo_item_cardapio">Title Item Menu</string>
+    <string name="descricao_item_cardapio">Description Item Menu</string>
+    <string name="valor_item_cardapio">Item Value Menu</string>
+
+    <!-- Toast -->
+    <string name="falha_na_conexão_com_a_internet">Internet connection failure.</string>
+    <string name="erro_ao_carregar_informações">Error loading info.</string>
+    <string name="abrir_tela_de_compra">Open purchase screen</string>
+    <string name="o_usuario_esta_deslogado">User is offline!</string>
+    <string name="abrir_cardapio">Open menu</string>
+
+    <!-- Outros -->
+    <string name="pt">pt</string>
+    <string name="en">en</string>
+    <string name="es">es</string>
+    <string name="ok">Ok</string>
+    <string name="cancelar">Cancel</string>
+    <string name="title_acitivity_cardapios">List of menus</string>
+    <string name="title_acitivity_item_cardapio">Dishes of the day</string>
+    <string name="aguarde">Wait...</string>
+    <string name="valor_do_prato">Plate value</string>
+    <string name="google_plus">Google +</string>
+    <string name="face_book">FaceBook</string>
+    <string name="selecionar_idioma">Select the desired language</string>
+    <string name="enviar_comentario">Submit Review</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="deseja_mais_informacoes">Want more information?</string>
+    <string name="dia_da_semana">Day of the week</string>
+    <string name="titulo_cardapio">Title Menu</string>
+    <string name="nome_do_prato">Name of dish</string>
+    <string name="descrição_do_prato">Description of the dish</string>
+    <string name="comentario_item_cardapio">Comentário</string>
+    <string name="title_activity_carrinho_compras">My cart</string>
+    <string name="total_valor">Total payable</string>
+    <string name="ver_carrinho">View cart</string>
+    <string name="restabelecer">Reset</string>
+    <string name="pagamento">Pay</string>
+    <string name="limpar">To clean</string>
+    <string name="valor_Pagar">Total payable = R$ 0,00</string>
+    <string name="confirmação_nula">confirmation is null</string>
+    <string name="erro_no_pagamento">Error in the payment</string>
+    <string name="pagamento_aprovado">Payment approved</string>
+    <string name="nao_ha_produtos">There are no products available for this Food Truck</string>
+    <string name="avaliar_estabelecimento">Rate Establishment</string>
+
+</resources>

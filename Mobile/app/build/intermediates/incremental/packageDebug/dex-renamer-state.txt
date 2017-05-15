@@ -1,0 +1,7 @@
+#Sun May 14 20:48:22 BRT 2017
+base.0=C\:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_feee385a9d8471ada12b3abac890bf84b763c473
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_e5ac0db860d96bd1ff945f3cbc39da512ffc60ea\\classes.dex
+base.1=C\:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_e5ac0db860d96bd1ff945f3cbc39da512ffc60ea
+file.0=C\:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_feee385a9d8471ada12b3abac890bf84b763c473\\classes.dex

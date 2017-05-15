@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_detalhe_estabelecimento.xml",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\menu\\menu_detalhe_estabelecimento.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_sobre.xml",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\menu\\menu_sobre.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_detalhe.xml",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\menu\\menu_detalhe.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_carrinho_compras.xml",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\menu\\menu_carrinho_compras.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main_drawer.xml",
+        "source": "C:\\Users\\Ricardo\\Desktop\\Projeto Aschoff\\mobile\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
+    }
+]

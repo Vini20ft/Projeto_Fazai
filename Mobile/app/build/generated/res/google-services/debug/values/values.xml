@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">359267866058-t4cuv15co1shvkep71tsdo8sr1iq4rn7.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://fazai-568d2.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">359267866058</string>
+    <string name="google_api_key" translatable="false">AIzaSyB92l3phtRvsbvjaYBLJJXVOz8T8X3vmR0</string>
+    <string name="google_app_id" translatable="false">1:359267866058:android:8ce77604a52312e0</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB92l3phtRvsbvjaYBLJJXVOz8T8X3vmR0</string>
+    <string name="google_storage_bucket" translatable="false">fazai-568d2.appspot.com</string>
+</resources>

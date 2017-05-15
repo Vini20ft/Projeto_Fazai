@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fazai.com.br.fazai.activities.LoginActivity" >
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="38dp"
+        android:src="@drawable/logo_faz_ai"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/txtLogin"
+        android:layout_width="wrap_content"
+        android:textColor="@color/com_facebook_button_background_color_disabled"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignStart="@+id/fb"
+        android:layout_marginTop="33dp" />
+
+
+
+    <FrameLayout
+        android:id="@+id/FrameLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/FrameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/gPlus"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickGooglePlus"
+        android:text="@string/google_plus"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_below="@+id/fb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/fb"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickFacebook"
+        android:text="@string/face_book"
+        android:drawableTint="@color/colorPrimary"
+        android:background="@color/com_facebook_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignStart="@+id/gPlus"
+        android:layout_marginTop="67dp" />
+
+</RelativeLayout>

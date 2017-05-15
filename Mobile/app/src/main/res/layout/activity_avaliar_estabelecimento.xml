@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="fazai.com.br.fazai.activities.AvaliarEstabelecimentoActivity">
+
+        <TextView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:id="@+id/txt_avaliar_estabelecimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:textColor="@color/cardview_dark_background"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:text="@string/avaliar_estabelecimento" />
+
+        <RatingBar
+            android:id="@+id/ratingEstabelecimento"
+            android:theme="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:isIndicator="true"
+            android:clickable="true"
+            android:stepSize="0.1"
+            android:rating="0.0"
+            android:numStars="5"
+            tools:layout_editor_absoluteY="16dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:textColor="@color/com_facebook_button_background_color_focused"
+            android:id="@+id/btn_avaliar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/avaliar_estabelecimento"
+            android:background="@color/colorPrimary"
+            />
+</LinearLayout>
