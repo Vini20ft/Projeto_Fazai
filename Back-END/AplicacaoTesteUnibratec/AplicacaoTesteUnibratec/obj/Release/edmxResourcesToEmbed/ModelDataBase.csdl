@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TesteUnibratecDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TesteUnibratecDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cardapio" EntityType="TesteUnibratecDBModel.Cardapio" />
+    <EntitySet Name="FoodTruck" EntityType="TesteUnibratecDBModel.FoodTruck" />
+    <EntitySet Name="FoodTruckFuncionario" EntityType="TesteUnibratecDBModel.FoodTruckFuncionario" />
+    <EntitySet Name="Funcionario" EntityType="TesteUnibratecDBModel.Funcionario" />
+    <EntitySet Name="ItemCardapio" EntityType="TesteUnibratecDBModel.ItemCardapio" />
+    <EntitySet Name="ItemPedido" EntityType="TesteUnibratecDBModel.ItemPedido" />
+    <EntitySet Name="Pedido" EntityType="TesteUnibratecDBModel.Pedido" />
+    <EntitySet Name="Perfil" EntityType="TesteUnibratecDBModel.Perfil" />
+    <EntitySet Name="TBTeste" EntityType="TesteUnibratecDBModel.TBTeste" />
+    <AssociationSet Name="FK_Cardapio_foodTruck" Association="TesteUnibratecDBModel.FK_Cardapio_foodTruck">
+      <End Role="FoodTruck" EntitySet="FoodTruck" />
+      <End Role="Cardapio" EntitySet="Cardapio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemCardapio_Cardapio" Association="TesteUnibratecDBModel.FK_ItemCardapio_Cardapio">
+      <End Role="Cardapio" EntitySet="Cardapio" />
+      <End Role="ItemCardapio" EntitySet="ItemCardapio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodTruckFuncionario_FoodTruck" Association="TesteUnibratecDBModel.FK_FoodTruckFuncionario_FoodTruck">
+      <End Role="FoodTruck" EntitySet="FoodTruck" />
+      <End Role="FoodTruckFuncionario" EntitySet="FoodTruckFuncionario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodTruckFuncionario_Funcionario" Association="TesteUnibratecDBModel.FK_FoodTruckFuncionario_Funcionario">
+      <End Role="Funcionario" EntitySet="Funcionario" />
+      <End Role="FoodTruckFuncionario" EntitySet="FoodTruckFuncionario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Funcionario_Perfil" Association="TesteUnibratecDBModel.FK_Funcionario_Perfil">
+      <End Role="Perfil" EntitySet="Perfil" />
+      <End Role="Funcionario" EntitySet="Funcionario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPedido_ItemCardapio" Association="TesteUnibratecDBModel.FK_ItemPedido_ItemCardapio">
+      <End Role="ItemCardapio" EntitySet="ItemCardapio" />
+      <End Role="ItemPedido" EntitySet="ItemPedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPedido_Pedido" Association="TesteUnibratecDBModel.FK_ItemPedido_Pedido">
+      <End Role="Pedido" EntitySet="Pedido" />
+      <End Role="ItemPedido" EntitySet="ItemPedido" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cardapio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IdFoodTruck" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodTruck" Relationship="TesteUnibratecDBModel.FK_Cardapio_foodTruck" FromRole="Cardapio" ToRole="FoodTruck" />
+    <NavigationProperty Name="ItemCardapio" Relationship="TesteUnibratecDBModel.FK_ItemCardapio_Cardapio" FromRole="Cardapio" ToRole="ItemCardapio" />
+  </EntityType>
+  <EntityType Name="FoodTruck">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNPJ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Especialidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RazaoSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rating" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Foto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rua" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cardapio" Relationship="TesteUnibratecDBModel.FK_Cardapio_foodTruck" FromRole="FoodTruck" ToRole="Cardapio" />
+    <NavigationProperty Name="FoodTruckFuncionario" Relationship="TesteUnibratecDBModel.FK_FoodTruckFuncionario_FoodTruck" FromRole="FoodTruck" ToRole="FoodTruckFuncionario" />
+  </EntityType>
+  <EntityType Name="FoodTruckFuncionario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFoodTruck" Type="Int32" Nullable="false" />
+    <Property Name="IdFuncionario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodTruck" Relationship="TesteUnibratecDBModel.FK_FoodTruckFuncionario_FoodTruck" FromRole="FoodTruckFuncionario" ToRole="FoodTruck" />
+    <NavigationProperty Name="Funcionario" Relationship="TesteUnibratecDBModel.FK_FoodTruckFuncionario_Funcionario" FromRole="FoodTruckFuncionario" ToRole="Funcionario" />
+  </EntityType>
+  <EntityType Name="Funcionario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Logradouro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodTruckFuncionario" Relationship="TesteUnibratecDBModel.FK_FoodTruckFuncionario_Funcionario" FromRole="Funcionario" ToRole="FoodTruckFuncionario" />
+    <NavigationProperty Name="Perfil" Relationship="TesteUnibratecDBModel.FK_Funcionario_Perfil" FromRole="Funcionario" ToRole="Perfil" />
+  </EntityType>
+  <EntityType Name="ItemCardapio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Preco" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IdCardapio" Type="Int32" Nullable="false" />
+    <Property Name="Foto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TempoEstimado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cardapio" Relationship="TesteUnibratecDBModel.FK_ItemCardapio_Cardapio" FromRole="ItemCardapio" ToRole="Cardapio" />
+    <NavigationProperty Name="ItemPedido" Relationship="TesteUnibratecDBModel.FK_ItemPedido_ItemCardapio" FromRole="ItemCardapio" ToRole="ItemPedido" />
+  </EntityType>
+  <EntityType Name="ItemPedido">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPedido" Type="Int32" Nullable="false" />
+    <Property Name="IdItemCardapio" Type="Int32" Nullable="false" />
+    <Property Name="Quantidade" Type="Int32" />
+    <NavigationProperty Name="ItemCardapio" Relationship="TesteUnibratecDBModel.FK_ItemPedido_ItemCardapio" FromRole="ItemPedido" ToRole="ItemCardapio" />
+    <NavigationProperty Name="Pedido" Relationship="TesteUnibratecDBModel.FK_ItemPedido_Pedido" FromRole="ItemPedido" ToRole="Pedido" />
+  </EntityType>
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ItemPedido" Relationship="TesteUnibratecDBModel.FK_ItemPedido_Pedido" FromRole="Pedido" ToRole="ItemPedido" />
+  </EntityType>
+  <EntityType Name="Perfil">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Funcionario" Relationship="TesteUnibratecDBModel.FK_Funcionario_Perfil" FromRole="Perfil" ToRole="Funcionario" />
+  </EntityType>
+  <EntityType Name="TBTeste">
+    <Key>
+      <PropertyRef Name="CodigoTeste" />
+    </Key>
+    <Property Name="CodigoTeste" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DescricaoTeste" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Cardapio_foodTruck">
+    <End Type="TesteUnibratecDBModel.FoodTruck" Role="FoodTruck" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.Cardapio" Role="Cardapio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodTruck">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cardapio">
+        <PropertyRef Name="IdFoodTruck" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemCardapio_Cardapio">
+    <End Type="TesteUnibratecDBModel.Cardapio" Role="Cardapio" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.ItemCardapio" Role="ItemCardapio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cardapio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItemCardapio">
+        <PropertyRef Name="IdCardapio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodTruckFuncionario_FoodTruck">
+    <End Type="TesteUnibratecDBModel.FoodTruck" Role="FoodTruck" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.FoodTruckFuncionario" Role="FoodTruckFuncionario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodTruck">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FoodTruckFuncionario">
+        <PropertyRef Name="IdFoodTruck" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodTruckFuncionario_Funcionario">
+    <End Type="TesteUnibratecDBModel.Funcionario" Role="Funcionario" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.FoodTruckFuncionario" Role="FoodTruckFuncionario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FoodTruckFuncionario">
+        <PropertyRef Name="IdFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Funcionario_Perfil">
+    <End Type="TesteUnibratecDBModel.Perfil" Role="Perfil" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.Funcionario" Role="Funcionario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Funcionario">
+        <PropertyRef Name="IdPerfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPedido_ItemCardapio">
+    <End Type="TesteUnibratecDBModel.ItemCardapio" Role="ItemCardapio" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.ItemPedido" Role="ItemPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemCardapio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItemPedido">
+        <PropertyRef Name="IdItemCardapio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPedido_Pedido">
+    <End Type="TesteUnibratecDBModel.Pedido" Role="Pedido" Multiplicity="1" />
+    <End Type="TesteUnibratecDBModel.ItemPedido" Role="ItemPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItemPedido">
+        <PropertyRef Name="IdPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
