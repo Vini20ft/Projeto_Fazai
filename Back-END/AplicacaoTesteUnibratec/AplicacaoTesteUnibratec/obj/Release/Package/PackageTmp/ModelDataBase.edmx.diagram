@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5174e830bfb44bffa665713e741cb927" Name="Diagram1">
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.AvaliacaoFoodTruck" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.Cardapio" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.FoodTruck" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.FoodTruckFuncionario" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.Funcionario" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.ItemCardapio" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.ItemPedido" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.Pedido" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.Perfil" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="TesteUnibratecDBModel.TBTeste" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_AvaliacaoFoodTruck_FoodTruck" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_Cardapio_foodTruck" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_ItemCardapio_Cardapio" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_FoodTruckFuncionario_FoodTruck" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_Pedido_FoodTruck" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_FoodTruckFuncionario_Funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_Funcionario_Perfil" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_ItemPedido_ItemCardapio" ManuallyRouted="false" />
+        <AssociationConnector Association="TesteUnibratecDBModel.FK_ItemPedido_Pedido" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
