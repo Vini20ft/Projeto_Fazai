@@ -1,21 +1,213 @@
-﻿<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2 style="margin-top:13px"><i class="fa fa-pie-chart" style="font-size:20px"></i> Relatórios</h2>
-    </div>
-    <div class="col-sm-8">
-        <div class="title-action">
+﻿<div ng-controller="relatorioController as spark" ng-init="RelatorioInit()">
+    <form method="get" class="form-horizontal" ng-submit="Pesquisar()">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-3">
+                <h2 style="margin-top:13px"><i class="fa fa-pie-chart" style="font-size:20px"></i> Relatórios</h2>
+            </div>
+            <div class="col-sm-9">
+                <div class="title-action">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <hr />
+            <div class="col-sm-12">
+                <label class="col-sm-1 control-label">Data Inicial:</label>
+                <div class="col-md-3"><input type="date" class="form-control" ng-model="pedidoDados.DataInicial" /></div>
+
+                <label class="col-sm-1 control-label">Data Final:</label>
+                <div class="col-md-3"><input type="date" class="form-control" ng-model="pedidoDados.DataFinal"></div>
+
+                <label class="col-sm-1 control-label">FoodTruck*:</label>
+                <div class="col-md-3">
+                    <select class="form-control" ng-options="item as item.Nome for item in foodTrucks | orderBy:'Nome' track by item.Id" ng-model="pedidoDados.foodTruck.selected" required="">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="wrapper wrapper-content">
-            <div class="middle-box text-center animated fadeInRightBig">
-                <h3 class="font-bold"><i class="fa fa-gears" style="font-size:50px"></i></h3>
-                <div class="error-desc">
-                    <h2>Em construção</h2>
+        <br />
+        <div class="row animated fadeInRightBig">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="spiner-example" ng-if="Pesquisa == true">
+                            <div class="sk-spinner sk-spinner-three-bounce">
+                                <div class="sk-bounce1"></div>
+                                <div class="sk-bounce2"></div>
+                                <div class="sk-bounce3"></div>
+                            </div>
+                        </div>
+                        <div ng-if="Pesquisa == false">
+
+                            <div ng-if="listaPedidos.ListaRankingItemCardapio.length > 0">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 navy-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-truck fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> FoodTruck </span>
+                                                    <h3 class="font-bold">{{listaPedidos.NomeFoodTruck}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 navy-bg" title="Total de avaliações: {{listaPedidos.QuantidadeAvaliacaoFoodTruck}}">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-star-half-o fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Avaliação do FoodTruck </span>
+                                                    <h2 class="font-bold">{{listaPedidos.AvaliacaoFoodTruck}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 navy-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-ticket fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Total de pedidos </span>
+                                                    <h2 class="font-bold">{{listaPedidos.ListaPedidos.length}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 navy-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-money fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Total ganho </span>
+                                                    <h2 class="font-bold">R$ {{listaPedidos.TotalGanho}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 navy-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-user fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Funcionários </span>
+                                                    <h4 ng-repeat="item in listaPedidos.ListaPedidos[0].FoodTruck.FoodTruckFuncionario">{{item.Funcionario.Nome}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 yellow-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-send-o fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Pedidos pendentes </span>
+                                                    <h2 class="font-bold">{{listaPedidos.PedidosPendentes}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 red-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-times fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Pedidos cancelados </span>
+                                                    <h2 class="font-bold">{{listaPedidos.PedidosCancelados}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="widget style1 lazur-bg">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <i class="fa fa-check fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-8 text-right">
+                                                    <span> Pedidos finalizados </span>
+                                                    <h2 class="font-bold">{{listaPedidos.PedidosFinalizados}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg-3" style="max-height:400px;overflow-y:auto;margin:0px">
+                                        <div class="ibox">
+                                            <h5>Itens mais vendidos</h5>
+                                            <table class="table table-stripped small m-t-md" width="100%">
+                                                <tbody>
+                                                    <tr ng-repeat="item in listaPedidos.ListaRankingItemCardapio" style="width:100%;margin:0px !important;padding:0px !important">
+                                                        <td class="no-borders" style="width:100%;margin:0px !important;padding:0px !important">
+                                                            <h5 class="b-r-md bg-success" style="padding:5px 5px;margin:2px">
+                                                                <i class="fa fa-cutlery" style="font-size:16px"></i>&nbsp;&nbsp;<b style="font-size:16px">{{item.ItemCardapio.Nome}}</b>
+                                                                <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-ticket"></i>&nbsp;&nbsp;Vendidos: {{item.Quantidade}}
+                                                                <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>&nbsp;&nbsp;Faturamento: R$ {{item.Quantidade * item.ItemCardapio.Preco}}
+                                                            </h5>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <!--<div class="widget navy-bg no-padding">
+                                            <div class="p-m">
+                                                <h1 class="m-xs">$ 1,540</h1>
+
+                                                <h3 class="font-bold no-margins">
+                                                    Annual income
+                                                </h3>
+                                                <small>Income form project Alpha.</small>
+                                            </div>
+                                            <div class="flot-chart">
+                                                <div flot class="flot-chart-content" dataset="chart.flotChartData1" options="chart.flotChartOptions1"></div>
+                                            </div>
+                                        </div>-->
+                                        <div class="ibox">
+                                            <h5>Total de pedidos por mês</h5>
+                                            <div sparkline spark-data="spark.demo1Data" spark-options="spark.demo1Options"></div>
+
+                                            <!--<div id="columnchart_material" style="width: 800px; height: 500px;"></div>-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-if="listaPedidos.ListaRankingItemCardapio == undefined || listaPedidos.ListaRankingItemCardapio.length <= 0">
+                                <h2 align="center">Dados não encontrados</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <br /><br />
+        <toaster-container></toaster-container>
+    </form>
 </div>

@@ -1,70 +1,72 @@
-﻿function pedidoController($scope, ServiceFazAi, toaster, $interval, $state, $stateParams, $timeout) {
+﻿function relatorioController($scope, ServiceFazAi, toaster, $interval, $state, $stateParams) {
 
-    $scope.PedidoDados = {};
-    $scope.PedidoDados.ItemPedido = [];
-    $scope.listaPedido = {};
-    $scope.foodTrucks = {};
-    $scope.listaItemPedido = [];
+    this.demo1Data = [34, 43, 43, 35, 44, 32, 44, 52];
+    this.demo1Options = {
+        type: 'line',
+        width: '100%',
+        height: '60',
+        lineColor: '#1ab394',
+        fillColor: "#ffffff"
+    };
+
+    //google.charts.load('current', { 'packages': ['bar'] });
+    //google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Mês', 'Total vendas'],
+          ['Jan', 10],
+          ['Fev', 8],
+          ['Mar', 25],
+          ['Abr', 12],
+          ['Mai', 10],
+          ['Jun', 17],
+          ['Jul', 2],
+          ['Ago', 1],
+          ['Set', 3],
+          ['Out', 8],
+          ['Nov', 31],
+          ['Dez', 12]
+        ]);
+
+        var options = { chart: { title: 'Total de pedidos por mês' } };
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    $scope.pedidoDados = {
+        listaIdFoodTruckFuncionario: getCookie("listaIdFoodTruckFuncionario"),
+        DataInicial: '',
+        DataFinal: '',
+        IdFoodTruck: 0
+    };
+    $scope.listaPedidos = [];
     $scope.Pesquisa = false;
+    var callAtTimeout = function () { };
 
     $scope.Pesquisar = function () {
         $scope.verificarOuAtualizarCookies();
-        //$scope.Pesquisa = true;
-
-        //setInterval(function () { $scope.Pesquisar(); }, 3000);
-        var callAtTimeout = function () { $scope.Pesquisar(); $timeout(callAtTimeout, 60000); }
-        $timeout(callAtTimeout, 3000);
-        //$interval($scope.Pesquisar(), 3000);
-
-        ServiceFazAi.getServiceFoodTruck('/Pedido/GetAll', getCookie("listaIdFoodTruckFuncionario")).then(function (response) {
-            $scope.listaPedido = response.data;
-            //$scope.Pesquisa = false;
+        $scope.Pesquisa = true;
+        var itemPesquisa = $scope.pedidoDados;
+        itemPesquisa.listaIdFoodTruckFuncionario = getCookie("listaIdFoodTruckFuncionario");
+        if ($scope.pedidoDados.foodTruck.selected != undefined) itemPesquisa.IdFoodTruck = $scope.pedidoDados.foodTruck.selected.Id;
+        ServiceFazAi.filtroService('/Pedido/GetAllFiltro', itemPesquisa).then(function (response) {
+            $scope.listaPedidos = response.data;
+            $scope.Pesquisa = false;
         }, function errorCallback(response) {
             $scope.MsgErro(response, pesquisaErro);
-            callAtTimeout = function () { };
-            //$scope.Pesquisa = false;
+            $scope.Pesquisa = false;
         });
-
-        //$scope.listaPedido = listaPedido;
-        //$scope.Pesquisa = false;
     }
 
-    $scope.CancelarPedido = function (itemLista) {
+    $scope.RelatorioInit = function () {
         $scope.verificarOuAtualizarCookies();
-        $scope.Pesquisa = true;
 
-        ServiceFazAi.removeService('/Pedido/Cancelar', itemLista.Id).then(function (response) {
-            $scope.ToasterMsg(canceladoSucesso);
-            $scope.Pesquisar();
-            $scope.Pesquisa = false;
+        ServiceFazAi.getServiceFoodTruck('/FoodTruck/GetAllDropDown', getCookie("listaIdFoodTruckFuncionario")).then(function (response) {
+            $scope.foodTrucks = response.data;
         }, function errorCallback(response) {
-            $scope.MsgErro(response, canceladoErro);
-            $scope.Pesquisa = false;
+            $state.go('index.main');
         });
-
-        //var index = $scope.listaPedido.indexOf(itemLista);
-        //if (index != -1) $scope.listaPedido.splice(index, 1);
-        //$scope.ToasterMsg(canceladoSucesso, 'success');
-        //$scope.Pesquisa = false;
-    }
-
-    $scope.FinalizarPedido = function (itemLista) {
-        $scope.verificarOuAtualizarCookies();
-        $scope.Pesquisa = true;
-
-        ServiceFazAi.removeService('/Pedido/Finalizar', itemLista.Id).then(function (response) {
-            $scope.ToasterMsg(finalizadoSucesso);
-            $scope.Pesquisar();
-            $scope.Pesquisa = false;
-        }, function errorCallback(response) {
-            $scope.MsgErro(response, finalizadoErro);
-            $scope.Pesquisa = false;
-        });
-
-        //var index = $scope.listaPedido.indexOf(itemLista);
-        //if (index != -1) $scope.listaPedido.splice(index, 1);
-        //$scope.ToasterMsg(finalizadoSucesso, 'success');
-        //$scope.Pesquisa = false;
     }
 
     ////////////////////////////////////////////////////
@@ -72,6 +74,9 @@
     //Observar os parametros do controller também.
     ////////////////////////////////////////////////////
     $scope.verificarOuAtualizarCookies = function () {
+        if (callAtTimeout)
+            callAtTimeout = function () { };
+
         var emailUsuario = getCookie("emailUsuario");
         var dadosFuncionario = getCookie("listaIdFoodTruckFuncionario");
         if (emailUsuario == "") $state.go('login');
@@ -117,7 +122,6 @@
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
         console.log("Deletar todos os Cookies");
-        callAtTimeout = function () { };
     }
 
     $scope.ToasterMsg = function (mensagem, tipo) {
@@ -143,4 +147,4 @@
 
 angular
     .module('inspinia')
-    .controller("pedidoController", pedidoController);
+    .controller("relatorioController", relatorioController);

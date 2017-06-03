@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Perfil*:</label>
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <select class="form-control" ng-model="Funcionario.Perfis.selected"
                                             ng-options="item as item.Nome for item in Perfis | orderBy:'Nome' track by item.Id"
                                             ng-required="true">
@@ -82,15 +82,15 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Estado*:</label>
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <select class="form-control" ng-model="Funcionario.Estados.selected"
                                             ng-options="item as item.nome for item in Estados | orderBy:'nome'"
                                             ng-required="true">
                                         <option value="">Selecione um Estado</option>
                                     </select>
                                 </div>
-                                <label class="col-sm-2 control-label">Telefone*:</label>
-                                <div class="col-md-4"><input type="text" class="form-control" maxlength="15" ng-model="Funcionario.Telefone" ng-required="true"></div>
+                                <label class="col-sm-2 control-label">Telefone celular*:</label>
+                                <div class="col-md-4"><input type="text" class="form-control" data-mask="99 99999-9999" maxlength="15" ng-model="Funcionario.Telefone" ng-required="true"></div>
                             </div>
                         </div>
                     </div>

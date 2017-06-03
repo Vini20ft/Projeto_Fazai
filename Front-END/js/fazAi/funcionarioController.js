@@ -7,6 +7,7 @@
     $scope.Pesquisa = false;
     $scope.bloquearTela = false;
     $scope.liberarAcesso = false;
+    var callAtTimeout = function () { };
 
     $scope.selection = [];
 
@@ -45,7 +46,11 @@
                         listaIdFoodTruckFuncionario += (item.IdFoodTruck);
                 });
                 setCookie("listaIdFoodTruckFuncionario", listaIdFoodTruckFuncionario);
-                $state.go('index.main');
+
+                if (response.data.IdPerfil == 1)
+                    $state.go('index.main');
+                else
+                    $state.go('cozinha');
             }, function errorCallback(response) {
                 $scope.MsgErro(response, loginErro);
                 $scope.bloquearTela = false;
@@ -129,7 +134,7 @@
                         listaIdFoodTruckFuncionario += (item.IdFoodTruck);
                 });
                 setCookie("listaIdFoodTruckFuncionario", listaIdFoodTruckFuncionario);
-                
+
                 $state.go('index.foodtruckEdicao/:foodtruckItem', { foodtruckItem: response.data.FoodTruckFuncionario[0].IdFoodTruck });
                 //$state.go('index.primeiroAcesso');
             }
@@ -228,6 +233,9 @@
     //Observar os parametros do controller também.
     ////////////////////////////////////////////////////
     $scope.verificarOuAtualizarCookies = function () {
+        if (callAtTimeout)
+            callAtTimeout = function () { };
+
         var emailUsuario = getCookie("emailUsuario");
         var dadosFuncionario = getCookie("listaIdFoodTruckFuncionario");
         if (emailUsuario == "") $state.go('login');

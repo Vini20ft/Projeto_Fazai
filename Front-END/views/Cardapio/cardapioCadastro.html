@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">Preço*:</label>
-                                            <div class="col-md-8"><input type="number" class="form-control" ng-model="listaItemCardapio.Preco" maxlength="30" /></div>
+                                            <div class="col-md-8"><input type="number" class="form-control" ng-model="listaItemCardapio.Preco" value="{{listaItemCardapio.Preco | currency:'R$'}}" /></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">Observação:</label>
@@ -69,7 +69,7 @@
                                             <tbody>
                                                 <tr ng-repeat="item in CardapioDados.ItemCardapio" style="cursor:pointer">
                                                     <td>{{item.Nome}}</td>
-                                                    <td>R$ {{item.Preco}}</td>
+                                                    <td>{{item.Preco | currency:'R$'}}</td>
                                                     <td align="right" width="80px">
                                                         <label class="btn btn-info btn-xs" ng-if="item.Observacao != '' && item.Observacao != undefined" uib-tooltip="{{item.Observacao}}" tooltip-placement="left">Obs</label>
                                                         <a href="" class="btn btn-danger btn-xs" ng-click="ExcluirItemCardapio(item)">Excluir</a>

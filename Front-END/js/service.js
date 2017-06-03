@@ -1,4 +1,5 @@
 var urlBase = "http://localhost:10079/";
+//var urlBase = "http://40.114.51.8/servico";
 
 function ServiceFazAi($http) {
     var _getService = function (controllerAction) {

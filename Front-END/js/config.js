@@ -89,6 +89,35 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('cozinha', {
+            url: "/cozinha",
+            templateUrl: "views/Cozinha.html",
+            data: { pageTitle: 'Cozinha' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
+                        },
+                        {
+                            name: 'ui.footable',
+                            files: ['js/plugins/footable/angular-footable.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['js/plugins/date.js']
                         }
                     ]);
                 }
@@ -103,6 +132,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                     return $ocLazyLoad.load([
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
                     ]);
                 }
@@ -152,6 +184,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
+                        },
+                        {
+                            name: 'ngMap',
+                            files: ['https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js']
+                        },
+                        {
+                            files: ['http://maps.googleapis.com/maps/api/js?sensor=false']
                         }
                     ]);
                 }
@@ -175,6 +217,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
+                        },
+                        {
+                            name: 'ngMap',
+                            files: ['https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js']
+                        },
+                        {
+                            files: ['http://maps.googleapis.com/maps/api/js?sensor=false']
                         }
                     ]);
                 }
@@ -247,6 +299,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
                     ]);
                 }
@@ -270,6 +325,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
                     ]);
                 }
@@ -322,6 +380,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
                     ]);
                 }
@@ -348,6 +409,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
                     ]);
                 }
@@ -374,6 +438,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                         },
                         {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
                     ]);
                 }
@@ -405,13 +472,39 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.relatorio', {
             url: "/relatorio",
             templateUrl: "views/relatorio.html",
-            data: { pageTitle: 'Relat�rios' },
+            data: { pageTitle: 'Relatorio' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
+                            files: ['js/plugins/sparkline/jquery.sparkline.min.js']
+                        },
+                        {
+                            files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
+                        },
+                        {
+                            name: 'ui.footable',
+                            files: ['js/plugins/footable/angular-footable.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
                             files: ['js/plugins/date.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
                         }
+                        //,
+                        //{
+                        //    files: ['https://www.gstatic.com/charts/loader.js']
+                        //}
                     ]);
                 }
             }
