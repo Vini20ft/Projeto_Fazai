@@ -6,6 +6,24 @@
     $scope.listaItemFoodTruck = {};
     $scope.Pesquisa = false;
     $scope.disabledUpload = false;
+    var callAtTimeout = function () { };
+
+    $scope.latlng = [-8.063016664244289, -34.8714154958725];
+    $scope.FoodTruckDados.Latitude = [-8.063016664244289];
+    $scope.FoodTruckDados.Longitude = [-34.8714154958725];
+
+    $scope.getpos = function (event) {
+        $scope.FoodTruckDados.Latitude = event.latLng.lat();
+        $scope.FoodTruckDados.Longitude = event.latLng.lng();
+        $scope.latlng = [event.latLng.lat(), event.latLng.lng()];
+    };
+
+    $scope.placeMarker = function () {
+        console.log(this.getPlace());
+        var loc = this.getPlace().geometry.location;
+        $scope.latlng = [loc.lat(), loc.lng()];
+        $scope.center = [loc.lat(), loc.lng()];
+    };
 
     $scope.Pesquisar = function () {
         $scope.verificarOuAtualizarCookies();
@@ -115,6 +133,9 @@
             $scope.FoodTruckDados.Estados = {};
             $scope.FoodTruckDados.Estados.selected = estadoSelecionado[0];
 
+
+            $scope.latlng = [$scope.FoodTruckDados.Latitude, $scope.FoodTruckDados.Longitude];
+
             $scope.Pesquisa = false;
         }, function errorCallback(response) {
             $state.go('index.foodtruck');
@@ -132,6 +153,9 @@
     //Observar os parametros do controller também.
     ////////////////////////////////////////////////////
     $scope.verificarOuAtualizarCookies = function () {
+        if (callAtTimeout)
+            callAtTimeout = function () { };
+
         var emailUsuario = getCookie("emailUsuario");
         var dadosFuncionario = getCookie("listaIdFoodTruckFuncionario");
         if (emailUsuario == "") $state.go('login');

@@ -3,6 +3,7 @@
     $scope.dadosUsuario = {};
     $scope.bloquearTela = false;
     $scope.liberarAcesso = true;
+    var callAtTimeout = function () { };
 
     $scope.entrar = function () {
         var item = $scope.dadosUsuario;
